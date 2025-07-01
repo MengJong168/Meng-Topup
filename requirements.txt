@@ -1,7 +1,4 @@
-Flask==3.0.3
-gunicorn==20.1.0
+Flask==3.0.2
 qrcode==7.4.2
-requests==2.31.0
-bakong-khqr
 requests==2.31.0
 python-dotenv==1.0.0
