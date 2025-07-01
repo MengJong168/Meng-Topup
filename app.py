@@ -183,5 +183,4 @@ def send_to_telegram(transaction):
         print(f"Error sending to Telegram: {e}")
         return None
 
-if __name__ == '__main__':
-    app.run(debug=True ,port=5002)
+
