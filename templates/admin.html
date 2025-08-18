@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - MENG TOPUP</title>
+    <link rel="stylesheet" href="/static/style.css">-->
+<!-- Add this near the top of both admin.html and admin_packages.html -->
+<div class="admin-nav">
+        <a href="/admin/packages?pass=1516Coolb" class="admin-link">Regular Packages</a>
+        <a href="/admin/special_offers?pass=1516Coolb" class="admin-link">Special Offers</a>
+    </div>
+</div>
+    <style>
+        .admin-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .admin-link {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .admin-link:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .admin-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .status-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .status-tab {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .status-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        .search-box {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+        .transactions-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .transactions-table th, .transactions-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .transactions-table th {
+            background: var(--primary-color);
+            color: white;
+        }
+        .transactions-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .status-pending {
+            background: #FFA500;
+            color: black;
+        }
+        .status-completed {
+            background: #4CAF50;
+            color: white;
+        }
+        .status-expired {
+            background: #F44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>MENG TOPUP Admin Panel</h1>
+            <input type="text" class="search-box" id="searchInput" placeholder="Search transactions..." 
+                   value="{{ search_query }}" oninput="updateSearch()">
+        </div>
+        
+        <div class="status-tabs">
+            <div class="status-tab {% if current_status == 'pending' %}active{% endif %}" 
+                 onclick="filterByStatus('pending')">Pending</div>
+            <div class="status-tab {% if current_status == 'expired' %}active{% endif %}" 
+                 onclick="filterByStatus('expired')">Expired</div>
+            <div class="status-tab {% if current_status == 'completed' %}active{% endif %}" 
+                 onclick="filterByStatus('completed')">Completed</div>
+        </div>
+        
+        <table class="transactions-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Player ID</th>
+                    <th>Zone ID</th>
+                    <th>Amount</th>
+                    <th>Package</th>
+                    <th>Game</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.transaction_id }}</td>
+                    <td>{{ transaction.player_id }}</td>
+                    <td>{{ transaction.zone_id }}</td>
+                    <td>${{ "%.2f"|format(transaction.amount) }}</td>
+                    <td>{{ transaction.package }}</td>
+                    <td>{{ transaction.game_type|upper }}</td>
+                    <td>{{ transaction.timestamp|datetimeformat }}</td>
+                    <td>
+                        <span class="status-badge status-{{ transaction.status }}">
+                            {{ transaction.status|title }}
+                        </span>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" style="text-align: center;">No transactions found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function filterByStatus(status) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('status', status);
+            window.location.href = url.toString();
+        }
+        
+        function updateSearch() {
+            const searchValue = document.getElementById('searchInput').value;
+            const url = new URL(window.location.href);
+            
+            if (searchValue) {
+                url.searchParams.set('search', searchValue);
+            } else {
+                url.searchParams.delete('search');
+            }
+            
+            // Debounce the search to avoid too many requests
+            clearTimeout(window.searchTimeout);
+            window.searchTimeout = setTimeout(() => {
+                window.location.href = url.toString();
+            }, 500);
+        }
+    </script>
+</body>
+</html>
