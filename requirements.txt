@@ -3,4 +3,5 @@ requests
 qrcode
 bakong_khqr
 bakong-khqr[image]
+Pillow
 pytz
