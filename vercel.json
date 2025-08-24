@@ -8,6 +8,14 @@
     {
       "src": "static/**/*",
       "use": "@vercel/static"
+    },
+    {
+      "src": "tmp/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.json",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -16,14 +24,16 @@
       "dest": "/static/$1"
     },
     {
+      "src": "/tmp/(.*)",
+      "dest": "/tmp/$1"
+    },
+    {
+      "src": "/(.*\\.json)",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/app.py"
     }
-  ],
-  "functions": {
-    "app.py": {
-      "includeFiles": "/tmp/transactions.json",
-      "includeFiles": "/tmp/packages.json"
-    }
-  }
+  ]
 }
