@@ -17,9 +17,6 @@ app = Flask(__name__)
 api_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMmEyMDE3MzUxMGU4NDZhMiJ9LCJpYXQiOjE3NTEzNTk1MDQsImV4cCI6MTc1OTEzNTUwNH0.EHVbg8wD4z7wdNP4zkHmUt8VjquH4kCrJgCf_HyLK8o"
 khqr = KHQR(api_token)
 current_transactions = {}
-# Add this after current_transactions initialization
-TRANSACTIONS_FILE = '/tmp/transactions.json'  # Changed for Vercel compatibility
-PACKAGES_FILE = '/tmp/packages.json'  # Changed for Vercel compatibility
 
 # Create database directory if it doesn't exist
 try:
@@ -622,3 +619,4 @@ def send_to_telegram(transaction):
 # This is required for Vercel
 if __name__ == '__main__':
     app.run(debug=True)
+
