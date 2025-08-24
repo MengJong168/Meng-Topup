@@ -18,12 +18,6 @@ api_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMmEyMDE3Mz
 khqr = KHQR(api_token)
 current_transactions = {}
 
-# Create database directory if it doesn't exist
-try:
-    os.makedirs('/tmp', exist_ok=True)
-except:
-    pass
-
 # Admin authentication decorator
 def admin_required(f):
     @wraps(f)
@@ -619,4 +613,5 @@ def send_to_telegram(transaction):
 # This is required for Vercel
 if __name__ == '__main__':
     app.run(debug=True)
+
 
