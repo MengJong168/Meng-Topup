@@ -19,5 +19,11 @@
       "src": "/(.*)",
       "dest": "/app.py"
     }
-  ]
+  ],
+  "functions": {
+    "app.py": {
+      "includeFiles": "/tmp/transactions.json",
+      "includeFiles": "/tmp/packages.json"
+    }
+  }
 }
