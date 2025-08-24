@@ -1,0 +1,2332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MENG TOPUP</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="static/images/logo.jpg" type="image/jpg" sizes="32x32" />
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="/static/style.css" />
+
+  <!-- Google Fonts: Cabin Condensed, Dangrek, Battambang -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Cabin+Condensed:wght@400;700&family=Dangrek&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <a href="https://t.me/MENGTOPUPP" target="_blank" rel="noopener noreferrer" class="support-button">
+  <img src="/static/images/support.jpg" alt="Support">
+</a>
+  <header onclick="location.reload()">
+    <div class="header-content">
+      <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="header-logo" />
+      <h1 style="font-family: 'Cabin Condensed', sans-serif; font-size: 40px; white-space: nowrap;">
+  MENG TOPUP
+</h1>
+    </div>
+  </header>
+
+  <main>
+<!-- Main Banner Slider -->
+<div class="banner-container frame">
+  <div class="banner-slider">
+    <div class="banner-slides">
+      <div class="banner-slide active">
+        <img src="/static/images/banner-01.jpg" alt="Meng Topup Banner" class="banner-image">
+      </div>
+      <div class="banner-slide">
+        <img src="/static/images/banner-02.jpg" alt="Meng Topup Banner" class="banner-image">
+      </div>
+        <div class="banner-slide">
+        <img src="/static/images/banner-03.jpg" alt="Meng Topup Banner" class="banner-image">
+      </div>
+      <div class="banner-slide">
+        <img src="/static/images/banner-04.jpg" alt="Meng Topup Banner" class="banner-image">
+      </div>
+      <div class="banner-slide">
+        <img src="/static/images/banner-05.jpg" alt="Meng Topup Banner" class="banner-image">
+      </div>
+      <div class="banner-slide">
+        <img src="/static/images/banner-06.jpg" alt="Meng Topup Banner" class="banner-image">
+      </div>
+      <div class="banner-slide">
+        <img src="/static/images/banner-07.jpg" alt="Meng Topup Banner" class="banner-image">
+      </div>
+    </div>
+    <div class="slider-nav" style="display: none;">
+      <button class="slider-prev">❮</button>
+      <div class="slider-dots"></div>
+      <button class="slider-next">❯</button>
+    </div>
+  </div>
+</div>
+
+<!-- <section id="specialOffers" class="offers-container frame"> 
+  <h6 class="section-title khmer-heading">SPECIAL OFFERS</h6>
+  <div class="offers-slider">
+    <div class="offer-slides">
+      <div class="offer-slide">
+        <div class="offer-image-container">
+          <img src="/static/images/specailoffer-1.jpg" alt="Special Offer 1">
+        </div>
+      </div>
+      <div class="offer-slide">
+        <div class="offer-image-container">
+          <img src="/static/images/specailoffer-2.jpg" alt="Special Offer 2">
+        </div>
+      </div>
+    </div>
+    <div class="slider-nav" style="display: none;">
+      <button class="slider-prev">❮</button>
+      <div class="slider-dots"></div>
+      <button class="slider-next">❯</button>
+    </div>
+  </div>
+</section> -->
+
+    <!-- Homepage Section -->
+    <section id="homepage" class="homepage-section">
+      <h2 class="khmer-heading section-step">
+      <span class="step-number">🎮</span>
+      <span class="step-text">ជ្រើសរើសហ្គេមដែលអ្នកចង់ទិញពេជ្យ</span>
+      </h2>
+      <div class="game-grid">
+        <div class="game-card" onclick="showMLTopup()">
+          <!-- <div class="game-card"> -->
+          <div class="game-image-container">
+            <img src="/static/images/mobile_legend.jpg" alt="Mobile Legend" class="game-image"/>
+          </div>
+          <div class="game-title english-heading">MOBILE LEGEND</div>
+          <!-- <button class="english-heading">Out of stock</button> -->
+          <button class="english-heading">TOPUP</button>
+        </div>
+        <div class="game-card" onclick="showFFTopup()">
+          <!-- <div class="game-card"> -->
+          <div class="game-image-container">
+            <img src="/static/images/free_fire.jpg" alt="Free Fire" class="game-image"/>
+          </div>
+          <div class="game-title english-heading">FREE FIRE</div>
+          <!-- <button class="english-heading">Out of stock</button> -->
+          <button class="english-heading">TOPUP</button>
+        </div>
+        <!-- In the game-grid section, replace the existing PUBG Mobile card with this: -->
+<div class="game-card" onclick="showPUBGTopup()">
+  <!-- <div class="game-card"> -->
+  <div class="game-image-container">
+    <img src="/static/images/pubg_mobile.jpg" alt="PUBG Mobile" class="game-image"/>
+  </div>
+  <div class="game-title english-heading">PUBG MOBILE</div>
+  <!-- <button class="english-heading">Out of stock</button> -->
+  <button class="english-heading">TOPUP</button>
+</div>
+
+<div class="game-card" onclick="showHOKTopup()">
+  <!-- <div class="game-card"> -->
+  <div class="game-image-container">
+    <img src="/static/images/h_o_k.jpg" alt="HONOR OF KING" class="game-image"/>
+  </div>
+  <div class="game-title english-heading">HONOR OF KINGS</div>
+  <!-- <button class="english-heading">Out of stock</button> -->
+  <button class="english-heading">TOPUP</button>
+</div>
+
+<div class="game-card" onclick="showBloodStrikeTopup()">
+  <!-- <div class="game-card"> -->
+  <div class="game-image-container">
+    <img src="/static/images/blood_strike.jpg" alt="Blood Strike" class="game-image"/>
+  </div>
+  <div class="game-title english-heading">BLOOD STRIKE</div>
+  <!-- <button class="english-heading">Out of stock</button> -->
+  <button class="english-heading">TOPUP</button>
+</div>
+
+<!-- Add this to your game-grid section -->
+<div class="game-card" onclick="showMCGGTopup()">
+  <!-- <div class="game-card"> -->
+  <div class="game-image-container">
+    <img src="/static/images/magic_chess.jpg" alt="Magic Chess: Go Go" class="game-image"/>
+  </div>
+  <div class="game-title english-heading">MAGIC CHESS: GO GO</div>
+  <!-- <button class="english-heading">Out of stock</button> -->
+  <button class="english-heading">TOPUP</button>
+</div>
+
+<!-- <div class="game-card">
+  <div class="game-image-container">
+    <img src="/static/images/mobile_legendphmysg.jpg" alt="Mobile Legend PH MY SG" class="game-image"/>
+  </div>
+  <div class="game-title khmer-heading">MLBB PH MY SG</div>
+  <div class="coming-soon khmer-heading">COMING SOON</div>
+</div>
+<div class="game-card">
+  <div class="game-image-container">
+    <img src="/static/images/mobile_legend_indo.jpg" alt="Mobile Legend INDO" class="game-image"/>
+  </div>
+  <div class="game-title khmer-heading">MLBB INDO</div>
+  <div class="coming-soon khmer-heading">COMING SOON</div>
+</div>
+        
+<div class="game-card">
+  <div class="game-image-container">
+    <img src="/static/images/free_fire_vn.jpg" alt="Free Fire VN" class="game-image"/>
+  </div>
+  <div class="game-title khmer-heading">FREE FIRE VN</div>
+  <div class="coming-soon khmer-heading">COMING SOON</div>
+</div>     
+<div class="game-card">
+  <div class="game-image-container">
+    <img src="/static/images/free_fire_th.jpg" alt="Free Fire TH" class="game-image"/>
+  </div>
+  <div class="game-title khmer-heading">FREE FIRE TH</div>
+  <div class="coming-soon khmer-heading">COMING SOON</div>
+</div>     -->
+    </section>
+<section id="Title" style="display: none;">
+  <div class="frame">
+    <h2 class="khmer-heading" style="margin-bottom: 15px;">Top-up Mobile Legends, Free Fire</h2>
+    <p class="khmer-heading">ទិញពេជ្រ Mobile Legends: Bang Bang ក្នុងតម្លៃសមរម្យ! តាមរយះអាយឌី ID របស់អ្នក, ជ្រើសរើសកញ្ចប់ពេជ្យ ដែលអ្នកពេញចិត្តទិញ, ដោយបង់ប្រាក់តាមមធ្យោបាយដែលអ្នកមាន, ពេជ្រនឹងបញ្ជូនទៅក្នុងគណនេយ្យ MLBB របស់អ្នកក្នុងរយះពេលពីចន្លោះ 10នាទី ដល់ 3ម៉ោង។</p>
+  </div>
+</section>
+
+<!-- Lucky Popup or How To Topup -->
+<div id="luckyPopup" class="lucky-popup" style="display: none;">
+  <div class="lucky-popup-content">
+    <span class="lucky-popup-close">&times;</span>
+    <img src="/static/images/HowToTopup-popup1.jpg" alt="Lucky Popup Offer">
+  </div>
+</div>
+
+<!-- Terms and Conditions Section (initially hidden) -->
+<section id="termsSection" style="display: none;">
+  <div class="frame">
+    <h2 class="english-heading" style="margin-bottom: 15px;">Terms & Condition</h2>
+    <p class="khmer-heading">១. ខ្ញុំយល់ព្រមចំពោះការបញ្ជារទិញទាំងអស់ និងមិនមានការ​ លុបចោល ឬ​ សងប្រាក់វិញ ឡើយ</p>
+    <p class="english-heading">1. I agree to all orders and there is no cancellation or refund</p>
+    <button onclick="hideTerms()" class="english-heading" style="margin-top: 20px;">Back</button>
+  </div>
+</section>
+
+    <!-- Mobile Legends Topup Section (initially hidden) -->
+    <section id="mlTopupSection" style="display: none;">
+      <section class="banner frame">
+        <div class="banner-content">
+          <div class="game-title-container">
+            <img src="/static/images/mobile_legend.jpg" alt="Mobile Legends Logo" class="game-logo" />
+            <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
+  MOBILE LEGEND
+</h3>
+          </div>
+          <!-- <h3 class="khmer-heading">ទិញពេជ្រ Mobile Legends: Bang Bang ក្នុងតម្លៃសមរម្យ!</h3> -->
+        </div>
+      </section>
+
+      <h3 class="khmer-heading section-step">
+      <span class="step-number">1</span>
+      <span class="step-text">បញ្ចូលព័ត៌មាន</span>
+      </h3>
+      <section class="user-input frame">
+        <div class="input-row">
+          <input type="number" id="idInput" placeholder="Player ID" />
+          <input type="number" id="zoneInput" placeholder="Zone ID" />
+        </div>
+        <button onclick="checkUsername()" class="english-heading">Check Username</button>
+        <div id="usernameDisplay" class="english-heading"></div>
+      </section>
+       
+<!-- Mobile Legends Special Offers Section -->
+<section class="special-offers-section">
+<h2 class="khmer-heading section-step">
+      <span class="step-text">កញ្ចប់ណែនាំ</span>
+      </h2>
+    <div class="frame">
+        <div class="pricing-grid" id="mlSpecialOffers">
+            <!-- Offers will be loaded dynamically -->
+            <div class="loading-placeholder khmer-heading">Loading ...</div>
+        </div>
+    </div>
+</section>  
+      
+      <section class="package-section">
+  <h3 class="khmer-heading section-step">
+    <span class="step-number">2</span>
+    <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
+  </h3>
+  <div class="frame package-frame">
+    <div class="pricing-grid" id="packageGrid"></div>
+  </div>
+</section>
+
+      <section class="package-section">
+        <h3 class="khmer-heading section-step">
+         <span class="step-number">3</span>
+        <span class="step-text">ការទូទាត់ប្រាក់</span></h3>
+        <div class="khqr-card" id="khqrCard">
+          <h3 class="english-heading">KHQR</h3>
+          <div class="text-group">
+          </div>
+          <h6>Scan to pay with any banking app</h6>
+          <input type="checkbox" id="khqrCheck" checked/>
+        </div>
+      </section>
+      <!-- Step 4: Agreement -->
+<section>
+  <h3 class="khmer-heading"></h3>
+  <div class="frame-agreement">
+    <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
+      <input type="checkbox" id="mlAgreementCheck" />
+      ខ្ញុំយល់ព្រមតាម 
+      <a href="javascript:void(0)" onclick="showTerms('ml')" style="color: #ffe600; text-decoration: underline;">
+        លក្ខខណ្ឌ
+      </a>
+    </label>
+  </div>
+</section>
+
+      <section class="banner frame">
+        <div class="banner-content">
+          <div class="game-title">
+            <img src="/static/images/logo.jpg" alt="Mobile Legends Logo" class="ml-logo" />
+            <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
+          </div>
+          <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
+        </div>
+      </section>
+    </section>
+
+    <!-- Free Fire Topup Section (initially hidden) -->
+    <section id="ffTopupSection" style="display: none;">
+      <section class="banner frame">
+        <div class="banner-content">
+          <div class="game-title-container">
+            <img src="/static/images/free_fire.jpg" alt="Free Fire Logo" class="game-logo" />
+            <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
+  FREE FIRE
+</h3>
+          </div>
+          <!-- <h3 class="khmer-heading">ទិញពេជ្រ Free Fire ក្នុងតម្លៃសមរម្យ!</h3> -->
+        </div>
+      </section>
+
+      <h3 class="khmer-heading section-step">
+      <span class="step-number">1</span>
+      <span class="step-text">បញ្ចូលព័ត៌មាន</span>
+      </h3>
+<section class="user-input frame ff-check-wrapper">
+  <div class="ff-input-group">
+    <input type="number" id="ffIdInput" placeholder="Player ID" class="ff-input" />
+    <button onclick="checkFFUsername()" class="ff-check-button">Check Username</button>
+  </div>
+  <div id="ffUsernameDisplay" class="english-heading ff-username-result"></div>
+</section>
+ 
+<!-- Free Fire Special Offers Section -->
+<section class="special-offers-section">
+    <h2 class="khmer-heading section-step">
+      <span class="step-text">កញ្ចប់ណែនាំ</span>
+      </h2>
+    <div class="frame">
+        <div class="pricing-grid" id="ffSpecialOffers">
+            <!-- Offers will be loaded dynamically -->
+            <div class="loading-placeholder english-heading">Loading ...</div>
+        </div>
+    </div>
+</section>
+
+      <section class="package-section">
+  <h3 class="khmer-heading section-step">
+    <span class="step-number">2</span>
+    <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
+  </h3>
+        <div class="frame">
+          <div class="pricing-grid" id="ffPackageGrid"></div>
+        </div>
+      </section>
+
+      <section class="package-section">
+        <h3 class="khmer-heading section-step">
+         <span class="step-number">3</span>
+        <span class="step-text">ការទូទាត់ប្រាក់</span></h3>
+        <div class="khqr-card" id="ffKhqrCard">
+          <h3 class="english-heading">KHQR</h3>
+          <div class="text-group">
+          </div>
+          <h6>Scan to pay with any banking app</h6>
+          <input type="checkbox" id="ffKhqrCheck" checked/>
+        </div>
+      </section>
+      <!-- Step 4: Agreement -->
+<section>
+  <h3 class="khmer-heading"></h3>
+  <div class="frame-agreement">
+    <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
+      <input type="checkbox" id="ffAgreementCheck" />
+      ខ្ញុំយល់ព្រមតាម 
+      <a href="javascript:void(0)" onclick="showTerms('ff')" style="color: #ffe600; text-decoration: underline;">
+        លក្ខខណ្ឌ
+      </a>
+    </label>
+  </div>
+</section>
+
+      
+      <section class="banner frame">
+        <div class="banner-content">
+          <div class="game-title">
+            <img src="/static/images/logo.jpg" alt="Free Fire Logo" class="ff-logo" />
+            <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
+          </div>
+          <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
+        </div>
+      </section>
+    </section>
+    <!-- PUBG Mobile Topup Section (initially hidden) -->
+<section id="pubgTopupSection" style="display: none;">
+  <section class="banner frame">
+    <div class="banner-content">
+      <div class="game-title-container">
+        <img src="/static/images/pubg_mobile.jpg" alt="PUBG Mobile Logo" class="game-logo" />
+        <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
+  PUBG MOBILE
+</h3>
+      </div>
+      <!-- <h3 class="khmer-heading">ទិញ UC PUBG Mobile ក្នុងតម្លៃសមរម្យ!</h3> -->
+    </div>
+  </section>
+
+  <h3 class="khmer-heading section-step">
+    <span class="step-number">1</span>
+    <span class="step-text">បញ្ចូលព័ត៌មាន</span>
+  </h3>
+  <section class="user-input frame ff-check-wrapper">
+    <div class="ff-input-group">
+      <input type="number" id="pubgIdInput" placeholder="Player ID" class="ff-input" />
+      <button onclick="checkPUBGUsername()" class="ff-check-button">Check Username</button>
+    </div>
+    <div id="pubgUsernameDisplay" class="english-heading ff-username-result"></div>
+  </section>
+
+  <!-- PUBG Mobile Special Offers Section -->
+  <section class="special-offers-section">
+    <h2 class="khmer-heading section-step">
+      <span class="step-text">កញ្ចប់ណែនាំ</span>
+      </h2>
+    <div class="frame">
+      <div class="pricing-grid" id="pubgSpecialOffers">
+        <!-- Offers will be loaded dynamically -->
+        <div class="loading-placeholder khmer-heading">Loading ...</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="package-section">
+    <h3 class="khmer-heading section-step">
+      <span class="step-number">2</span>
+      <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
+    </h3>
+    <div class="frame">
+      <div class="pricing-grid" id="pubgPackageGrid"></div>
+    </div>
+  </section>
+
+  <!-- Payment and agreement sections similar to other games -->
+  <section class="package-section">
+    <h3 class="khmer-heading section-step">
+      <span class="step-number">3</span>
+      <span class="step-text">ការទូទាត់ប្រាក់</span>
+    </h3>
+    <div class="khqr-card" id="pubgKhqrCard">
+      <h3 class="english-heading">KHQR</h3>
+      <div class="text-group"></div>
+      <h6>Scan to pay with any banking app</h6>
+      <input type="checkbox" id="pubgKhqrCheck" checked/>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="khmer-heading"></h3>
+    <div class="frame-agreement">
+      <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
+        <input type="checkbox" id="pubgAgreementCheck" />
+        ខ្ញុំយល់ព្រមតាម 
+        <a href="javascript:void(0)" onclick="showTerms('pubg')" style="color: #ffe600; text-decoration: underline;">
+          លក្ខខណ្ឌ
+        </a>
+      </label>
+    </div>
+  </section>
+
+  <section class="banner frame">
+    <div class="banner-content">
+      <div class="game-title">
+        <img src="/static/images/logo.jpg" alt="PUBG Mobile Logo" class="pubg-logo" />
+        <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
+      </div>
+      <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
+    </div>
+  </section>
+</section>
+<!-- HONOR OF KING Topup Section -->
+<section id="hokTopupSection" style="display: none;">
+  <section class="banner frame">
+    <div class="banner-content">
+      <div class="game-title-container">
+        <img src="/static/images/h_o_k.jpg" alt="HONOR OF KING Logo" class="game-logo" />
+        <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
+  HONOR OF KINGS
+</h3>
+      </div>
+      <!-- <h3 class="khmer-heading">ទិញថូខឹន HONOR OF KING ក្នុងតម្លៃសមរម្យ!</h3> -->
+    </div>
+  </section>
+
+  <h3 class="khmer-heading section-step">
+    <span class="step-number">1</span>
+    <span class="step-text">បញ្ចូលព័ត៌មាន</span>
+  </h3>
+  <section class="user-input frame ff-check-wrapper">
+    <div class="ff-input-group">
+      <input type="number" id="hokIdInput" placeholder="Player ID" class="ff-input" />
+      <button onclick="checkHOKUsername()" class="ff-check-button">Check Username</button>
+    </div>
+    <div id="hokUsernameDisplay" class="english-heading ff-username-result"></div>
+  </section>
+
+  <!-- HOK Special Offers Section -->
+  <section class="special-offers-section">
+    <h2 class="khmer-heading section-step">
+      <span class="step-text">កញ្ចប់ណែនាំ</span>
+    </h2>
+    <div class="frame">
+      <div class="pricing-grid" id="hokSpecialOffers">
+        <div class="loading-placeholder english-heading">Loading ...</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="package-section">
+    <h3 class="khmer-heading section-step">
+      <span class="step-number">2</span>
+      <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
+    </h3>
+    <div class="frame">
+      <div class="pricing-grid" id="hokPackageGrid"></div>
+    </div>
+  </section>
+
+  <!-- Payment and agreement sections similar to other games -->
+  <section class="package-section">
+    <h3 class="khmer-heading section-step">
+      <span class="step-number">3</span>
+      <span class="step-text">ការទូទាត់ប្រាក់</span>
+    </h3>
+    <div class="khqr-card" id="hokKhqrCard">
+      <h3 class="english-heading">KHQR</h3>
+      <div class="text-group"></div>
+      <h6>Scan to pay with any banking app</h6>
+      <input type="checkbox" id="hokKhqrCheck" checked/>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="khmer-heading"></h3>
+    <div class="frame-agreement">
+      <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
+        <input type="checkbox" id="hokAgreementCheck" />
+        ខ្ញុំយល់ព្រមតាម 
+        <a href="javascript:void(0)" onclick="showTerms('hok')" style="color: #ffe600; text-decoration: underline;">
+          លក្ខខណ្ឌ
+        </a>
+      </label>
+    </div>
+  </section>
+
+  <section class="banner frame">
+    <div class="banner-content">
+      <div class="game-title">
+        <img src="/static/images/logo.jpg" alt="PUBG Mobile Logo" class="pubg-logo" />
+        <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
+      </div>
+      <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
+    </div>
+  </section>
+</section>
+
+<section id="bloodstrikeTopupSection" style="display: none;">
+  <section class="banner frame">
+    <div class="banner-content">
+      <div class="game-title-container">
+        <img src="/static/images/blood_strike.jpg" alt="BLOOD STRIKE Logo" class="game-logo" />
+        <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
+  BLOOD STRIKE
+</h3>
+      </div>
+      <!-- <h3 class="khmer-heading">ទិញកាក់ BLOOD STRIKE ក្នុងតម្លៃសមរម្យ!</h3> -->
+    </div>
+  </section>
+
+  <h3 class="khmer-heading section-step">
+    <span class="step-number">1</span>
+    <span class="step-text">បញ្ចូលព័ត៌មាន</span>
+  </h3>
+  <section class="user-input frame ff-check-wrapper">
+    <div class="ff-input-group">
+      <input type="number" id="bloodstrikeIdInput" placeholder="Player ID" class="ff-input" />
+      <button onclick="checkBloodStrikeUsername()" class="ff-check-button">Check Username</button>
+    </div>
+    <div id="bloodstrikeUsernameDisplay" class="english-heading ff-username-result"></div>
+  </section>
+
+  <!-- HOK Special Offers Section -->
+  <section class="special-offers-section">
+    <h2 class="khmer-heading section-step">
+      <span class="step-text">កញ្ចប់ណែនាំ</span>
+    </h2>
+    <div class="frame">
+      <div class="pricing-grid" id="bloodstrike_special_offers">
+        <div class="loading-placeholder english-heading">Loading ...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Regular Packages -->
+  <section class="package-section">
+    <h3 class="khmer-heading section-step">
+      <span class="step-number">2</span>
+      <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
+    </h3>
+    <div class="frame">
+      <div class="pricing-grid" id="bloodstrikePackageGrid"></div>
+    </div>
+  </section>
+
+  <!-- Payment Section -->
+  <section class="package-section">
+    <h3 class="khmer-heading section-step">
+      <span class="step-number">3</span>
+      <span class="step-text">ការទូទាត់ប្រាក់</span>
+    </h3>
+    <div class="khqr-card" id="bloodstrikeKhqrCard">
+      <h3 class="english-heading">KHQR</h3>
+      <div class="text-group"></div>
+      <h6>Scan to pay with any banking app</h6>
+      <input type="checkbox" id="bloodstrikeKhqrCheck" checked/>
+    </div>
+  </section>
+
+  <!-- Terms Agreement -->
+  <section>
+    <div class="frame-agreement">
+      <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
+        <input type="checkbox" id="bloodstrikeAgreementCheck" />
+        ខ្ញុំយល់ព្រមតាម 
+        <a href="javascript:void(0)" onclick="showTerms('bloodstrike')" 
+           style="color: #ffe600; text-decoration: underline;">
+          លក្ខខណ្ឌ
+        </a>
+      </label>
+    </div>
+  </section>
+  <section class="banner frame">
+    <div class="banner-content">
+      <div class="game-title">
+        <img src="/static/images/logo.jpg" alt="PUBG Mobile Logo" class="pubg-logo" />
+        <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
+      </div>
+      <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
+    </div>
+  </section>
+</section>
+</section>
+
+<!-- Add the MCGG topup section -->
+<section id="mcggTopupSection" style="display: none;">
+  <section class="banner frame">
+    <div class="banner-content">
+      <div class="game-title-container">
+        <img src="/static/images/magic_chess.jpg" alt="Magic Chess: Go Go Logo" class="game-logo" />
+        <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
+  MAGIC CHESS: GO GO
+</h3>
+      </div>
+      <!-- <h3 class="khmer-heading">ទិញពេជ្រ MAGIC CHESS: GO GO ក្នុងតម្លៃសមរម្យ!</h3> -->
+    </div>
+  </section>
+
+  <h3 class="khmer-heading section-step">
+    <span class="step-number">1</span>
+    <span class="step-text">បញ្ចូលព័ត៌មាន</span>
+  </h3>
+  <section class="user-input frame ff-check-wrapper">
+    <div class="ff-input-group">
+      <input type="number" id="mcggIdInput" placeholder="Player ID" class="ff-input" />
+      <input type="number" id="mcggZoneInput" placeholder="Zone ID" class="ff-input" />
+      <button onclick="checkMCGGUsername()" class="ff-check-button">Check Username</button>
+    </div>
+    <div id="mcggUsernameDisplay" class="english-heading ff-username-result"></div>
+  </section>
+
+  <!-- Special Offers Section -->
+  <section class="special-offers-section">
+    <h2 class="khmer-heading section-step">
+      <span class="step-text">កញ្ចប់ណែនាំ</span>
+    </h2>
+    <div class="frame">
+      <div class="pricing-grid" id="mcggSpecialOffers">
+        <div class="loading-placeholder khmer-heading">Loading ...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Regular Packages Section -->
+  <section class="package-section">
+    <h3 class="khmer-heading section-step">
+      <span class="step-number">2</span>
+      <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
+    </h3>
+    <div class="frame">
+      <div class="pricing-grid" id="mcggPackageGrid"></div>
+    </div>
+  </section>
+
+  <!-- Payment Section -->
+  <section class="package-section">
+    <h3 class="khmer-heading section-step">
+      <span class="step-number">3</span>
+      <span class="step-text">ការទូទាត់ប្រាក់</span>
+    </h3>
+    <div class="khqr-card" id="mcggKhqrCard">
+      <h3 class="english-heading">KHQR</h3>
+      <div class="text-group"></div>
+      <h6>Scan to pay with any banking app</h6>
+      <input type="checkbox" id="mcggKhqrCheck" checked/>
+    </div>
+  </section>
+
+  <!-- Terms Agreement -->
+  <section>
+    <div class="frame-agreement">
+      <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
+        <input type="checkbox" id="mcggAgreementCheck" />
+        ខ្ញុំយល់ព្រមតាម
+        <a href="javascript:void(0)" onclick="showTerms('mcgg')" style="color: #ffe600; text-decoration: underline;">
+          លក្ខខណ្ឌ
+        </a>
+      </label>
+    </div>
+  </section>
+  <section class="banner frame">
+    <div class="banner-content">
+      <div class="game-title">
+        <img src="/static/images/logo.jpg" alt="PUBG Mobile Logo" class="pubg-logo" />
+        <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
+      </div>
+      <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
+    </div>
+  </section>
+</section>
+  </main>
+
+  <footer id="mainFooter" class="site-footer">
+  <!-- Centered logo and text section -->
+  <div class="footer-center">
+    <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="footer-logo">
+    <p class="khmer-heading footer-text">ទិញពេជ្រ Mobile Legends Free Fire ក្នុងតម្លៃសមរម្យ! តាមរយះអាយឌី ID របស់អ្នក, ជ្រើសរើសកញ្ចប់ពេជ្យ ដែលអ្នកពេញចិត្តទិញ, ដោយបង់ប្រាក់តាមមធ្យោបាយដែលអ្នកមាន, ពេជ្រនឹងបញ្ជូនទៅក្នុងគណនេយ្យ GAME របស់អ្នកក្នុងរយះពេលពីចន្លោះ 10នាទី ដល់ 3ម៉ោង។</p>
+  </div>
+  
+  <!-- Left-aligned content sections -->
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3 class="khmer-heading">អំពីយើង</h3>
+      <p class="khmer-heading">MENG TOPUP ផ្តល់សេវាកម្មបញ្ចូលពេជ្រល្អបំផុត:</p>
+      <p class="khmer-heading">
+        ✅ ល្បឿនលឿន – ទទួលពេជ្រភ្លាមៗ បន្ទាប់ពីទូទាត់ <br>
+        ✅ តម្លៃសមរម្យ – ថោកជាង និងមានប្រូម៉ូសិនជាញឹកញាប់<br>
+        ✅ សុវត្ថិភាព – ទូទាត់ដោយប្រព័ន្ធមានការការពារដ៏ទំនើប<br>
+        ✅ សេវាកម្ម 24/7 – មានបុគ្គលិករួសរាន់ជួយគ្រប់ពេល<br></p>
+    </div>
+    <div class="footer-section">
+      <h3 class="khmer-heading">វិធីបង់ប្រាក់</h3>
+      <p class="khmer-heading">យើងទទួលការបង់ប្រាក់តាមរយៈ KHQR</p>
+    </div>
+  <div class="footer-section">
+  <h3 class="khmer-heading">ទំនាក់ទំនង</h3>
+  <p class="english-heading">
+    Telegram: 
+    <a class="telegram-link" href="https://t.me/MENGTOPUPP" target="_blank" rel="noopener noreferrer">
+      @MENGTOPUPP
+    </a>
+  </p>
+  <p class="english-heading">
+    Facebook PAGE: 
+    <a class="facebook-link" href="https://web.facebook.com/profile.php?id=61567102657266" target="_blank" rel="noopener noreferrer">
+      MENG TOPUPP
+    </a>
+  </p>
+</div>
+  <div class="footer-bottom">
+    <p class="english-heading" style="text-align: center;">Copyright © MENG TOPUP. All Rights Reserved.</p>
+    <p class="english-heading" style="text-align: center; margin-top: 20px;">
+      <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffe600; text-decoration: underline;">
+        Privacy Policy | Terms and Conditions
+      </a>
+    </p>
+  </div>
+</footer>
+
+  <button onclick="initiatePayment()" id="buyNowBtn" style="display: none;" class="english-heading">Buy Now $0.00</button>
+
+  <!-- Bakong Payment Modal -->
+  <div id="bakongModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 class="english-heading">Bakong Payment</h2>
+      <div id="bakongStatus" class="english-heading">Ready to generate payment QR</div>
+      
+      <div class="qr-container">
+        <div class="qr-image">
+          <img id="bakongQR" src="" alt="QR Code">
+        </div>
+      </div>
+      
+      <div id="bakongCountdown" class="english-heading"></div>
+      
+      <div class="modal-buttons">
+        <button id="checkPaymentBtn" class="bakong-btn english-heading" onclick="checkBakongPayment()" disabled>Check Payment</button>
+        <button class="bakong-btn english-heading" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invoice Modal -->
+  <div id="invoiceModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeInvoiceModal()">&times;</span>
+      <h2 class="english-heading">Payment Successful</h2>
+      
+      <div class="invoice-details">
+        <div class="invoice-row">
+          <span class="invoice-icon">👤</span>
+          <span class="invoice-label english-heading">Username:</span>
+          <span class="invoice-value english-heading" id="invoice-username"></span>
+        </div>
+        <div class="invoice-row">
+          <span class="invoice-icon">🆔</span>
+          <span class="invoice-label english-heading">Player ID:</span>
+          <span class="invoice-value english-heading" id="invoice-playerid"></span>
+        </div>
+        <div class="invoice-row">
+          <span class="invoice-icon">🌐</span>
+          <span class="invoice-label english-heading">Zone ID:</span>
+          <span class="invoice-value english-heading" id="invoice-zoneid"></span>
+        </div>
+        <div class="invoice-row">
+          <span class="invoice-icon">🎮</span>
+          <span class="invoice-label english-heading">Package:</span>
+          <span class="invoice-value english-heading" id="invoice-package"></span>
+        </div>
+        <div class="invoice-row">
+          <span class="invoice-icon">💵</span>
+          <span class="invoice-label english-heading">Amount:</span>
+          <span class="invoice-value english-heading" id="invoice-amount"></span>
+        </div>
+        <div class="invoice-row">
+          <span class="invoice-icon">📅</span>
+          <span class="invoice-label english-heading">Date:</span>
+          <span class="invoice-value english-heading" id="invoice-date"></span>
+        </div>
+      </div>
+      
+      <div class="modal-buttons">
+  <button class="bakong-btn english-heading" onclick="downloadInvoicePDF()">Download Receipt</button>
+  <button class="bakong-btn english-heading" onclick="backToTopup()">Back to Top-up</button>
+</div>
+
+  </div>
+
+  <script>
+   // Global variables to store packages
+let gamePackages = {
+    ml: [],
+    ff: [],
+    pubg: [],
+    hok: [],
+    bloodstrike: [],
+    mcgg: [],
+    ml_special_offers: [],
+    ff_special_offers: [],
+    pubg_special_offers: [],
+    hok_special_offers: [],
+    bloodstrike_special_offers: [],
+    mcgg_special_offers: []
+
+};
+let selectedPrice = 0;
+let selectedName = "";
+let currentTransaction = null;
+
+async function loadAllPackages() {
+    try {
+        const response = await fetch('/get_packages');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        
+        const data = await response.json();
+        console.log('Received package data:', data); // Debug log
+        
+        // Initialize gamePackages with all supported game types
+        gamePackages = {
+            ml: Array.isArray(data.ml) ? data.ml : [],
+            ff: Array.isArray(data.ff) ? data.ff : [],
+            pubg: Array.isArray(data.pubg) ? data.pubg : [],
+            hok: Array.isArray(data.hok) ? data.hok : [],
+            bloodstrike: Array.isArray(data.bloodstrike) ? data.bloodstrike : [],
+            mcgg: Array.isArray(data.mcgg) ? data.mcgg : [],
+            ml_special_offers: Array.isArray(data.ml_special_offers) ? data.ml_special_offers : [],
+            ff_special_offers: Array.isArray(data.ff_special_offers) ? data.ff_special_offers : [],
+            pubg_special_offers: Array.isArray(data.pubg_special_offers) ? data.pubg_special_offers : [],
+            hok_special_offers: Array.isArray(data.hok_special_offers) ? data.hok_special_offers : [],
+            bloodstrike_special_offers: Array.isArray(data.bloodstrike_special_offers) ? data.bloodstrike_special_offers : [],
+            mcgg_special_offers: Array.isArray(data.mcgg_special_offers) ? data.mcgg_special_offers : []
+        };
+
+        console.log('Processed packages:', gamePackages); // Debug log
+        initPackageGrids();
+    } catch (error) {
+        console.error('Error loading packages:', error);
+        
+        // Fallback to empty packages if error occurs
+        gamePackages = {
+            ml: [],
+            ff: [],
+            pubg: [],
+            hok: [],
+            bloodstrike: [],
+            mcgg: [],
+            ml_special_offers: [],
+            ff_special_offers: [],
+            pubg_special_offers: [],
+            hok_special_offers: [],
+            bloodstrike_special_offers: [],
+            mcgg_special_offers: []
+        };
+        
+        // Show error to user
+        showAlert('Failed to load packages. Please try again later.', 'error');
+        
+        // Optional: Retry after delay
+        setTimeout(loadAllPackages, 5000);
+    }
+}
+
+// Update initPackageGrids to include MCGG
+function initPackageGrids() {
+    const mappings = [
+        { gameType: 'ml', gridId: 'packageGrid', offersId: 'mlSpecialOffers' },
+        { gameType: 'ff', gridId: 'ffPackageGrid', offersId: 'ffSpecialOffers' },
+        { gameType: 'pubg', gridId: 'pubgPackageGrid', offersId: 'pubgSpecialOffers' },
+        { gameType: 'hok', gridId: 'hokPackageGrid', offersId: 'hokSpecialOffers' },
+        { gameType: 'bloodstrike', gridId: 'bloodstrikePackageGrid', offersId: 'bloodstrike_special_offers' },
+        { gameType: 'mcgg', gridId: 'mcggPackageGrid', offersId: 'mcggSpecialOffers' }
+    ];
+
+    mappings.forEach(({ gameType, gridId, offersId }) => {
+        // Packages
+        const pkgGrid = document.getElementById(gridId);
+        if (pkgGrid) {
+            pkgGrid.innerHTML = '';
+            gamePackages[gameType].forEach(pkg => {
+                const card = createPackageCard(pkg, gameType);
+                pkgGrid.appendChild(card);
+            });
+        }
+
+        // Special offers
+        const offerGrid = document.getElementById(offersId);
+        if (offerGrid) {
+            offerGrid.innerHTML = '';
+            gamePackages[`${gameType}_special_offers`].forEach(offer => {
+                const card = createSpecialOfferCard(offer, gameType);
+                offerGrid.appendChild(card);
+            });
+        }
+    });
+}
+
+function createPackageCard(pkg, gameType) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.name = pkg.name;
+    card.dataset.price = pkg.price;
+    card.dataset.packageId = pkg.package_id || '';
+
+    // Determine image path
+    const imagePath = pkg.image
+        ? `/static/images/${pkg.image}`
+        : `/static/images/${gameType}-${
+            gameType === 'hok' ? 'tokens' : 
+            gameType === 'pubg' ? 'uc' : 
+            gameType === 'bloodstrike' ? 'gold' : 
+            gameType === 'mcgg' ? 'diamond' :
+            'diamond'
+          }.jpg`;
+
+    // Determine display name based on game type
+    let displayName;
+    switch(gameType) {
+        case 'hok':
+            displayName = pkg.name.includes('TOKENS') ? pkg.name : `${pkg.name} TOKENS`;
+            break;
+        case 'pubg':
+            displayName = pkg.name.includes('UC') ? pkg.name : `${pkg.name} UC`;
+            break;
+        case 'bloodstrike':
+            displayName = pkg.name.includes('Pass') ? pkg.name : `${pkg.name} Gold`;
+            break;
+        case 'mcgg':
+            displayName = pkg.name.includes('Diamonds') ? pkg.name : `${pkg.name} Diamonds`;
+            break;
+        default: // ml, ff
+            displayName = (pkg.name.includes('Weekly') || 
+                         pkg.name.includes('Monthly') || 
+                         pkg.name.includes('Evo') || 
+                         pkg.name.includes('lite') || 
+                         pkg.name.includes('Pass'))
+                       ? pkg.name
+                       : `${pkg.name} Diamonds`;
+    }
+
+    // Create the card HTML
+    card.innerHTML = `
+        <img src="${imagePath}" alt="${gameType} package" />
+        <h2 class="english-heading">${displayName}</h2>
+        <p class="new-price english-heading">$${parseFloat(pkg.price).toFixed(2)}</p>
+        ${gameType === 'bloodstrike' && pkg.name.includes('Pass') ? 
+          '<p class="special-badge english-heading">PASS</p>' : ''}
+        ${pkg.special_badge ? 
+          `<p class="special-badge english-heading">${pkg.special_badge}</p>` : ''}
+    `;
+
+    // Add click handler
+    card.onclick = () => selectPackage(card, pkg.price, pkg.name, gameType);
+    
+    return card;
+}
+
+// Create a special offer card
+function createSpecialOfferCard(offer, gameType) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.name = offer.name;
+    card.dataset.price = offer.price;
+
+    const imagePath = offer.image
+        ? `/static/images/${offer.image}`
+        : `/static/images/${gameType}-${gameType === 'pubg' ? 'uc' : 'diamond'}.jpg`;
+
+    const displayName = gameType === 'pubg'
+        ? `${offer.name} UC`
+        : `${offer.name} `;
+
+    card.innerHTML = `
+        <img src="${imagePath}" alt="${gameType} special offer" />
+        <h2 class="english-heading">${displayName}</h2>
+        <p class="new-price english-heading">$${parseFloat(offer.price).toFixed(2)}</p>
+        <p class="special-badge english-heading">SPECIAL OFFER</p>
+    `;
+
+    card.onclick = () => selectSpecialOffer(card, offer.price, offer.name, gameType);
+    return card;
+}
+
+// Handle regular package selection
+function selectPackage(card, price, name, gameType) {
+    const grid = card.parentElement;
+
+    // Deselect all in this grid
+    document.querySelectorAll(`#${grid.id} .card`).forEach(c => c.classList.remove('selected'));
+
+    // Deselect special offers
+    document.querySelectorAll(`#${gameType}SpecialOffers .card`).forEach(c => c.classList.remove('selected'));
+
+    card.classList.add('selected');
+    selectedPrice = price;
+    selectedName = name;
+    updateBuyButton();
+}
+
+// Handle special offer selection
+function selectSpecialOffer(card, price, name, gameType) {
+    document.querySelectorAll(`#${gameType}SpecialOffers .card`).forEach(c => c.classList.remove('selected'));
+
+    const gridId = gameType === 'ml' ? 'packageGrid' :
+                   gameType === 'ff' ? 'ffPackageGrid' :
+                   'pubgPackageGrid';
+
+    document.querySelectorAll(`#${gridId} .card`).forEach(c => c.classList.remove('selected'));
+
+    card.classList.add('selected');
+    selectedPrice = price;
+    selectedName = name;
+    updateBuyButton();
+}
+
+// Update Buy Button Text
+function updateBuyButton() {
+    const buyBtn = document.getElementById('buyNowBtn');
+    buyBtn.textContent = selectedPrice > 0
+        ? `Buy Now $${selectedPrice.toFixed(2)}`
+        : 'Buy Now $0.00';
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', async function () {
+    await loadAllPackages();
+    initPackageGrids();
+
+    let selectedPrice = 0;
+    let selectedName = "";
+    let currentTransaction = null;
+    let countdownInterval = null;
+});
+    function showMLTopup() {
+      document.getElementById('homepage').style.display = 'none';
+      document.getElementById('mlTopupSection').style.display = 'block';
+      document.getElementById('ffTopupSection').style.display = 'none';
+      document.getElementById('buyNowBtn').style.display = 'block';
+      document.getElementById('mainFooter').style.display = 'none';
+      window.scrollTo(0, 0);
+      selectedPrice = 0;
+      selectedName = "";
+      document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+    }
+
+    function showFFTopup() {
+      document.getElementById('homepage').style.display = 'none';
+      document.getElementById('ffTopupSection').style.display = 'block';
+      document.getElementById('mlTopupSection').style.display = 'none';
+      document.getElementById('buyNowBtn').style.display = 'block';
+      document.getElementById('mainFooter').style.display = 'none';
+      window.scrollTo(0, 0);
+      selectedPrice = 0;
+      selectedName = "";
+      document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+    }
+
+    // Add this function
+function showPUBGTopup() {
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('pubgTopupSection').style.display = 'block';
+    document.getElementById('mlTopupSection').style.display = 'none';
+    document.getElementById('ffTopupSection').style.display = 'none';
+    document.getElementById('buyNowBtn').style.display = 'block';
+    document.getElementById('mainFooter').style.display = 'none';
+    window.scrollTo(0, 0);
+    selectedPrice = 0;
+    selectedName = "";
+    document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+}
+
+function showHOKTopup() {
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('hokTopupSection').style.display = 'block';
+    document.getElementById('mlTopupSection').style.display = 'none';
+    document.getElementById('ffTopupSection').style.display = 'none';
+    document.getElementById('pubgTopupSection').style.display = 'none';
+    document.getElementById('buyNowBtn').style.display = 'block';
+    document.getElementById('mainFooter').style.display = 'none';
+    window.scrollTo(0, 0);
+    selectedPrice = 0;
+    selectedName = "";
+    document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+}
+
+function showBloodStrikeTopup() {
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('bloodstrikeTopupSection').style.display = 'block';
+    // Hide other sections
+    ['ml', 'ff', 'pubg', 'hok'].forEach(game => {
+        document.getElementById(`${game}TopupSection`).style.display = 'none';
+    });
+    document.getElementById('buyNowBtn').style.display = 'block';
+    document.getElementById('mainFooter').style.display = 'none';
+    window.scrollTo(0, 0);
+    selectedPrice = 0;
+    selectedName = "";
+    document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+}
+    async function checkUsername() {
+      const id = document.getElementById('idInput').value.trim();
+      const zone = document.getElementById('zoneInput').value.trim();
+      const display = document.getElementById('usernameDisplay');
+      if (!id || !zone) {
+        display.textContent = "username not found!.";
+        return;
+      }
+      display.textContent = "Checking username...";
+      try {
+        const url = `https://api.isan.eu.org/nickname/ml?id=${encodeURIComponent(id)}&zone=${encodeURIComponent(zone)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.success && data.name) {
+          display.textContent = `✅ Username: ${data.name}`;
+        } else {
+          display.textContent = "❌ Username not found.";
+        }
+      } catch (err) {
+        display.textContent = "⚠️ Error fetching data.";
+      }
+    }
+
+// Add MCGG show function
+function showMCGGTopup() {
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('mcggTopupSection').style.display = 'block';
+    // Hide other sections
+    ['ml', 'ff', 'pubg', 'hok', 'bloodstrike'].forEach(game => {
+        document.getElementById(`${game}TopupSection`).style.display = 'none';
+    });
+    document.getElementById('buyNowBtn').style.display = 'block';
+    document.getElementById('mainFooter').style.display = 'none';
+    window.scrollTo(0, 0);
+    selectedPrice = 0;
+    selectedName = "";
+    document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+}
+
+// Add MCGG username verification
+async function checkMCGGUsername() {
+    const uid = document.getElementById('mcggIdInput').value.trim();
+    const zone = document.getElementById('mcggZoneInput').value.trim();
+    const display = document.getElementById('mcggUsernameDisplay');
+
+    if (!uid || !zone) {
+        display.textContent = "❌ Please enter Player ID and Zone ID";
+        display.style.color = "white";
+        return;
+    }
+
+    display.textContent = "Checking username...";
+    display.style.color = "white";
+
+    try {
+        const response = await fetch(`https://luffytopup.com/api/v1/verify_account.php?id=${uid}&zone=${zone}&game=magic_chest_gogo`);
+        const data = await response.json();
+
+        if (data.success && data.name) {
+            display.textContent = `✅ Username: ${data.name}`;
+            display.style.color = "white";
+        } else {
+            display.textContent = "❌ Username not found";
+            display.style.color = "white";
+        }
+    } catch (error) {
+        display.textContent = "⚠️ Error verifying account";
+        display.style.color = "white";
+        console.error(error);
+    }
+}
+
+// Add this function to check PUBG username
+async function checkPUBGUsername() {
+    const uid = document.getElementById('pubgIdInput').value.trim();
+    const display = document.getElementById('pubgUsernameDisplay');
+
+    if (!uid) {
+        display.textContent = "❌ Please enter a Player ID.";
+        display.style.color = "white";
+        return;
+    }
+
+    display.textContent = "Checking username...";
+    display.style.color = "white";
+
+    try {
+        const response = await fetch(`https://luffytopup.com/api/v1/verify_account.php?id=${uid}&zone=0000&game=pubgm`);
+        const data = await response.json();
+
+        if (data.success && data.name) {
+            display.textContent = `✅ Username: ${data.name}`;
+            display.style.color = "white";
+        } else {
+            display.textContent = "❌ Username not found.";
+            display.style.color = "white";
+        }
+    } catch (error) {
+        display.textContent = "⚠️ Error fetching username.";
+        display.style.color = "white";
+        console.error(error);
+    }
+}
+
+// Add HOK username verification
+async function checkHOKUsername() {
+    const uid = document.getElementById('hokIdInput').value.trim();
+    const display = document.getElementById('hokUsernameDisplay');
+
+    if (!uid) {
+        display.textContent = "❌ Please enter a Player ID.";
+        display.style.color = "white";
+        return;
+    }
+
+    display.textContent = "Checking username...";
+    display.style.color = "white";
+
+    try {
+        const response = await fetch(`https://luffytopup.com/api/v1/verify_account.php?id=${uid}&zone=0000&game=hok`);
+        const data = await response.json();
+
+        if (data.success && data.name) {
+            display.textContent = `✅ Username: ${data.name}`;
+            display.style.color = "white";
+        } else {
+            display.textContent = "❌ Username not found.";
+            display.style.color = "white";
+        }
+    } catch (error) {
+        display.textContent = "⚠️ Error fetching username.";
+        display.style.color = "white";
+        console.error(error);
+    }
+}
+
+// Add Blood Strike username verification
+async function checkBloodStrikeUsername() {
+    const uid = document.getElementById('bloodstrikeIdInput').value.trim();
+    const display = document.getElementById('bloodstrikeUsernameDisplay');
+
+    try {
+        const response = await fetch(
+            `https://luffytopup.com/api/v1/checkrole.php?id=${uid}&zone=-1&game=bloodstrike`
+        );
+        const data = await response.json();
+        
+        if (data.success) {
+            display.textContent = `✅ Verified Player`;
+            display.style.color = "white";
+        } else {
+            display.textContent = "❌ Player not found";
+            display.style.color = "white";
+        }
+    } catch (error) {
+        display.textContent = "⚠️ Verification error";
+        display.style.color = "white";
+    }
+}
+
+    function openModal() {
+      document.getElementById('bakongModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('bakongModal').style.display = 'none';
+      if (countdownInterval) clearInterval(countdownInterval);
+      currentTransaction = null;
+    }
+
+    function closeInvoiceModal() {
+      document.getElementById('invoiceModal').style.display = 'none';
+    }
+let countdownInterval = null;
+function initiatePayment() {
+    let id, zone, gameType;
+    
+    // Determine which game section is active
+    if (document.getElementById('mlTopupSection').style.display === 'block') {
+        gameType = 'ml';
+        id = document.getElementById('idInput').value.trim();
+        zone = document.getElementById('zoneInput').value.trim();
+    } 
+    else if (document.getElementById('ffTopupSection').style.display === 'block') {
+        gameType = 'ff';
+        id = document.getElementById('ffIdInput').value.trim();
+        zone = "0";
+    } 
+    else if (document.getElementById('pubgTopupSection').style.display === 'block') {
+        gameType = 'pubg';
+        id = document.getElementById('pubgIdInput').value.trim();
+        zone = "0000";
+    } 
+    else if (document.getElementById('hokTopupSection').style.display === 'block') {
+        gameType = 'hok';
+        id = document.getElementById('hokIdInput').value.trim();
+        zone = "0000";
+    } 
+    else if (document.getElementById('bloodstrikeTopupSection').style.display === 'block') {
+        gameType = 'bloodstrike';
+        id = document.getElementById('bloodstrikeIdInput').value.trim();
+        zone = "0000";
+    }    
+    else if (document.getElementById('mcggTopupSection').style.display === 'block') {
+    gameType = 'mcgg';
+    id = document.getElementById('mcggIdInput').value.trim();
+    zone = document.getElementById('mcggZoneInput').value.trim();
+    }
+    else {
+        alert('No game section selected');
+        return;
+    }
+
+    // Get the appropriate checkbox based on game type
+    let khqrChecked;
+    switch(gameType) {
+        case 'ml':
+            khqrChecked = document.getElementById('khqrCheck').checked;
+            break;
+        case 'ff':
+            khqrChecked = document.getElementById('ffKhqrCheck').checked;
+            break;
+        case 'pubg':
+            khqrChecked = document.getElementById('pubgKhqrCheck').checked;
+            break;
+        case 'hok':
+            khqrChecked = document.getElementById('hokKhqrCheck').checked;
+            break;
+        case 'bloodstrike':
+            khqrChecked = document.getElementById('bloodstrikeKhqrCheck').checked;
+            break;
+        case 'mcgg':
+            khqrChecked = document.getElementById('mcggKhqrCheck').checked;
+            break;
+    }
+
+    // Get the appropriate agreement checkbox
+    let agreed;
+    switch(gameType) {
+        case 'ml':
+            agreed = document.getElementById('mlAgreementCheck').checked;
+            break;
+        case 'ff':
+            agreed = document.getElementById('ffAgreementCheck').checked;
+            break;
+        case 'pubg':
+            agreed = document.getElementById('pubgAgreementCheck').checked;
+            break;
+        case 'hok':
+            agreed = document.getElementById('hokAgreementCheck').checked;
+            break;
+        case 'bloodstrike':
+            agreed = document.getElementById('bloodstrikeAgreementCheck').checked;
+            break;
+        case 'mcgg':
+            agreed = document.getElementById('mcggAgreementCheck').checked;
+            break;
+    }
+
+    if (!id) {
+        alert('Please fill Player ID.');
+        return;
+    }
+
+    if (!selectedName) {
+        alert('Please select a package.');
+        return;
+    }
+
+    if (!khqrChecked) {
+        alert('Please check KHQR payment method.');
+        return;
+    }
+
+    if (!agreed) {
+        alert('សូមធ្វើការយល់ព្រមនឹងលក្ខខណ្ឌមុនពេលបន្ត!');
+        return;
+    }
+
+    openModal();
+    generateBakongQR(id, zone);
+}
+  
+async function generateBakongQR(playerId, zoneId) {
+  try {
+    // Determine game type based on which section is visible
+    let gameType;
+    if (document.getElementById('mlTopupSection').style.display === 'block') {
+      gameType = 'ml';
+    } 
+    else if (document.getElementById('ffTopupSection').style.display === 'block') {
+      gameType = 'ff';
+    }
+    else if (document.getElementById('pubgTopupSection').style.display === 'block') {
+      gameType = 'pubg';
+    }
+    else if (document.getElementById('hokTopupSection').style.display === 'block') {
+      gameType = 'hok';
+    }
+    else if (document.getElementById('bloodstrikeTopupSection').style.display === 'block') {
+      gameType = 'bloodstrike';
+    }
+    else if (document.getElementById('mcggTopupSection').style.display === 'block') {
+    gameType = 'mcgg';
+    }   
+    else {
+      throw new Error('No game section selected');
+    }
+
+    // Get package ID from the selected package
+    let packageId = '';
+    const packages = gamePackages[gameType] || [];
+    const specialOffers = gamePackages[`${gameType}_special_offers`] || [];
+    
+    // Check regular packages
+    const selectedPackage = packages.find(pkg => pkg.name === selectedName);
+    if (selectedPackage) {
+      packageId = selectedPackage.package_id || '';
+    } else {
+      // Check special offers if not found in regular packages
+      const selectedOffer = specialOffers.find(offer => offer.name === selectedName);
+      if (selectedOffer) {
+        packageId = selectedOffer.package_id || '';
+      }
+    }
+
+    const response = await fetch('/generate_qr', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        amount: selectedPrice,
+        player_id: playerId,
+        zone_id: zoneId,
+        package: selectedName,
+        package_id: packageId,
+        game_type: gameType
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to generate QR');
+    }
+    
+    // Store current transaction with additional details
+    currentTransaction = {
+      id: result.transaction_id,
+      amount: result.amount,
+      expiry: new Date(result.expiry),
+      playerId: playerId,
+      zoneId: zoneId,
+      package: selectedName,
+      packageId: packageId,
+      gameType: gameType
+    };
+    
+    // Display QR code
+    document.getElementById('bakongQR').src = `data:image/png;base64,${result.qr_image}`;
+    
+    // Enable check button and update text
+    const checkBtn = document.getElementById('checkPaymentBtn');
+    checkBtn.disabled = false;
+    checkBtn.textContent = 'Checking...';
+    
+    // Update status with game-specific message
+    let gameName;
+    switch(gameType) {
+      case 'ml': gameName = 'Mobile Legends'; break;
+      case 'ff': gameName = 'Free Fire'; break;
+      case 'pubg': gameName = 'PUBG Mobile'; break;
+      case 'hok': gameName = 'Honor of Kings'; break;
+      case 'bloodstrike': gameName = 'Blood Strike'; break;
+      case 'mcgg': gameName = 'Magic Chess: Go Go'; break;
+      default: gameName = 'Game';
+    }
+    document.getElementById('bakongStatus').textContent = `Scan to pay $${selectedPrice.toFixed(2)} for ${gameName}`;
+    
+    // Start countdown and auto-checking
+    startCountdown();
+    startAutoPaymentCheck();
+    
+  } catch (error) {
+    document.getElementById('bakongStatus').textContent = `Error: ${error.message}`;
+    document.getElementById('bakongStatus').style.color = '#f44336';
+    console.error('QR Generation Error:', error);
+    
+    // Ensure auto-check is stopped if there was an error
+    stopAutoPaymentCheck();
+  }
+}
+
+// Auto-check payment functions
+let paymentCheckInterval = null;
+
+function startAutoPaymentCheck() {
+  // Clear any existing interval
+  stopAutoPaymentCheck();
+  
+  // Initial immediate check
+  checkBakongPayment();
+  
+  // Set up recurring checks every 10 seconds
+  paymentCheckInterval = setInterval(() => {
+    checkBakongPayment();
+  }, 10000);
+}
+
+function stopAutoPaymentCheck() {
+  if (paymentCheckInterval) {
+    clearInterval(paymentCheckInterval);
+    paymentCheckInterval = null;
+  }
+  document.getElementById('checkPaymentBtn').style.display = 'none';
+  // document.getElementById('checkPaymentBtn').textContent = 'Check Payment';
+}
+
+// Modified checkBakongPayment function
+async function checkBakongPayment() {
+  if (!currentTransaction) {
+    stopAutoPaymentCheck();
+    return;
+  }
+
+  try {
+    const response = await fetch('/check_payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        transaction_id: currentTransaction.id
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(result.error || 'Payment check failed');
+    }
+    
+    if (result.status === 'PAID') {
+      stopAutoPaymentCheck();
+      document.getElementById('bakongCountdown').textContent = 'Payment Received!';
+      document.getElementById('bakongCountdown').style.color = '#4caf50';
+      document.getElementById('bakongStatus').textContent = result.message;
+      showInvoice(currentTransaction);
+      setTimeout(closeModal, 500);
+    } 
+    else if (result.status === 'EXPIRED') {
+      stopAutoPaymentCheck();
+      document.getElementById('bakongCountdown').textContent = 'QR Code Expired'; 
+      document.getElementById('bakongCountdown').style.color = '#f44336';
+      document.getElementById('bakongStatus').textContent = result.message;
+    }
+    else {
+      document.getElementById('bakongStatus').textContent = 'Waiting for payment...';
+    }
+  } catch (error) {
+    console.error('Payment Check Error:', error);
+    document.getElementById('bakongStatus').textContent = 'Error checking payment';
+    document.getElementById('bakongStatus').style.color = '#f44336';
+    stopAutoPaymentCheck();
+  }
+}
+
+    function startCountdown() {
+      if (countdownInterval) clearInterval(countdownInterval);
+      updateCountdown();
+      countdownInterval = setInterval(updateCountdown, 1000);
+    }
+
+    function updateCountdown() {
+      if (!currentTransaction) return;
+      
+      const now = new Date();
+      const remaining = currentTransaction.expiry - now;
+      
+      if (remaining <= 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('bakongCountdown').textContent = 'QR Code Expired';
+        document.getElementById('bakongCountdown').style.color = '#f44336';
+        document.getElementById('checkPaymentBtn').disabled = true;
+        document.getElementById('bakongStatus').textContent = 'QR expired. Please try again.';
+        return;
+      }
+      
+      const mins = Math.floor(remaining / 60000);
+      const secs = Math.floor((remaining % 60000) / 1000);
+      const countdownText = `Expires in: ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      
+      document.getElementById('bakongCountdown').textContent = countdownText;
+      document.getElementById('bakongCountdown').style.color = (mins === 0 && secs < 30) ? '#f44336' : 'white';
+    }
+
+    async function checkBakongPayment() {
+      if (!currentTransaction) {
+        // alert('No active transaction to check');
+        return;
+      }
+      
+      // Disable button during check
+      document.getElementById('checkPaymentBtn').disabled = true;
+      document.getElementById('bakongStatus').textContent = 'Checking payment...';
+      
+      try {
+        const response = await fetch('/check_payment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            transaction_id: currentTransaction.id
+          })
+        });
+        
+        const result = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(result.error || 'Payment check failed');
+        }
+        
+        if (result.status === 'PAID') {
+          // Payment successful
+          clearInterval(countdownInterval);
+          document.getElementById('bakongCountdown').textContent = 'Payment Received!';
+          document.getElementById('bakongCountdown').style.color = '#4caf50';
+          document.getElementById('bakongStatus').textContent = result.message;
+          
+          // Show invoice
+          showInvoice(currentTransaction);
+          
+          // Close payment modal after 0.5 second
+          setTimeout(closeModal, 500);
+        } else if (result.status === 'EXPIRED') {
+          clearInterval(countdownInterval);
+          document.getElementById('bakongCountdown').textContent = 'QR Code Expired';
+          document.getElementById('bakongCountdown').style.color = '#f44336';
+          document.getElementById('bakongStatus').textContent = result.message;
+        } else {
+          document.getElementById('bakongStatus').textContent = result.message;
+          document.getElementById('checkPaymentBtn').disabled = false;
+        }
+      } catch (error) {
+        document.getElementById('bakongStatus').textContent = `Error: ${error.message}`;
+        document.getElementById('bakongStatus').style.color = '#f44336';
+        document.getElementById('checkPaymentBtn').disabled = false;
+        console.error(error);
+      }
+    }
+
+    // Game configuration mapping
+const GAME_CONFIG = {
+  ml: {
+    idInput: 'idInput',
+    zoneInput: 'zoneInput',
+    usernameDisplay: 'usernameDisplay',
+    khqrCheck: 'khqrCheck',
+    packageGrid: '#packageGrid'
+  },
+  ff: {
+    idInput: 'ffIdInput',
+    usernameDisplay: 'ffUsernameDisplay',
+    khqrCheck: 'ffKhqrCheck',
+    packageGrid: '#ffPackageGrid'
+  },
+  pubg: {
+    idInput: 'pubgIdInput',
+    usernameDisplay: 'pubgUsernameDisplay',
+    khqrCheck: 'pubgKhqrCheck',
+    packageGrid: '#pubgPackageGrid'
+  },
+  hok: {
+    idInput: 'hokIdInput',
+    usernameDisplay: 'hokUsernameDisplay',
+    khqrCheck: 'hokKhqrCheck',
+    packageGrid: '#hokPackageGrid'
+  },
+  bloodstrike: {
+    idInput: 'bloodstrikeIdInput',
+    usernameDisplay: 'bloodstrikeUsernameDisplay',
+    khqrCheck: 'bloodstrikeKhqrCheck',
+    packageGrid: '#bloodstrikePackageGrid'
+  }
+};
+
+function showInvoice(transaction) {
+  try {
+    const now = new Date();
+    let username = "N/A";
+    let gameType = getActiveGameType();
+
+    if (gameType && GAME_CONFIG[gameType]) {
+      const usernameElement = document.getElementById(GAME_CONFIG[gameType].usernameDisplay);
+      if (usernameElement) {
+        username = usernameElement.textContent;
+        // Clean up username if it contains the success prefix
+        username = username.replace(/^(✅|✔|✓)?\s*Username:\s*/i, '').trim() || 'N/A';
+      }
+    }
+
+    // Fill invoice details
+    document.getElementById('invoice-username').textContent = username;
+    document.getElementById('invoice-playerid').textContent = transaction.playerId || 'N/A';
+    document.getElementById('invoice-zoneid').textContent = transaction.zoneId || '0';
+    document.getElementById('invoice-package').textContent = transaction.package || 'N/A';
+    document.getElementById('invoice-amount').textContent = `$${(transaction.amount || 0).toFixed(2)}`;
+    document.getElementById('invoice-date').textContent = now.toLocaleString();
+
+    // Show the invoice modal with animation
+    const invoiceModal = document.getElementById('invoiceModal');
+    invoiceModal.style.display = 'flex';
+    invoiceModal.style.animation = 'fadeIn 0.3s ease-in-out';
+    
+  } catch (error) {
+    console.error('Error showing invoice:', error);
+    alert('There was an error displaying your invoice. Please try again.');
+  }
+}
+
+function backToTopup() {
+  try {
+    closeInvoiceModal();
+    const gameType = getActiveGameType();
+
+    if (gameType && GAME_CONFIG[gameType]) {
+      const config = GAME_CONFIG[gameType];
+      
+      // Reset form fields
+      document.getElementById(config.idInput).value = '';
+      if (config.zoneInput) {
+        document.getElementById(config.zoneInput).value = '';
+      }
+      document.getElementById(config.usernameDisplay).textContent = '';
+      document.getElementById(config.khqrCheck).checked = false;
+      
+      // Reset package selection
+      document.querySelectorAll(config.packageGrid + ' .card').forEach(c => {
+        c.classList.remove('selected');
+      });
+    }
+
+    // Reset buy button and scroll to top
+    document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+  } catch (error) {
+    console.error('Error returning to topup:', error);
+    // Fallback to simple reload if something goes wrong
+    window.location.reload();
+  }
+}
+
+// Helper function to get active game type
+function getActiveGameType() {
+  for (const gameType in GAME_CONFIG) {
+    if (document.getElementById(`${gameType}TopupSection`).style.display === 'block') {
+      return gameType;
+    }
+  }
+  return null;
+}
+
+// Helper function to close invoice modal with animation
+function closeInvoiceModal() {
+  const invoiceModal = document.getElementById('invoiceModal');
+  if (invoiceModal) {
+    invoiceModal.style.animation = 'fadeOut 0.3s ease-in-out';
+    setTimeout(() => {
+      invoiceModal.style.display = 'none';
+      invoiceModal.style.animation = '';
+    }, 300);
+  }
+}
+    async function checkFFUsername() {
+  const uid = document.getElementById('ffIdInput').value.trim();
+  const display = document.getElementById('ffUsernameDisplay');
+
+  if (!uid) {
+    display.textContent = "❌ Please enter a Player ID.";
+    display.style.color = "white";
+    return;
+  }
+
+  display.textContent = "Checking username...";
+  display.style.color = "white";
+
+  try {
+    const proxyUrl = 'https://api.allorigins.win/raw?url=';
+    
+
+    const targetUrl = encodeURIComponent(`https://luffytopup.com/api/v1/verify_account.php?id=${uid}&zone=0000&game=freefire_sgmy`);
+    const response = await fetch(proxyUrl + targetUrl);
+
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    const data = await response.json();
+
+    if (data.name) {
+      display.textContent = `✅ Username: ${data.name}`;
+      display.style.color = "white";
+    } else {
+      display.textContent = "❌ Username not found.";
+      display.style.color = "white";
+    }
+  } catch (error) {
+    display.textContent = "⚠️ Error fetching username.";
+    display.style.color = "white";
+    console.error(error);
+  }
+}
+
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<script>
+async function downloadInvoicePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF("p", "mm", "a4");
+  const pw = doc.internal.pageSize.getWidth();
+
+  const nowStr = document.getElementById("invoice-date").textContent;
+  const dateOnly = nowStr.split(",")[0].trim();
+  const timeOnly = nowStr.split(",")[1] ? nowStr.split(",")[1].trim() : "";
+
+  const playerId = document.getElementById("invoice-playerid").textContent;
+  const zoneId = document.getElementById("invoice-zoneid").textContent;
+  const pkg = document.getElementById("invoice-package").textContent;
+  const priceStr = document.getElementById("invoice-amount").textContent;
+
+  // Generate invoice number with seconds (INVNO-YYYYMMDDHHMMSS)
+  const now = new Date();
+  const invoiceNumber = `INVNO-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}${String(now.getSeconds()).padStart(2,'0')}`;
+
+  const logo = new Image();
+  logo.src = "/static/images/logo.jpg";
+
+  logo.onload = () => {
+    // Logo
+    doc.addImage(logo, "JPEG", 15, 12, 22, 20);
+
+    // Company name
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(12);
+    doc.text("MENG TOPUP", 15, 35);
+
+    // Date
+    doc.setFont("Helvetica", "normal");
+    doc.setFontSize(10);
+    doc.text(dateOnly, 15, 41);
+
+    // Invoice number (bold and slightly larger)
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(11);
+    doc.text(`Invoice: ${invoiceNumber}`, 15, 47);
+
+    // Contact info (right aligned)
+    doc.setFontSize(9);
+    const addr = [
+      "+855 88 5555 479",
+      "mengjongmm99@gmail.com",
+      "Phleung Chheh Roteh Lech, Sangkat Phleung Chheh Roteh",
+      "Sangkat Phleung Chheh Roteh, Phnom Penh City, Cambodia"
+    ];
+    let ay = 12, ax = pw - 15;
+    addr.forEach(line => { doc.text(line, ax, ay, { align: "right" }); ay += 5; });
+
+    // Invoice title
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(20);
+    doc.text("INVOICE", pw / 2, 50, { align: "center" });
+
+    // Divider line
+    doc.setDrawColor(0); doc.setLineWidth(0.3);
+    doc.line(25, 56, pw - 25, 56);
+
+    // User info box
+    const boxW = 100, boxH = 12, boxX = (pw - boxW) / 2, boxY = 62;
+    doc.roundedRect(boxX, boxY, boxW, boxH, 2, 2);
+    doc.setFontSize(12);
+    doc.text(`User: ${playerId} (${zoneId})`, pw / 2, boxY + 8, { align: "center" });
+
+    // Details table
+    const desc = /weekly|monthly|pass/i.test(pkg) ? `${pkg} Pass` : /diamond/i.test(pkg) ? pkg : `${pkg} Diamonds`;
+    doc.autoTable({
+      head: [["Item", "Details"]],
+      body: [
+        ["Package", desc],
+        ["Price", priceStr],
+        ["Time", timeOnly],
+        ["Status", "Successful"],
+        ["Invoice No", invoiceNumber]
+      ],
+      startY: boxY + boxH + 10,
+      tableWidth: 160,
+      margin: { left: (pw - 160) / 2 },
+      styles: { halign: "center", valign: "middle", fontSize: 11 },
+      headStyles: { fillColor: [230,230,255], textColor: 0, fontStyle: "bold" },
+      bodyStyles: { fillColor: [245,245,245] }
+    });
+
+    // Footer
+    const footerY = doc.lastAutoTable.finalY + 15;
+    doc.setFont("Helvetica", "normal");
+    doc.setFontSize(9);
+    doc.setTextColor(120);
+    doc.text("Thank you for your purchase.", pw / 2, footerY, { align: "center" });
+
+    // Save PDF
+    doc.save(`invoice-${playerId}.pdf`);
+  };
+}
+let returnSection = null;
+
+function showTerms(fromSection = null) {
+  returnSection = fromSection;
+
+  document.getElementById('homepage').style.display = 'none';
+  document.getElementById('mlTopupSection').style.display = 'none';
+  document.getElementById('ffTopupSection').style.display = 'none';
+  document.getElementById('pubgTopupSection').style.display = 'none';
+  document.getElementById('hokTopupSection').style.display = 'none';
+  document.getElementById('bloodstrikeTopupSection').style.display = 'none';
+  document.getElementById('mcggTopupSection').style.display = 'none';
+  document.getElementById('termsSection').style.display = 'block';
+  document.getElementById('buyNowBtn').style.display = 'none';
+
+  const banner = document.querySelector('.home-banner');
+  if (banner) banner.style.display = 'none';
+
+  window.scrollTo(0, 0);
+}
+
+function hideTerms() {
+  document.getElementById('termsSection').style.display = 'none';
+
+  if (returnSection === 'ml') {
+    document.getElementById('mlTopupSection').style.display = 'block';
+    document.getElementById('buyNowBtn').style.display = 'block';
+  } else if (returnSection === 'ff') {
+    document.getElementById('ffTopupSection').style.display = 'block';
+    document.getElementById('buyNowBtn').style.display = 'block';
+    } else if (returnSection === 'pubg') {
+    document.getElementById('pubgTopupSection').style.display = 'block';
+    document.getElementById('buyNowBtn').style.display = 'block';
+  } else if (returnSection === 'hok') {
+    document.getElementById('hokTopupSection').style.display = 'block';
+    document.getElementById('buyNowBtn').style.display = 'block';
+  } else if (returnSection === 'bloodstrike') {
+    document.getElementById('bloodstrikeTopupSection').style.display = 'block';
+    document.getElementById('buyNowBtn').style.display = 'block';
+  } else if (returnSection === 'mcgg') {
+    document.getElementById('mcggTopupSection').style.display = 'block';
+    document.getElementById('buyNowBtn').style.display = 'block';
+  } else {
+    document.getElementById('homepage').style.display = 'block';
+    document.getElementById('mainFooter').style.display = 'block';
+  }
+
+  const banner = document.querySelector('.home-banner');
+  if (banner) banner.style.display = 'block';
+
+  window.scrollTo(0, 0);
+}
+
+// Show offers only on homepage
+document.addEventListener('DOMContentLoaded', function() {
+  const homepageSection = document.getElementById('homepage');
+  const specialOffers = document.getElementById('specialOffers');
+  
+  function checkActiveSection() {
+    if (homepageSection.style.display !== 'none') {
+      specialOffers.style.display = 'block';
+    } else {
+      specialOffers.style.display = 'none';
+    }
+  }
+  
+  // Initial check
+  checkActiveSection();
+  
+  // Re-check when sections change
+  const observer = new MutationObserver(checkActiveSection);
+  observer.observe(homepageSection, { attributes: true, attributeFilter: ['style'] });
+});
+
+// Initialize all sliders
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize banner slider
+  initSlider('.banner-slider');
+  
+  // Initialize offers slider (only when visible)
+  const offersSlider = document.querySelector('.offers-slider');
+  if (offersSlider) {
+    initSlider('.offers-slider');
+  }
+  
+  // Show offers only on homepage
+  const homepageSection = document.getElementById('homepage');
+  const specialOffers = document.getElementById('specialOffers');
+  
+  function checkActiveSection() {
+    if (homepageSection.style.display !== 'none') {
+      specialOffers.style.display = 'block';
+      initSlider('.offers-slider'); // Re-init if needed
+    } else {
+      specialOffers.style.display = 'none';
+    }
+  }
+  
+  // Initial check
+  checkActiveSection();
+  
+  // Re-check when sections change
+  const observer = new MutationObserver(checkActiveSection);
+  observer.observe(homepageSection, { attributes: true, attributeFilter: ['style'] });
+});
+
+// Generic slider initialization
+function initSlider(selector) {
+  const container = document.querySelector(selector);
+  if (!container) return;
+  
+  const slides = container.querySelector('.slider-slides') || container.querySelector('.banner-slides') || container.querySelector('.offer-slides');
+  const slideItems = slides.querySelectorAll('.banner-slide, .offer-slide');
+  const dotsContainer = container.querySelector('.slider-dots');
+  const prevBtn = container.querySelector('.slider-prev');
+  const nextBtn = container.querySelector('.slider-next');
+  
+  let currentIndex = 0;
+  const slideCount = slideItems.length;
+  
+  // Create dots if they don't exist
+  if (dotsContainer && dotsContainer.children.length === 0) {
+    for (let i = 0; i < slideCount; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('slider-dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+  
+  // Navigation functions
+  function goToSlide(index) {
+    currentIndex = index;
+    updateSlider();
+  }
+  
+  function updateSlider() {
+    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    // Update dots
+    if (dotsContainer) {
+      const dots = dotsContainer.querySelectorAll('.slider-dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+  }
+  
+  // Event listeners
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex > 0) ? currentIndex - 1 : slideCount - 1;
+      updateSlider();
+    });
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex < slideCount - 1) ? currentIndex + 1 : 0;
+      updateSlider();
+    });
+  }
+  
+  // Auto-rotation
+  let autoSlide = setInterval(() => {
+    currentIndex = (currentIndex < slideCount - 1) ? currentIndex + 1 : 0;
+    updateSlider();
+  }, 5000);
+  
+  // Pause on hover
+  container.addEventListener('mouseenter', () => clearInterval(autoSlide));
+  container.addEventListener('mouseleave', () => {
+    autoSlide = setInterval(() => {
+      currentIndex = (currentIndex < slideCount - 1) ? currentIndex + 1 : 0;
+      updateSlider();
+    }, 5000);
+  });
+  
+  // Touch support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  slides.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    clearInterval(autoSlide);
+  }, {passive: true});
+  
+  slides.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+    autoSlide = setInterval(() => {
+      currentIndex = (currentIndex < slideCount - 1) ? currentIndex + 1 : 0;
+      updateSlider();
+    }, 5000);
+  }, {passive: true});
+  
+  function handleSwipe() {
+    if (touchEndX < touchStartX - 50) {
+      // Swipe left - next
+      currentIndex = (currentIndex < slideCount - 1) ? currentIndex + 1 : 0;
+    } else if (touchEndX > touchStartX + 50) {
+      // Swipe right - prev
+      currentIndex = (currentIndex > 0) ? currentIndex - 1 : slideCount - 1;
+    }
+    updateSlider();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if popup was closed in the last 1 hour (3600000 ms)
+  const popupClosedAt = localStorage.getItem('popupClosedAt');
+  const oneHour = 3600000;
+  
+  if (!popupClosedAt || (Date.now() - popupClosedAt) > oneHour) {
+    setTimeout(function() {
+      const popup = document.getElementById('luckyPopup');
+      popup.style.display = 'flex';
+      
+      // Close button functionality
+      document.querySelector('.lucky-popup-close').onclick = function() {
+        popup.style.display = 'none';
+        localStorage.setItem('popupClosedAt', Date.now());
+      };
+      
+      // Close when clicking outside
+      popup.onclick = function(e) {
+        if (e.target === this) {
+          this.style.display = 'none';
+          localStorage.setItem('popupClosedAt', Date.now());
+        }
+      };
+    }, 1000); // Show after 1 second delay
+  }
+});
+
+// Add these at the top with your other variables
+const STORAGE_KEY = 'mengTopupPrefs';
+let rememberedPrefs = {};
+
+// Add this new function to load saved preferences
+function loadRememberedPrefs() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    rememberedPrefs = JSON.parse(saved);
+    
+    // Fill ML fields if available
+    if (rememberedPrefs.ml) {
+      document.getElementById('idInput').value = rememberedPrefs.ml.playerId || '';
+      document.getElementById('zoneInput').value = rememberedPrefs.ml.zoneId || '';
+    }
+    
+    // Fill FF field if available
+    if (rememberedPrefs.ff) {
+      document.getElementById('ffIdInput').value = rememberedPrefs.ff.playerId || '';
+    }
+    
+    // Fill PUBG field if available
+    if (rememberedPrefs.pubg) {
+      document.getElementById('pubgIdInput').value = rememberedPrefs.pubg.playerId || '';
+    }
+    
+    // Fill HOK field if available
+    if (rememberedPrefs.hok) {
+      document.getElementById('hokIdInput').value = rememberedPrefs.hok.playerId || '';
+    }
+    
+    // Fill Bloodstrike field if available
+    if (rememberedPrefs.bloodstrike) {
+      document.getElementById('bloodstrikeIdInput').value = rememberedPrefs.bloodstrike.playerId || '';
+    }
+    
+    // Fill MCGG fields if available
+    if (rememberedPrefs.mcgg) {
+      document.getElementById('mcggIdInput').value = rememberedPrefs.mcgg.playerId || '';
+      document.getElementById('mcggZoneInput').value = rememberedPrefs.mcgg.zoneId || '';
+    }
+  }
+}
+
+function saveRememberedPrefs() {
+  // Determine which game section is active
+  let gameType;
+  if (document.getElementById('mlTopupSection').style.display === 'block') {
+    gameType = 'ml';
+  } 
+  else if (document.getElementById('ffTopupSection').style.display === 'block') {
+    gameType = 'ff';
+  }
+  else if (document.getElementById('pubgTopupSection').style.display === 'block') {
+    gameType = 'pubg';
+  }
+  else if (document.getElementById('hokTopupSection').style.display === 'block') {
+    gameType = 'hok';
+  }
+  else if (document.getElementById('bloodstrikeTopupSection').style.display === 'block') {
+    gameType = 'bloodstrike';
+  }
+  else if (document.getElementById('mcggTopupSection').style.display === 'block') {
+    gameType = 'mcgg';
+  }
+
+  if (!gameType) return; // No active game section found
+
+  // Save preferences based on game type
+  switch(gameType) {
+    case 'ml':
+      rememberedPrefs.ml = {
+        playerId: document.getElementById('idInput').value.trim(),
+        zoneId: document.getElementById('zoneInput').value.trim()
+      };
+      break;
+    case 'ff':
+      rememberedPrefs.ff = {
+        playerId: document.getElementById('ffIdInput').value.trim()
+      };
+      break;
+    case 'pubg':
+      rememberedPrefs.pubg = {
+        playerId: document.getElementById('pubgIdInput').value.trim()
+      };
+      break;
+    case 'hok':
+      rememberedPrefs.hok = {
+        playerId: document.getElementById('hokIdInput').value.trim()
+      };
+      break;
+    case 'bloodstrike':
+      rememberedPrefs.bloodstrike = {
+        playerId: document.getElementById('bloodstrikeIdInput').value.trim()
+      };
+      break;
+    case 'mcgg':
+      rememberedPrefs.mcgg = {
+        playerId: document.getElementById('mcggIdInput').value.trim(),
+        zoneId: document.getElementById('mcggZoneInput').value.trim()
+      };
+      break;
+  }
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(rememberedPrefs));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadRememberedPrefs();
+  
+  // Add event listeners to all input fields
+  document.getElementById('idInput').addEventListener('input', saveRememberedPrefs);
+  document.getElementById('zoneInput').addEventListener('input', saveRememberedPrefs);
+  document.getElementById('ffIdInput').addEventListener('input', saveRememberedPrefs);
+  document.getElementById('pubgIdInput').addEventListener('input', saveRememberedPrefs);
+  document.getElementById('hokIdInput').addEventListener('input', saveRememberedPrefs);
+  document.getElementById('bloodstrikeIdInput').addEventListener('input', saveRememberedPrefs);
+  document.getElementById('mcggIdInput').addEventListener('input', saveRememberedPrefs);
+  document.getElementById('mcggZoneInput').addEventListener('input', saveRememberedPrefs);
+});
+</script>
+</body>
+</html>
