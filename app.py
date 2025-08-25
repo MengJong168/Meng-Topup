@@ -17,15 +17,9 @@ app = Flask(__name__)
 api_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMmEyMDE3MzUxMGU4NDZhMiJ9LCJpYXQiOjE3NTEzNTk1MDQsImV4cCI6MTc1OTEzNTUwNH0.EHVbg8wD4z7wdNP4zkHmUt8VjquH4kCrJgCf_HyLK8o"
 khqr = KHQR(api_token)
 current_transactions = {}
-# Add this after current_transactions initialization
-TRANSACTIONS_FILE = '/tmp/transactions.json'  # Changed for Vercel compatibility
-PACKAGES_FILE = '/tmp/packages.json'  # Changed for Vercel compatibility
 
-# Create database directory if it doesn't exist
-try:
-    os.makedirs('/tmp', exist_ok=True)
-except:
-    pass
+# Data Store API configuration
+DATA_STORE_URL = 'https://mengtopup.shop'  # Change this to your data store server URL
 
 # Admin authentication decorator
 def admin_required(f):
@@ -37,18 +31,50 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# Load transactions from file
+# Load transactions from data store API
 def load_transactions():
     try:
-        with open(TRANSACTIONS_FILE, 'r') as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
+        response = requests.get(f'{DATA_STORE_URL}/transactions?store=mengtopup', timeout=5)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException:
         return {"pending": [], "expired": [], "completed": []}
 
-# Save transactions to file
+# Save transactions to data store API
 def save_transactions(transactions):
-    with open(TRANSACTIONS_FILE, 'w') as f:
-        json.dump(transactions, f, indent=2)
+    try:
+        response = requests.post(f'{DATA_STORE_URL}/transactions?store=mengtopup', 
+                               json=transactions, timeout=5)
+        response.raise_for_status()
+        return response.json().get('success', False)
+    except requests.RequestException:
+        return False
+
+# Add a single transaction to data store
+def add_transaction_to_store(transaction_data, status):
+    try:
+        response = requests.post(f'{DATA_STORE_URL}/transactions?store=mengtopup/add', 
+                               json={
+                                   'status': status,
+                                   'transaction': transaction_data
+                               }, timeout=5)
+        return response.status_code == 200
+    except requests.RequestException:
+        return False
+
+# Load packages from data store API
+def load_packages():
+    try:
+        response = requests.get(f'{DATA_STORE_URL}/packages?store=mengtopup', timeout=5)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException:
+        # Return default packages if API is unavailable
+        return {
+            "ml": [], "ff": [], "pubg": [], "hok": [], "bloodstrike": [], "mcgg": [],
+            "ml_special_offers": [], "ff_special_offers": [], "pubg_special_offers": [],
+            "hok_special_offers": [], "bloodstrike_special_offers": [], "mcgg_special_offers": []
+        }
 
 # Add this route to app.py
 @app.route('/admin')
@@ -82,10 +108,7 @@ def datetimeformat(value, format='%Y-%m-%d %H:%M:%S'):
     return value.strftime(format)
 
 # Create static/images directory if it doesn't exist
-try:
-    os.makedirs('static/images', exist_ok=True)
-except:
-    pass
+os.makedirs('static/images', exist_ok=True)
 
 @app.route('/')
 def index():
@@ -191,7 +214,7 @@ def check_payment():
         md5_hash = transaction['md5_hash']
         
         # Use the new API endpoint to check payment status
-        response = requests.get(f"https://api-bakong-by-limvisa.shop/api/check_payment?md5={md5_hash}")
+        response = requests.get(f"https://mengtopup.shop/api/check_payment?md5={md5_hash}")
         
         if response.status_code == 200:
             payment_data = response.json()
@@ -249,39 +272,14 @@ def check_payment():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-if not os.path.exists(PACKAGES_FILE):
-    with open(PACKAGES_FILE, 'w') as f:
-        json.dump({
-            "ml": [
-                {"name": "11", "price": 0.25}, 
-                {"name": "56", "price": 0.89},
-            ],
-            "ff": [
-                {"name": "25", "price": 0.30},
-                {"name": "100", "price": 0.99},
-            ],
-            "ml_special_offers": [
-                {"name": "11", "price": 0.20, "image": "ml-diamond.jpg"},
-                {"name": "56", "price": 0.80, "image": "ml-diamond.jpg"},
-                {"name": "86", "price": 1.10, "image": "ml-diamond.jpg"}
-            ],
-            "ff_special_offers": [
-                {"name": "25", "price": 0.25, "image": "ff-diamond.jpg"},
-                {"name": "100", "price": 0.95, "image": "ff-diamond.jpg"},
-                {"name": "310", "price": 2.70, "image": "ff-diamond.jpg"}
-            ]
-        }, f, indent=2)
-
 # Update the admin_packages and admin_special_offers routes to include HOK
 @app.route('/admin/packages')
 @admin_required
 def admin_packages():
     """Admin endpoint for managing regular packages including MCGG"""
     try:
-        with open(PACKAGES_FILE, 'r') as f:
-            packages = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError) as e:
+        packages = load_packages()
+    except Exception as e:
         app.logger.error(f"Error loading packages: {str(e)}")
         packages = {
             "ml": [],
@@ -311,9 +309,8 @@ def admin_packages():
 def admin_special_offers():
     """Admin endpoint for managing special offers including MCGG"""
     try:
-        with open(PACKAGES_FILE, 'r') as f:
-            packages = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError) as e:
+        packages = load_packages()
+    except Exception as e:
         app.logger.error(f"Error loading special offers: {str(e)}")
         packages = {
             "ml_special_offers": [],
@@ -357,26 +354,19 @@ def update_package():
         except ValueError:
             return jsonify({'error': 'Price must be a number'}), 400
 
-        # Load packages
-        with open(PACKAGES_FILE, 'r') as f:
-            packages = json.load(f)
-
-        # Update package
-        updated = False
-        for pkg in packages.get(game_type, []):
-            if pkg['name'] == package_name:
-                pkg['price'] = new_price
-                updated = True
-                break
-
-        if not updated:
-            return jsonify({'error': 'Package not found'}), 404
-
-        # Save changes
-        with open(PACKAGES_FILE, 'w') as f:
-            json.dump(packages, f, indent=2)
-
-        return jsonify({'success': True, 'new_price': new_price})
+        # Update via API
+        response = requests.post(f'{DATA_STORE_URL}/packages/update', 
+                               json={
+                                   'game_type': game_type,
+                                   'package_name': package_name,
+                                   'new_price': new_price,
+                                   'is_special_offer': False
+                               }, timeout=5)
+        
+        if response.status_code == 200:
+            return jsonify({'success': True, 'new_price': new_price})
+        else:
+            return jsonify({'error': 'Failed to update package'}), 500
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -384,97 +374,21 @@ def update_package():
 @app.route('/get_packages')
 def get_packages():
     try:
-        # Default package structure with PUBG packages
-        default_packages = {
-            "ml": [
-                {"name": "11", "price": 0.25},
-                {"name": "56", "price": 0.89}
-            ],
-            "ff": [
-                {"name": "25", "price": 0.30},
-                {"name": "100", "price": 0.99}
-            ],
-            "pubg": [  # Add PUBG packages
-                {"name": "60", "price": 0.99},
-                {"name": "325", "price": 4.99},
-                {"name": "660", "price": 9.99}
-            ],
-            "hok": [
-                {
-                    "name": "16 TOKENS",
-                    "price": 0.25,
-                    "image": "",
-                    "package_id": 302
-                }
-            ],
-            "bloodstrike": [
-                {"name": "Elite Pass", "price": 4.10, "image": "bs-elite_pass.jpg", "package_id": 250}
-            ],
-            "mcgg": [
-        {
-            "name": "86 Diamonds",
-            "price": 1.40,
-            "image": "",
-            "package_id": 605
-        },
-        {
-            "name": "172 Diamonds",
-            "price": 2.60,
-            "image": "",
-            "package_id": 606
-        }
-    ],
-            "ml_special_offers": [
-                {"name": "11", "price": 0.20, "image": "ml-diamond.jpg"}
-            ],
-            "ff_special_offers": [
-                {"name": "25", "price": 0.25, "image": "ff-diamond.jpg"}
-            ],
-            "pubg_special_offers": [  # Add PUBG special offers
-                {"name": "60", "price": 0.89, "image": "pubg-uc.jpg"},
-                {"name": "325", "price": 4.49, "image": "pubg-uc.jpg"}
-            ],
-           "hok_special_offers": [
-                {
-                    "name": "16 TOKENS",
-                    "price": 0.25,
-                    "image": "",
-                    "package_id": 302
-                }
-            ],
-            "bloodstrike_special_offers": [
-                {"name": "Elite Pass", "price": 4.05, "image": "bs-elite_pass.jpg", "package_id": 250}
-            ],
-            "mcgg_special_offers": [
-        {
-            "name": "86+86 Diamonds",
-            "price": 2.50,
-            "image": "mcgg-diamond.jpg",
-            "package_id": 607
-        }
-    ]
-}
-
-         # Create file if doesn't exist
-        if not os.path.exists(PACKAGES_FILE):
-            with open(PACKAGES_FILE, 'w') as f:
-                json.dump(default_packages, f, indent=2)
-            return jsonify(default_packages)
-
-        # Load existing packages
-        with open(PACKAGES_FILE, 'r') as f:
-            try:
-                packages = json.load(f)
-                # Validate structure - ensure all game types exist
-                for key in ['ml', 'ff', 'pubg', 'hok', 'bloodstrike', 'ml_special_offers', 'ff_special_offers', 'pubg_special_offers', 'hok_special_offers', 'bloodstrike_special_offers']:
-                    if key not in packages:
-                        packages[key] = default_packages.get(key, [])
-                return jsonify(packages)
-            except json.JSONDecodeError:
-                # If file is corrupted, recreate it
-                with open(PACKAGES_FILE, 'w') as f:
-                    json.dump(default_packages, f, indent=2)
-                return jsonify(default_packages)
+        packages = load_packages()
+        
+        # Ensure all required keys exist
+        required_keys = [
+            'ml', 'ff', 'pubg', 'hok', 'bloodstrike', 'mcgg',
+            'ml_special_offers', 'ff_special_offers', 'pubg_special_offers',
+            'hok_special_offers', 'bloodstrike_special_offers', 'mcgg_special_offers'
+        ]
+        
+        for key in required_keys:
+            if key not in packages:
+                packages[key] = []
+        
+        return jsonify(packages)
+        
     except Exception as e:
         print(f"Error loading packages: {str(e)}")
         return jsonify({
@@ -483,11 +397,13 @@ def get_packages():
             "pubg": [],
             "hok": [],
             "bloodstrike": [],
+            "mcgg": [],
             "ml_special_offers": [],
             "ff_special_offers": [],
             "pubg_special_offers": [],
             "hok_special_offers": [],
             "bloodstrike_special_offers": [],
+            "mcgg_special_offers": [],
             "error": str(e)
         }), 500
     
@@ -508,27 +424,19 @@ def update_special_offer():
         except ValueError:
             return jsonify({'error': 'Price must be a number'}), 400
 
-        # Load packages
-        with open(PACKAGES_FILE, 'r') as f:
-            packages = json.load(f)
-
-        # Update special offer
-        section = f"{game_type}_special_offers"
-        updated = False
-        for offer in packages.get(section, []):
-            if offer['name'] == offer_name:
-                offer['price'] = new_price
-                updated = True
-                break
-
-        if not updated:
-            return jsonify({'error': 'Special offer not found'}), 404
-
-        # Save changes
-        with open(PACKAGES_FILE, 'w') as f:
-            json.dump(packages, f, indent=2)
-
-        return jsonify({'success': True, 'new_price': new_price})
+        # Update via API
+        response = requests.post(f'{DATA_STORE_URL}/packages/update', 
+                               json={
+                                   'game_type': game_type,
+                                   'package_name': offer_name,
+                                   'new_price': new_price,
+                                   'is_special_offer': True
+                               }, timeout=5)
+        
+        if response.status_code == 200:
+            return jsonify({'success': True, 'new_price': new_price})
+        else:
+            return jsonify({'error': 'Failed to update special offer'}), 500
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -540,9 +448,8 @@ def send_to_telegram(transaction):
     
     # Load packages data
     try:
-        with open(PACKAGES_FILE, 'r') as f:
-            packages_data = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
+        packages_data = load_packages()
+    except Exception:
         packages_data = {}
     
     # Get package_id from database
@@ -619,7 +526,6 @@ def send_to_telegram(transaction):
         print(f"Error sending to Telegram: {e}")
         return None
 
-# This is required for Vercel
+
 if __name__ == '__main__':
     app.run()
-
