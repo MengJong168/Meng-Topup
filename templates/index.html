@@ -1610,8 +1610,8 @@ async function checkBakongPayment() {
     } 
     else if (result.status === 'EXPIRED') {
       stopAutoPaymentCheck();
-      document.getElementById('bakongCountdown').textContent = 'QR Code Expired'; 
-      document.getElementById('bakongCountdown').style.color = '#f44336';
+      document.getElementById('bakongCountdown').textContent = 'Note: Expires in 3 minutes.'; 
+      document.getElementById('bakongCountdown').style.color = '#ffffff';
       document.getElementById('bakongStatus').textContent = result.message;
     }
     else {
@@ -1639,10 +1639,10 @@ async function checkBakongPayment() {
       
       if (remaining <= 0) {
         clearInterval(countdownInterval);
-        document.getElementById('bakongCountdown').textContent = 'QR Code Expired';
-        document.getElementById('bakongCountdown').style.color = '#f44336';
+        document.getElementById('bakongCountdown').textContent = 'Note: Expires in 3 minutes.';
+        document.getElementById('bakongCountdown').style.color = '#ffffff';
         document.getElementById('checkPaymentBtn').disabled = true;
-        document.getElementById('bakongStatus').textContent = 'QR expired. Please try again.';
+        // document.getElementById('bakongStatus').textContent = 'QR expired. Please try again.';
         return;
       }
       
@@ -1662,7 +1662,7 @@ async function checkBakongPayment() {
       
       // Disable button during check
       document.getElementById('checkPaymentBtn').disabled = true;
-      document.getElementById('bakongStatus').textContent = 'Checking payment...';
+      // document.getElementById('bakongStatus').textContent = 'Checking payment...';
       
       try {
         const response = await fetch('/check_payment', {
@@ -1695,8 +1695,8 @@ async function checkBakongPayment() {
           setTimeout(closeModal, 500);
         } else if (result.status === 'EXPIRED') {
           clearInterval(countdownInterval);
-          document.getElementById('bakongCountdown').textContent = 'QR Code Expired';
-          document.getElementById('bakongCountdown').style.color = '#f44336';
+          document.getElementById('bakongCountdown').textContent = 'Note: Expires in 3 minutes.';
+          document.getElementById('bakongCountdown').style.color = '#ffffff';
           document.getElementById('bakongStatus').textContent = result.message;
         } else {
           document.getElementById('bakongStatus').textContent = result.message;
