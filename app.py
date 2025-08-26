@@ -355,7 +355,7 @@ def update_package():
             return jsonify({'error': 'Price must be a number'}), 400
 
         # Update via API
-        response = requests.post(f'{DATA_STORE_URL}/packages/update', 
+        response = requests.post(f'{DATA_STORE_URL}/packages/update?store=mengtopup', 
                                json={
                                    'game_type': game_type,
                                    'package_name': package_name,
@@ -425,7 +425,7 @@ def update_special_offer():
             return jsonify({'error': 'Price must be a number'}), 400
 
         # Update via API
-        response = requests.post(f'{DATA_STORE_URL}/packages/update', 
+        response = requests.post(f'{DATA_STORE_URL}/packages/update?store=mengtopup', 
                                json={
                                    'game_type': game_type,
                                    'package_name': offer_name,
