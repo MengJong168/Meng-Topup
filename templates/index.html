@@ -1305,7 +1305,7 @@ async function checkBloodStrikeUsername() {
         const data = await response.json();
         
         if (data.success) {
-            display.textContent = `✅ Verified Player`;
+            display.textContent = `✅ Username: ${data.name}`;
             display.style.color = "white";
         } else {
             display.textContent = "❌ Player not found";
