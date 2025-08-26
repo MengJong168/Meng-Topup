@@ -183,7 +183,6 @@ def generate_qr():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Updated check_payment function
 @app.route('/check_payment', methods=['POST'])
 def check_payment():
     try:
@@ -193,6 +192,28 @@ def check_payment():
             
         transaction = current_transactions[transaction_id]
         transactions = load_transactions()
+        
+        # Check if already completed first (including Telegram sent status)
+        completed_transactions = [t for t in transactions['completed'] if t['transaction_id'] == transaction_id]
+        if completed_transactions:
+            completed_txn = completed_transactions[0]
+            # Check if Telegram was already sent
+            telegram_sent = completed_txn.get('telegram_sent', False)
+            
+            # If Telegram wasn't sent yet, send it now
+            if not telegram_sent:
+                send_to_telegram(completed_txn)
+                # Update the transaction to mark Telegram as sent
+                for t in transactions['completed']:
+                    if t['transaction_id'] == transaction_id:
+                        t['telegram_sent'] = True
+                save_transactions(transactions)
+            
+            return jsonify({
+                'status': 'PAID',
+                'message': f'Payment of ${completed_txn["amount"]:.2f} was already processed!',
+                'amount': completed_txn["amount"]
+            })
         
         # Check if expired
         if datetime.now() > datetime.fromisoformat(transaction['expiry']):
@@ -222,20 +243,29 @@ def check_payment():
             
             if status == "PAID":
                 amount = transaction['amount']
-                # Send to Telegram
-                send_to_telegram(transaction)
                 
-                # Move to completed
+                # Move to completed (mark Telegram as not sent yet)
                 if not any(t['transaction_id'] == transaction_id for t in transactions['completed']):
-                    transactions['completed'].append({
+                    completed_transaction = {
                         **transaction,
                         'transaction_id': transaction_id,
                         'status': 'completed',
-                        'timestamp': datetime.now().isoformat()
-                    })
+                        'timestamp': datetime.now().isoformat(),
+                        'telegram_sent': False  # Add this flag
+                    }
+                    transactions['completed'].append(completed_transaction)
                     # Remove from pending if exists
                     transactions['pending'] = [t for t in transactions['pending'] 
                                              if t['transaction_id'] != transaction_id]
+                    save_transactions(transactions)
+                    
+                    # Send to Telegram only once
+                    send_to_telegram(completed_transaction)
+                    
+                    # Update transaction to mark Telegram as sent
+                    for t in transactions['completed']:
+                        if t['transaction_id'] == transaction_id:
+                            t['telegram_sent'] = True
                     save_transactions(transactions)
                 
                 return jsonify({
@@ -501,23 +531,25 @@ def send_to_telegram(transaction):
     )
     
     try:
-        # Send to processing channel
+        # Send to processing channel with timeout
         requests.post(
             'https://api.telegram.org/bot8039794961:AAHsZCVdd9clK7uYtCJaUKH8JKjlLLWefOM/sendMessage',
             json={
                 'chat_id': process_chat_id,
                 'text': process_text
-            }
+            },
+            timeout=5  # Add timeout
         )
         
-        # Send to invoice channel
+        # Send to invoice channel with timeout
         requests.post(
             'https://api.telegram.org/bot8039794961:AAHsZCVdd9clK7uYtCJaUKH8JKjlLLWefOM/sendMessage',
             json={
                 'chat_id': '-1002765171217',
                 'text': invoice_text,
                 'parse_mode': 'Markdown'
-            }
+            },
+            timeout=5  # Add timeout
         )
         
         return invoice_number
@@ -525,7 +557,6 @@ def send_to_telegram(transaction):
     except Exception as e:
         print(f"Error sending to Telegram: {e}")
         return None
-
 
 if __name__ == '__main__':
     app.run()
