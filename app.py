@@ -235,7 +235,7 @@ def check_payment():
         md5_hash = transaction['md5_hash']
         
         # Use the new API endpoint to check payment status
-        response = requests.get(f"https://mengtopup.shop/api/check_payment?md5={md5_hash}")
+        response = requests.get(f"https://mengtopup.shop/api/check_payment?md5={md5_hash}", timeout=5)
         
         if response.status_code == 200:
             payment_data = response.json()
