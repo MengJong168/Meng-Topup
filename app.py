@@ -296,7 +296,7 @@ def check_payment():
         else:
             return jsonify({
                 'status': 'ERROR',
-                'message': 'Failed to check payment status'
+                # 'message': 'Failed to check payment status'
             })
             
     except Exception as e:
