@@ -796,7 +796,7 @@
       
       <div class="modal-buttons">
         <button id="checkPaymentBtn" class="bakong-btn english-heading" onclick="checkBakongPayment()" disabled>Check Payment</button>
-        <button class="bakong-btn english-heading" onclick="closeModal()">Cancel</button>
+        <button class="bakong-btn khmer-heading" onclick="closeModal()">បោះបង់</button>
       </div>
     </div>
   </div>
@@ -1561,10 +1561,10 @@ function startAutoPaymentCheck() {
   // Initial immediate check
   checkBakongPayment();
   
-  // Set up recurring checks every 10 seconds
+  // Set up recurring checks every 5 seconds
   paymentCheckInterval = setInterval(() => {
     checkBakongPayment();
-  }, 10000);
+  }, 5000);
 }
 
 function stopAutoPaymentCheck() {
