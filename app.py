@@ -114,9 +114,35 @@ os.makedirs('static/images', exist_ok=True)
 def index():
     return render_template('index.html')
 
+# Add these new routes for each game
+@app.route('/mobile-legend')
+def mobile_legend():
+    return render_template('index.html')
+
+@app.route('/free-fire')
+def free_fire():
+    return render_template('index.html')
+
+@app.route('/pubg-mobile')
+def pubg_mobile():
+    return render_template('index.html')
+
+@app.route('/honor-of-kings')
+def honor_of_kings():
+    return render_template('index.html')
+
+@app.route('/blood-strike')
+def blood_strike():
+    return render_template('index.html')
+
+@app.route('/magic-chess-go-go')
+def magic_chess_go_go():
+    return render_template('index.html')
+
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory('static', filename)
+
 
 @app.route('/generate_qr', methods=['POST'])
 def generate_qr():
@@ -229,7 +255,7 @@ def check_payment():
                 
             return jsonify({
                 'status': 'EXPIRED',
-                'message': 'QR code has expired'
+                'message': 'QR​ កូដ បានផុតកំណត់ហើយ។'
             })
         
         md5_hash = transaction['md5_hash']
@@ -270,7 +296,7 @@ def check_payment():
                 
                 return jsonify({
                     'status': 'PAID',
-                    'message': f'Payment of ${amount:.2f} received!',
+                    'message': f'Payment of ${amount:.2f} បានទទួលប្រាក់!',
                     'amount': amount
                 })
             elif status == "UNPAID":
@@ -286,7 +312,7 @@ def check_payment():
                     
                 return jsonify({
                     'status': 'UNPAID',
-                    'message': 'Payment not received yet'
+                    'message': 'មិនទាន់ទូទាត់ប្រាក់'
                 })
             else:
                 return jsonify({
@@ -474,7 +500,7 @@ def update_special_offer():
 def send_to_telegram(transaction):
     """Send transaction details to Telegram"""
     # Generate invoice number
-    invoice_number = f"INVNO-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+    invoice_number = f"INVNO-S{datetime.now().strftime('%Y%m%d%H%M')}"
     
     # Load packages data
     try:
@@ -527,7 +553,7 @@ def send_to_telegram(transaction):
         f"🌐 Zone ID: {transaction['zone_id']}\n"
         f"🎮 Package: {package_name} (ID: {package_id})\n"
         f"💵 Amount: ${float(transaction['amount']):.2f}\n"
-        f"📅 Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+        f"📅 Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}"
     )
     
     try:
