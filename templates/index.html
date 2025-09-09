@@ -3,33 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>MENG TOPUP</title>
-
+  <title>Meng TopUp</title>
   <!-- Favicon -->
   <link rel="shortcut icon" href="static/images/logo.jpg" type="image/jpg" sizes="32x32" />
-
   <!-- Main Styles -->
   <link rel="stylesheet" href="/static/style.css" />
-
   <!-- Google Fonts: Cabin Condensed, Dangrek, Battambang -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Cabin+Condensed:wght@400;700&family=Dangrek&display=swap" rel="stylesheet">
 </head>
-
 <body>
   <a href="https://t.me/MENGTOPUPP" target="_blank" rel="noopener noreferrer" class="support-button">
   <img src="/static/images/support.jpg" alt="Support">
 </a>
-  <header onclick="location.reload()">
+   <header onclick="goToHomepage()">
     <div class="header-content">
       <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="header-logo" />
       <h1 style="font-family: 'Cabin Condensed', sans-serif; font-size: 40px; white-space: nowrap;">
-  MENG TOPUP
+    MENG TOPUP ╰‿╯
 </h1>
     </div>
   </header>
-
   <main>
 <!-- Main Banner Slider -->
 <div class="banner-container frame">
@@ -37,24 +32,6 @@
     <div class="banner-slides">
       <div class="banner-slide active">
         <img src="/static/images/banner-01.jpg" alt="Meng Topup Banner" class="banner-image">
-      </div>
-      <div class="banner-slide">
-        <img src="/static/images/banner-02.jpg" alt="Meng Topup Banner" class="banner-image">
-      </div>
-        <div class="banner-slide">
-        <img src="/static/images/banner-03.jpg" alt="Meng Topup Banner" class="banner-image">
-      </div>
-      <div class="banner-slide">
-        <img src="/static/images/banner-04.jpg" alt="Meng Topup Banner" class="banner-image">
-      </div>
-      <div class="banner-slide">
-        <img src="/static/images/banner-05.jpg" alt="Meng Topup Banner" class="banner-image">
-      </div>
-      <div class="banner-slide">
-        <img src="/static/images/banner-06.jpg" alt="Meng Topup Banner" class="banner-image">
-      </div>
-      <div class="banner-slide">
-        <img src="/static/images/banner-07.jpg" alt="Meng Topup Banner" class="banner-image">
       </div>
     </div>
     <div class="slider-nav" style="display: none;">
@@ -64,30 +41,14 @@
     </div>
   </div>
 </div>
-
-<!-- <section id="specialOffers" class="offers-container frame"> 
-  <h6 class="section-title khmer-heading">SPECIAL OFFERS</h6>
-  <div class="offers-slider">
-    <div class="offer-slides">
-      <div class="offer-slide">
-        <div class="offer-image-container">
-          <img src="/static/images/specailoffer-1.jpg" alt="Special Offer 1">
-        </div>
-      </div>
-      <div class="offer-slide">
-        <div class="offer-image-container">
-          <img src="/static/images/specailoffer-2.jpg" alt="Special Offer 2">
-        </div>
-      </div>
-    </div>
-    <div class="slider-nav" style="display: none;">
-      <button class="slider-prev">❮</button>
-      <div class="slider-dots"></div>
-      <button class="slider-next">❯</button>
-    </div>
+<section id="specialOffers"> 
+  <h3 class="section-title special-offer-english-heading">SPECIAL OFFERS</h3>
+  <div class="offer-image-container">
+    <a href="/free-fire">
+      <img src="/static/images/offer-ff.jpg" alt="Special Offer 1">
+    </a>
   </div>
-</section> -->
-
+</section>
     <!-- Homepage Section -->
     <section id="homepage" class="homepage-section">
       <h2 class="khmer-heading section-step">
@@ -123,7 +84,6 @@
   <!-- <button class="english-heading">Out of stock</button> -->
   <button class="english-heading">TOPUP</button>
 </div>
-
 <div class="game-card" onclick="showHOKTopup()">
   <!-- <div class="game-card"> -->
   <div class="game-image-container">
@@ -133,7 +93,6 @@
   <!-- <button class="english-heading">Out of stock</button> -->
   <button class="english-heading">TOPUP</button>
 </div>
-
 <div class="game-card" onclick="showBloodStrikeTopup()">
   <!-- <div class="game-card"> -->
   <div class="game-image-container">
@@ -143,7 +102,6 @@
   <!-- <button class="english-heading">Out of stock</button> -->
   <button class="english-heading">TOPUP</button>
 </div>
-
 <!-- Add this to your game-grid section -->
 <div class="game-card" onclick="showMCGGTopup()">
   <!-- <div class="game-card"> -->
@@ -154,7 +112,6 @@
   <!-- <button class="english-heading">Out of stock</button> -->
   <button class="english-heading">TOPUP</button>
 </div>
-
 <!-- <div class="game-card">
   <div class="game-image-container">
     <img src="/static/images/mobile_legendphmysg.jpg" alt="Mobile Legend PH MY SG" class="game-image"/>
@@ -168,8 +125,7 @@
   </div>
   <div class="game-title khmer-heading">MLBB INDO</div>
   <div class="coming-soon khmer-heading">COMING SOON</div>
-</div>
-        
+</div>    
 <div class="game-card">
   <div class="game-image-container">
     <img src="/static/images/free_fire_vn.jpg" alt="Free Fire VN" class="game-image"/>
@@ -191,15 +147,13 @@
     <p class="khmer-heading">ទិញពេជ្រ Mobile Legends: Bang Bang ក្នុងតម្លៃសមរម្យ! តាមរយះអាយឌី ID របស់អ្នក, ជ្រើសរើសកញ្ចប់ពេជ្យ ដែលអ្នកពេញចិត្តទិញ, ដោយបង់ប្រាក់តាមមធ្យោបាយដែលអ្នកមាន, ពេជ្រនឹងបញ្ជូនទៅក្នុងគណនេយ្យ MLBB របស់អ្នកក្នុងរយះពេលពីចន្លោះ 10នាទី ដល់ 3ម៉ោង។</p>
   </div>
 </section>
-
 <!-- Lucky Popup or How To Topup -->
 <div id="luckyPopup" class="lucky-popup" style="display: none;">
   <div class="lucky-popup-content">
     <span class="lucky-popup-close">&times;</span>
-    <img src="/static/images/HowToTopup-popup1.jpg" alt="Lucky Popup Offer">
+    <img src="/static/images/logo.jpg" alt="logo Welcome">
   </div>
 </div>
-
 <!-- Terms and Conditions Section (initially hidden) -->
 <section id="termsSection" style="display: none;">
   <div class="frame">
@@ -209,7 +163,6 @@
     <button onclick="hideTerms()" class="english-heading" style="margin-top: 20px;">Back</button>
   </div>
 </section>
-
     <!-- Mobile Legends Topup Section (initially hidden) -->
     <section id="mlTopupSection" style="display: none;">
       <section class="banner frame">
@@ -219,11 +172,12 @@
             <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
   MOBILE LEGEND
 </h3>
-          </div>
-          <!-- <h3 class="khmer-heading">ទិញពេជ្រ Mobile Legends: Bang Bang ក្នុងតម្លៃសមរម្យ!</h3> -->
-        </div>
       </section>
-
+<ul class="feature-list">
+  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
+  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
+  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
+</ul>
       <h3 class="khmer-heading section-step">
       <span class="step-number">1</span>
       <span class="step-text">បញ្ចូលព័ត៌មាន</span>
@@ -235,11 +189,10 @@
         </div>
         <button onclick="checkUsername()" class="english-heading">Check Username</button>
         <div id="usernameDisplay" class="english-heading"></div>
-      </section>
-       
+      </section>   
 <!-- Mobile Legends Special Offers Section -->
 <section class="special-offers-section">
-<h2 class="khmer-heading section-step">
+<h2 class="khmer-heading special-section-step">
       <span class="step-text">កញ្ចប់ណែនាំ</span>
       </h2>
     <div class="frame">
@@ -248,8 +201,7 @@
             <div class="loading-placeholder khmer-heading">Loading ...</div>
         </div>
     </div>
-</section>  
-      
+</section>        
       <section class="package-section">
   <h3 class="khmer-heading section-step">
     <span class="step-number">2</span>
@@ -259,7 +211,6 @@
     <div class="pricing-grid" id="packageGrid"></div>
   </div>
 </section>
-
       <section class="package-section">
         <h3 class="khmer-heading section-step">
          <span class="step-number">3</span>
@@ -285,7 +236,6 @@
     </label>
   </div>
 </section>
-
       <section class="banner frame">
         <div class="banner-content">
           <div class="game-title">
@@ -296,7 +246,6 @@
         </div>
       </section>
     </section>
-
     <!-- Free Fire Topup Section (initially hidden) -->
     <section id="ffTopupSection" style="display: none;">
       <section class="banner frame">
@@ -310,7 +259,11 @@
           <!-- <h3 class="khmer-heading">ទិញពេជ្រ Free Fire ក្នុងតម្លៃសមរម្យ!</h3> -->
         </div>
       </section>
-
+<ul class="feature-list">
+  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
+  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
+  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
+</ul>
       <h3 class="khmer-heading section-step">
       <span class="step-number">1</span>
       <span class="step-text">បញ្ចូលព័ត៌មាន</span>
@@ -322,10 +275,9 @@
   </div>
   <div id="ffUsernameDisplay" class="english-heading ff-username-result"></div>
 </section>
- 
 <!-- Free Fire Special Offers Section -->
 <section class="special-offers-section">
-    <h2 class="khmer-heading section-step">
+    <h2 class="khmer-heading special-section-step">
       <span class="step-text">កញ្ចប់ណែនាំ</span>
       </h2>
     <div class="frame">
@@ -335,7 +287,6 @@
         </div>
     </div>
 </section>
-
       <section class="package-section">
   <h3 class="khmer-heading section-step">
     <span class="step-number">2</span>
@@ -345,7 +296,6 @@
           <div class="pricing-grid" id="ffPackageGrid"></div>
         </div>
       </section>
-
       <section class="package-section">
         <h3 class="khmer-heading section-step">
          <span class="step-number">3</span>
@@ -371,8 +321,6 @@
     </label>
   </div>
 </section>
-
-      
       <section class="banner frame">
         <div class="banner-content">
           <div class="game-title">
@@ -396,7 +344,11 @@
       <!-- <h3 class="khmer-heading">ទិញ UC PUBG Mobile ក្នុងតម្លៃសមរម្យ!</h3> -->
     </div>
   </section>
-
+<ul class="feature-list">
+  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
+  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
+  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
+</ul>
   <h3 class="khmer-heading section-step">
     <span class="step-number">1</span>
     <span class="step-text">បញ្ចូលព័ត៌មាន</span>
@@ -408,10 +360,9 @@
     </div>
     <div id="pubgUsernameDisplay" class="english-heading ff-username-result"></div>
   </section>
-
   <!-- PUBG Mobile Special Offers Section -->
   <section class="special-offers-section">
-    <h2 class="khmer-heading section-step">
+    <h2 class="khmer-heading special-section-step">
       <span class="step-text">កញ្ចប់ណែនាំ</span>
       </h2>
     <div class="frame">
@@ -421,7 +372,6 @@
       </div>
     </div>
   </section>
-
   <section class="package-section">
     <h3 class="khmer-heading section-step">
       <span class="step-number">2</span>
@@ -431,7 +381,6 @@
       <div class="pricing-grid" id="pubgPackageGrid"></div>
     </div>
   </section>
-
   <!-- Payment and agreement sections similar to other games -->
   <section class="package-section">
     <h3 class="khmer-heading section-step">
@@ -445,7 +394,6 @@
       <input type="checkbox" id="pubgKhqrCheck" checked/>
     </div>
   </section>
-
   <section>
     <h3 class="khmer-heading"></h3>
     <div class="frame-agreement">
@@ -458,7 +406,6 @@
       </label>
     </div>
   </section>
-
   <section class="banner frame">
     <div class="banner-content">
       <div class="game-title">
@@ -482,7 +429,11 @@
       <!-- <h3 class="khmer-heading">ទិញថូខឹន HONOR OF KING ក្នុងតម្លៃសមរម្យ!</h3> -->
     </div>
   </section>
-
+<ul class="feature-list">
+  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
+  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
+  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
+</ul>
   <h3 class="khmer-heading section-step">
     <span class="step-number">1</span>
     <span class="step-text">បញ្ចូលព័ត៌មាន</span>
@@ -494,10 +445,9 @@
     </div>
     <div id="hokUsernameDisplay" class="english-heading ff-username-result"></div>
   </section>
-
   <!-- HOK Special Offers Section -->
   <section class="special-offers-section">
-    <h2 class="khmer-heading section-step">
+    <h2 class="khmer-heading special-section-step">
       <span class="step-text">កញ្ចប់ណែនាំ</span>
     </h2>
     <div class="frame">
@@ -506,7 +456,6 @@
       </div>
     </div>
   </section>
-
   <section class="package-section">
     <h3 class="khmer-heading section-step">
       <span class="step-number">2</span>
@@ -516,7 +465,6 @@
       <div class="pricing-grid" id="hokPackageGrid"></div>
     </div>
   </section>
-
   <!-- Payment and agreement sections similar to other games -->
   <section class="package-section">
     <h3 class="khmer-heading section-step">
@@ -530,7 +478,6 @@
       <input type="checkbox" id="hokKhqrCheck" checked/>
     </div>
   </section>
-
   <section>
     <h3 class="khmer-heading"></h3>
     <div class="frame-agreement">
@@ -543,7 +490,6 @@
       </label>
     </div>
   </section>
-
   <section class="banner frame">
     <div class="banner-content">
       <div class="game-title">
@@ -554,7 +500,6 @@
     </div>
   </section>
 </section>
-
 <section id="bloodstrikeTopupSection" style="display: none;">
   <section class="banner frame">
     <div class="banner-content">
@@ -567,7 +512,11 @@
       <!-- <h3 class="khmer-heading">ទិញកាក់ BLOOD STRIKE ក្នុងតម្លៃសមរម្យ!</h3> -->
     </div>
   </section>
-
+<ul class="feature-list">
+  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
+  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
+  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
+</ul>
   <h3 class="khmer-heading section-step">
     <span class="step-number">1</span>
     <span class="step-text">បញ្ចូលព័ត៌មាន</span>
@@ -579,10 +528,9 @@
     </div>
     <div id="bloodstrikeUsernameDisplay" class="english-heading ff-username-result"></div>
   </section>
-
   <!-- HOK Special Offers Section -->
   <section class="special-offers-section">
-    <h2 class="khmer-heading section-step">
+    <h2 class="khmer-heading special-section-step">
       <span class="step-text">កញ្ចប់ណែនាំ</span>
     </h2>
     <div class="frame">
@@ -591,7 +539,6 @@
       </div>
     </div>
   </section>
-
   <!-- Regular Packages -->
   <section class="package-section">
     <h3 class="khmer-heading section-step">
@@ -602,7 +549,6 @@
       <div class="pricing-grid" id="bloodstrikePackageGrid"></div>
     </div>
   </section>
-
   <!-- Payment Section -->
   <section class="package-section">
     <h3 class="khmer-heading section-step">
@@ -616,7 +562,6 @@
       <input type="checkbox" id="bloodstrikeKhqrCheck" checked/>
     </div>
   </section>
-
   <!-- Terms Agreement -->
   <section>
     <div class="frame-agreement">
@@ -641,7 +586,6 @@
   </section>
 </section>
 </section>
-
 <!-- Add the MCGG topup section -->
 <section id="mcggTopupSection" style="display: none;">
   <section class="banner frame">
@@ -655,7 +599,11 @@
       <!-- <h3 class="khmer-heading">ទិញពេជ្រ MAGIC CHESS: GO GO ក្នុងតម្លៃសមរម្យ!</h3> -->
     </div>
   </section>
-
+<ul class="feature-list">
+  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
+  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
+  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
+</ul>
   <h3 class="khmer-heading section-step">
     <span class="step-number">1</span>
     <span class="step-text">បញ្ចូលព័ត៌មាន</span>
@@ -668,10 +616,9 @@
     </div>
     <div id="mcggUsernameDisplay" class="english-heading ff-username-result"></div>
   </section>
-
   <!-- Special Offers Section -->
   <section class="special-offers-section">
-    <h2 class="khmer-heading section-step">
+    <h2 class="khmer-heading special-section-step">
       <span class="step-text">កញ្ចប់ណែនាំ</span>
     </h2>
     <div class="frame">
@@ -680,7 +627,6 @@
       </div>
     </div>
   </section>
-
   <!-- Regular Packages Section -->
   <section class="package-section">
     <h3 class="khmer-heading section-step">
@@ -691,7 +637,6 @@
       <div class="pricing-grid" id="mcggPackageGrid"></div>
     </div>
   </section>
-
   <!-- Payment Section -->
   <section class="package-section">
     <h3 class="khmer-heading section-step">
@@ -705,7 +650,6 @@
       <input type="checkbox" id="mcggKhqrCheck" checked/>
     </div>
   </section>
-
   <!-- Terms Agreement -->
   <section>
     <div class="frame-agreement">
@@ -729,24 +673,22 @@
   </section>
 </section>
   </main>
-
   <footer id="mainFooter" class="site-footer">
   <!-- Centered logo and text section -->
   <div class="footer-center">
     <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="footer-logo">
     <p class="khmer-heading footer-text">ទិញពេជ្រ Mobile Legends Free Fire ក្នុងតម្លៃសមរម្យ! តាមរយះអាយឌី ID របស់អ្នក, ជ្រើសរើសកញ្ចប់ពេជ្យ ដែលអ្នកពេញចិត្តទិញ, ដោយបង់ប្រាក់តាមមធ្យោបាយដែលអ្នកមាន, ពេជ្រនឹងបញ្ជូនទៅក្នុងគណនេយ្យ GAME របស់អ្នកក្នុងរយះពេលពីចន្លោះ 10នាទី ដល់ 3ម៉ោង។</p>
   </div>
-  
   <!-- Left-aligned content sections -->
   <div class="footer-content">
     <div class="footer-section">
       <h3 class="khmer-heading">អំពីយើង</h3>
       <p class="khmer-heading">MENG TOPUP ផ្តល់សេវាកម្មបញ្ចូលពេជ្រល្អបំផុត:</p>
       <p class="khmer-heading">
-        ✅ ល្បឿនលឿន – ទទួលពេជ្រភ្លាមៗ បន្ទាប់ពីទូទាត់ <br>
-        ✅ តម្លៃសមរម្យ – ថោកជាង និងមានប្រូម៉ូសិនជាញឹកញាប់<br>
-        ✅ សុវត្ថិភាព – ទូទាត់ដោយប្រព័ន្ធមានការការពារដ៏ទំនើប<br>
-        ✅ សេវាកម្ម 24/7 – មានបុគ្គលិករួសរាន់ជួយគ្រប់ពេល<br></p>
+        ⚡️ ល្បឿនលឿន – ទទួលពេជ្រភ្លាមៗ បន្ទាប់ពីទូទាត់ <br>
+        🪙 តម្លៃសមរម្យ – ថោកជាង និងមានប្រូម៉ូសិនជាញឹកញាប់<br>
+        🛡️ សុវត្ថិភាព – ទូទាត់ដោយប្រព័ន្ធមានការការពារដ៏ទំនើប<br>
+        💬 សេវាកម្ម 24/7 – មានបុគ្គលិករួសរាន់ជួយគ្រប់ពេល<br></p>
     </div>
     <div class="footer-section">
       <h3 class="khmer-heading">វិធីបង់ប្រាក់</h3>
@@ -757,13 +699,19 @@
   <p class="english-heading">
     Telegram: 
     <a class="telegram-link" href="https://t.me/MENGTOPUPP" target="_blank" rel="noopener noreferrer">
-      @MENGTOPUPP
+      MENGTOPUPP
     </a>
   </p>
   <p class="english-heading">
     Facebook PAGE: 
     <a class="facebook-link" href="https://web.facebook.com/profile.php?id=61567102657266" target="_blank" rel="noopener noreferrer">
       MENG TOPUPP
+    </a>
+  </p>
+  <p class="english-heading">
+    Reseller: 
+    <a class="telegram-link" href="https://t.me/mengjong" target="_blank" rel="noopener noreferrer">
+      Join Reseller
     </a>
   </p>
 </div>
@@ -777,7 +725,7 @@
   </div>
 </footer>
 
-  <button onclick="initiatePayment()" id="buyNowBtn" style="display: none;" class="english-heading">Buy Now $0.00</button>
+  <button onclick="initiatePayment()" id="buyNowBtn" style="display: none;" class="khmer-heading">ទិញឥឡូវ $0.00</button>
 
   <!-- Bakong Payment Modal -->
   <div id="bakongModal" class="modal">
@@ -786,13 +734,18 @@
       <h2 class="english-heading">Bakong Payment</h2>
       <div id="bakongStatus" class="english-heading">Ready to generate payment QR</div>
       
-      <div class="qr-container">
-        <div class="qr-image">
-          <img id="bakongQR" src="" alt="QR Code">
-        </div>
-      </div>
+<div class="qr-container">
+  <div class="qr-header">KHQR</div>
+  <div class="qr-details">
+    <div>MENG TOPUP</div>
+    <div>--------------------------------------</div>
+  </div>
+  <div class="qr-image">
+    <img id="bakongQR" src="" alt="QR Code">
+  </div>
+</div>
       
-      <div id="bakongCountdown" class="english-heading"></div>
+      <div id="bakongCountdown" class="khmer-heading"></div>
       
       <div class="modal-buttons">
         <button id="checkPaymentBtn" class="bakong-btn english-heading" onclick="checkBakongPayment()" disabled>Check Payment</button>
@@ -841,8 +794,8 @@
       </div>
       
       <div class="modal-buttons">
-  <button class="bakong-btn english-heading" onclick="downloadInvoicePDF()">Download Receipt</button>
-  <button class="bakong-btn english-heading" onclick="backToTopup()">Back to Top-up</button>
+  <button class="bakong-btn khmer-heading" onclick="downloadInvoicePDF()">ទាញយកបង្កាន់ដៃ</button>
+  <button class="bakong-btn khmer-heading" onclick="backToTopup()">ត្រឡប់ទៅហាង</button>
 </div>
 
   </div>
@@ -1034,7 +987,7 @@ function createSpecialOfferCard(offer, gameType) {
         <img src="${imagePath}" alt="${gameType} special offer" />
         <h2 class="english-heading">${displayName}</h2>
         <p class="new-price english-heading">$${parseFloat(offer.price).toFixed(2)}</p>
-        <p class="special-badge english-heading">SPECIAL OFFER</p>
+        <p class="special-badge english-heading"></p>
     `;
 
     card.onclick = () => selectSpecialOffer(card, offer.price, offer.name, gameType);
@@ -1077,8 +1030,8 @@ function selectSpecialOffer(card, price, name, gameType) {
 function updateBuyButton() {
     const buyBtn = document.getElementById('buyNowBtn');
     buyBtn.textContent = selectedPrice > 0
-        ? `Buy Now $${selectedPrice.toFixed(2)}`
-        : 'Buy Now $0.00';
+        ? `ទិញឥឡូវ $${selectedPrice.toFixed(2)}`
+        : 'ទិញឥឡូវ $0.00';
 }
 
 // Initialize on page load
@@ -1100,7 +1053,8 @@ document.addEventListener('DOMContentLoaded', async function () {
       window.scrollTo(0, 0);
       selectedPrice = 0;
       selectedName = "";
-      document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+      document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+      updateGameURL('mobile-legend'); // Add this line
     }
 
     function showFFTopup() {
@@ -1112,7 +1066,8 @@ document.addEventListener('DOMContentLoaded', async function () {
       window.scrollTo(0, 0);
       selectedPrice = 0;
       selectedName = "";
-      document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+      document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+       updateGameURL('free-fire'); // Add this line
     }
 
     // Add this function
@@ -1126,7 +1081,8 @@ function showPUBGTopup() {
     window.scrollTo(0, 0);
     selectedPrice = 0;
     selectedName = "";
-    document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+    document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+    updateGameURL('pubg-mobile'); // Add this line
 }
 
 function showHOKTopup() {
@@ -1140,7 +1096,8 @@ function showHOKTopup() {
     window.scrollTo(0, 0);
     selectedPrice = 0;
     selectedName = "";
-    document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+    document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+    updateGameURL('honor-of-kings'); // Add this line
 }
 
 function showBloodStrikeTopup() {
@@ -1155,7 +1112,8 @@ function showBloodStrikeTopup() {
     window.scrollTo(0, 0);
     selectedPrice = 0;
     selectedName = "";
-    document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+    document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+    updateGameURL('blood-strike'); // Add this line
 }
     async function checkUsername() {
       const id = document.getElementById('idInput').value.trim();
@@ -1193,7 +1151,8 @@ function showMCGGTopup() {
     window.scrollTo(0, 0);
     selectedPrice = 0;
     selectedName = "";
-    document.getElementById('buyNowBtn').textContent = 'Buy Now $0.00';
+    document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+    updateGameURL('magic-chess-go-go'); // Add this line
 }
 
 // Add MCGG username verification
@@ -1535,7 +1494,7 @@ async function generateBakongQR(playerId, zoneId) {
       case 'mcgg': gameName = 'Magic Chess: Go Go'; break;
       default: gameName = 'Game';
     }
-    document.getElementById('bakongStatus').textContent = `Scan to pay $${selectedPrice.toFixed(2)} for ${gameName}`;
+    document.getElementById('bakongStatus').textContent = `ស្កេនដើម្បីបង់ប្រាក់ $${selectedPrice.toFixed(2)} ហ្គេម ${gameName}`;
     
     // Start countdown and auto-checking
     startCountdown();
@@ -1610,7 +1569,7 @@ async function checkBakongPayment() {
     } 
     else if (result.status === 'EXPIRED') {
       stopAutoPaymentCheck();
-      document.getElementById('bakongCountdown').textContent = 'Note: Expires in 3 minutes.'; 
+      document.getElementById('bakongCountdown').textContent = 'ផុតកំណត់ក្នុងរយៈពេល 3 នាទី។'; 
       document.getElementById('bakongCountdown').style.color = '#ffffff';
       document.getElementById('bakongStatus').textContent = result.message;
     }
@@ -1639,7 +1598,7 @@ async function checkBakongPayment() {
       
       if (remaining <= 0) {
         clearInterval(countdownInterval);
-        document.getElementById('bakongCountdown').textContent = 'Note: Expires in 3 minutes.';
+        document.getElementById('bakongCountdown').textContent = 'ផុតកំណត់ក្នុងរយៈពេល 3 នាទី។';
         document.getElementById('bakongCountdown').style.color = '#ffffff';
         document.getElementById('checkPaymentBtn').disabled = true;
         // document.getElementById('bakongStatus').textContent = 'QR expired. Please try again.';
@@ -1695,7 +1654,7 @@ async function checkBakongPayment() {
           setTimeout(closeModal, 500);
         } else if (result.status === 'EXPIRED') {
           clearInterval(countdownInterval);
-          document.getElementById('bakongCountdown').textContent = 'Note: Expires in 3 minutes.';
+          document.getElementById('bakongCountdown').textContent = 'ផុតកំណត់ក្នុងរយៈពេល 3 នាទី។';
           document.getElementById('bakongCountdown').style.color = '#ffffff';
           document.getElementById('bakongStatus').textContent = result.message;
         } else {
@@ -1850,15 +1809,16 @@ function closeInvoiceModal() {
     const proxyUrl = 'https://api.allorigins.win/raw?url=';
     
 
-    const targetUrl = encodeURIComponent(`https://luffytopup.com/api/v1/verify_account.php?id=${uid}&zone=0000&game=freefire_sgmy`);
+    // const targetUrl = encodeURIComponent(`https://luffytopup.com/api/v1/verify_account.php?id=${uid}&zone=0000&game=freefire_sgmy`);
+    const targetUrl = encodeURIComponent(`https://mengtopup.shop/api/account?uid=${uid}&region=sg`);
     const response = await fetch(proxyUrl + targetUrl);
 
     if (!response.ok) throw new Error("Network response was not ok");
 
     const data = await response.json();
 
-    if (data.name) {
-      display.textContent = `✅ Username: ${data.name}`;
+    if (data.basicInfo.nickname) {
+      display.textContent = `✅ Username: ${data.basicInfo.nickname}`;
       display.style.color = "white";
     } else {
       display.textContent = "❌ Username not found.";
@@ -1891,7 +1851,8 @@ async function downloadInvoicePDF() {
 
   // Generate invoice number with seconds (INVNO-YYYYMMDDHHMMSS)
   const now = new Date();
-  const invoiceNumber = `INVNO-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}${String(now.getSeconds()).padStart(2,'0')}`;
+  const invoiceNumber = `INVNO-S${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`;
+
 
   const logo = new Image();
   logo.src = "/static/images/logo.jpg";
@@ -2327,6 +2288,92 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('mcggIdInput').addEventListener('input', saveRememberedPrefs);
   document.getElementById('mcggZoneInput').addEventListener('input', saveRememberedPrefs);
 });
+// Add this function to handle URL changes
+function updateGameURL(gameSlug) {
+    const newURL = `${window.location.origin}/${gameSlug}`;
+    window.history.pushState({game: gameSlug}, '', newURL);
+}
+// Add this function to handle back/forward browser navigation
+window.addEventListener('popstate', function(event) {
+    // Parse the URL to determine which section to show
+    const path = window.location.pathname;
+    
+    if (path.includes('mobile-legend')) {
+        showMLTopup();
+    } else if (path.includes('free-fire')) {
+        showFFTopup();
+    } else if (path.includes('pubg-mobile')) {
+        showPUBGTopup();
+    } else if (path.includes('honor-of-kings')) {
+        showHOKTopup();
+    } else if (path.includes('blood-strike')) {
+        showBloodStrikeTopup();
+    } else if (path.includes('magic-chess-go-go')) {
+        showMCGGTopup();
+    } else {
+        // Default to homepage
+        document.getElementById('homepage').style.display = 'block';
+        document.getElementById('mlTopupSection').style.display = 'none';
+        document.getElementById('ffTopupSection').style.display = 'none';
+        document.getElementById('pubgTopupSection').style.display = 'none';
+        document.getElementById('hokTopupSection').style.display = 'none';
+        document.getElementById('bloodstrikeTopupSection').style.display = 'none';
+        document.getElementById('mcggTopupSection').style.display = 'none';
+        document.getElementById('buyNowBtn').style.display = 'none';
+        document.getElementById('mainFooter').style.display = 'block';
+    }
+});
+
+// Add this to handle direct URL access on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const path = window.location.pathname;
+    
+    if (path.includes('mobile-legend')) {
+        showMLTopup();
+    } else if (path.includes('free-fire')) {
+        showFFTopup();
+    } else if (path.includes('pubg-mobile')) {
+        showPUBGTopup();
+    } else if (path.includes('honor-of-kings')) {
+        showHOKTopup();
+    } else if (path.includes('blood-strike')) {
+        showBloodStrikeTopup();
+    } else if (path.includes('magic-chess-go-go')) {
+        showMCGGTopup();
+    }
+    // If no specific game in URL, homepage will remain visible
+});
+   function goToHomepage() {
+        // Update URL
+        window.history.pushState({page: 'home'}, '', '/');
+        
+        // Show homepage and hide all game sections
+        document.getElementById('homepage').style.display = 'block';
+        document.getElementById('mainFooter').style.display = 'block';
+        
+        // Hide all game sections
+        const gameSections = [
+            'mlTopupSection', 'ffTopupSection', 'pubgTopupSection', 
+            'hokTopupSection', 'bloodstrikeTopupSection', 'mcggTopupSection'
+        ];
+        
+        gameSections.forEach(section => {
+            document.getElementById(section).style.display = 'none';
+        });
+        
+        // Hide buy button
+        document.getElementById('buyNowBtn').style.display = 'none';
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+        
+        // Add transition effect
+        document.getElementById('homepage').classList.add('page-transition');
+        setTimeout(() => {
+            document.getElementById('homepage').classList.remove('page-transition');
+        }, 300);
+    }
+
 </script>
 </body>
 </html>
