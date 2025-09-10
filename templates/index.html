@@ -736,14 +736,16 @@
       
 <div class="qr-container">
   <div class="qr-header">KHQR</div>
-  <div class="qr-details">
-    <div>MENG TOPUP</div>
-    <div>--------------------------------------</div>
-  </div>
+<div class="qr-details">
+  <div>MENG TOPUP</div>
+  <h2 id="qrAmount"></h2>
+  <hr class="qr-line">
+</div>
   <div class="qr-image">
     <img id="bakongQR" src="" alt="QR Code">
   </div>
 </div>
+
       
       <div id="bakongCountdown" class="khmer-heading"></div>
       
@@ -1477,6 +1479,7 @@ async function generateBakongQR(playerId, zoneId) {
     
     // Display QR code
     document.getElementById('bakongQR').src = `data:image/png;base64,${result.qr_image}`;
+    document.getElementById("qrAmount").textContent = `$${selectedPrice.toFixed(2)}`;
     
     // Enable check button and update text
     const checkBtn = document.getElementById('checkPaymentBtn');
