@@ -399,7 +399,7 @@ input[type="number"] {
 .qr-details {
   margin: 0px 0;
   font-size: 16px;
-  color: #333;
+  color: #000000;
   font-weight: 500;
   text-align: left;
 }
@@ -418,6 +418,11 @@ input[type="number"] {
   margin: 0 auto;
 }
 
+.qr-line {
+  border: none;
+  border-top: 1px dashed #000000; /* dashed line */
+  margin: 8px 0;
+}
 
 .modal-buttons {
   display: flex;
