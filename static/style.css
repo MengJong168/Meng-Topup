@@ -76,12 +76,14 @@ main {
 
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 160px); /* fixed card width */
+  gap: 10px;
   margin-top: 20px;
+  justify-content: center; /* center cards horizontally */
 }
 
 .game-card {
+  width: 160px; /* fixed size */
   background-color: var(--card-bg);
   border: 2px solid var(--border-color);
   border-radius: 15px;
@@ -533,7 +535,7 @@ button:hover {
 }
 
 /* Responsive Design */
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .header-title {
     font-size: 1.5rem;
   }
@@ -560,7 +562,7 @@ button:hover {
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .header-content {
     padding: 10px 0;
   }
@@ -657,7 +659,7 @@ button:hover {
 }
 
 /* Responsive adjustments */
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .banner-text h3 {
     font-size: 1.3rem;
   }
@@ -667,7 +669,7 @@ button:hover {
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .banner-text {
     padding: 1px;
     bottom: 1px;
@@ -753,7 +755,7 @@ button:hover {
   filter: brightness(1.15);     /* Slightly brighter */
 }
 
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .footer-logo {
     width: 150px;
     max-height: 140px;
@@ -795,7 +797,7 @@ button:hover {
 }
 
 /* Responsive adjustments */
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .footer-logo {
     width: 80px;
   }
@@ -815,7 +817,7 @@ button:hover {
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .footer-logo {
     width: 70px;
   }
@@ -985,7 +987,7 @@ button:hover {
 }
 
 /* Responsive Adjustments */
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .banner-container.frame {
     border-radius: 6px;
   }
@@ -996,7 +998,7 @@ button:hover {
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .slider-nav {
     gap: 10px;
     padding: 8px 0;
@@ -1117,7 +1119,7 @@ button:hover {
 }
 
 /* Responsive Adjustments */
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .special-offer {
     margin-bottom: 15px;
   }
@@ -1249,7 +1251,7 @@ button:hover {
 }
 
 /* Responsive adjustments */
-@media (max-width: 360px) {
+@media (max-width: 320px) {
     .section-step {
         font-size: 1.3rem;
         padding-left: 5px;
@@ -1337,8 +1339,8 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* center items horizontally */
-  gap: 6px; /* space between items */
-  padding: 2;
+  gap: 2px; /* space between items */
+  padding: 0;
   list-style: none;
 }
 
@@ -1348,7 +1350,7 @@ p {
   align-items: center;
   padding: 4px 8px; /* tight padding around text */
   background: var(--card-bg, #1a1a1a);
-  border: 1px solid var(--border-color, #333);
+  border: none;
   border-radius: 8px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   white-space: nowrap; /* prevent text wrap */
@@ -1367,7 +1369,7 @@ p {
 }
 
 /* Mobile: screens ≤360px */
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .feature-list {
     flex-direction: column; /* stack items vertically */
     gap: 4px;
