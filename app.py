@@ -527,27 +527,27 @@ def send_to_telegram(transaction):
     
     # Determine processing channel and format
     if game_type == 'ff':  # Free Fire
-       process_chat_id = '-1002809349921'
+       process_chat_id = '-1003009193203'
        process_text = f"{transaction['player_id']} 0 {package_id}"
     elif game_type == 'bloodstrike':
-       process_chat_id = '-1002796371372'  # Update with your actual channel ID
+       process_chat_id = '-1002992364496'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} 0000 {package_id}"
     elif game_type == 'pubg':  # PUBG Mobile
-       process_chat_id = '-1002796371372' 
+       process_chat_id = '-1002992364496' 
        process_text = f"{transaction['player_id']} 0000 {package_id}"
     elif game_type == 'hok':  # HONOR OF KING
-       process_chat_id = '-1002796371372'  # Update with your actual channel ID
+       process_chat_id = '-1002992364496'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} 0000 {package_id}"
     elif game_type == 'mcgg':  # Magic Chess: Go Go
-       process_chat_id = '-1002796371372'  # Update with your actual channel ID
+       process_chat_id = '-1002992364496'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
     else:  # Mobile Legends (default)
-       process_chat_id = '-1002796371372'
+       process_chat_id = '-1002992364496'
        process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
     
     # Create invoice message               
     invoice_text = (
-        "Payment Successful\n"
+        "Payment Successful -Zea-\n"
         f"📄 Invoice: {invoice_number}\n"
         f"👤 Player ID: {transaction['player_id']}\n"
         f"🌐 Zone ID: {transaction['zone_id']}\n"
@@ -559,7 +559,7 @@ def send_to_telegram(transaction):
     try:
         # Send to processing channel with timeout
         requests.post(
-            'https://api.telegram.org/bot8039794961:AAHsZCVdd9clK7uYtCJaUKH8JKjlLLWefOM/sendMessage',
+            'https://api.telegram.org/bot7976961594:AAFZmNRvICLUAAcqvrcFeStz0zpPk15ijBI/sendMessage',
             json={
                 'chat_id': process_chat_id,
                 'text': process_text
@@ -569,9 +569,9 @@ def send_to_telegram(transaction):
         
         # Send to invoice channel with timeout
         requests.post(
-            'https://api.telegram.org/bot8327476935:AAFDhvMY9MH6L9zDSGHwep_clAB0TbAGu3E/sendMessage',
+            'https://api.telegram.org/bot7976961594:AAFZmNRvICLUAAcqvrcFeStz0zpPk15ijBI/sendMessage',
             json={
-                'chat_id': '-1002765171217',
+                'chat_id': '-1002621594913',
                 'text': invoice_text,
                 'parse_mode': 'Markdown'
             },
