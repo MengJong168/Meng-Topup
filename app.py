@@ -527,22 +527,22 @@ def send_to_telegram(transaction):
     
     # Determine processing channel and format
     if game_type == 'ff':  # Free Fire
-       process_chat_id = '-1003009193203'
-       process_text = f"{transaction['player_id']}   {package_id}"
+       process_chat_id = '-1002992364496'
+       process_text = f"{transaction['player_id']} 0 {package_id}"
     elif game_type == 'bloodstrike':
-       process_chat_id = '-1002992364496'  # Update with your actual channel ID
+       process_chat_id = '-1003009193203'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} 0000 {package_id}"
     elif game_type == 'pubg':  # PUBG Mobile
-       process_chat_id = '-1002992364496' 
+       process_chat_id = '-1003009193203' 
        process_text = f"{transaction['player_id']} 0000 {package_id}"
     elif game_type == 'hok':  # HONOR OF KING
-       process_chat_id = '-1002992364496'  # Update with your actual channel ID
+       process_chat_id = '-1003009193203'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} 0000 {package_id}"
     elif game_type == 'mcgg':  # Magic Chess: Go Go
-       process_chat_id = '-1002992364496'  # Update with your actual channel ID
+       process_chat_id = '-1003009193203'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
     else:  # Mobile Legends (default)
-       process_chat_id = '-1002992364496'
+       process_chat_id = '-1003009193203'
        process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
     
     # Create invoice message               
