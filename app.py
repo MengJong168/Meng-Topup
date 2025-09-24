@@ -547,7 +547,7 @@ def send_to_telegram(transaction):
     
     # Create invoice message               
     invoice_text = (
-        "Payment Successful -Zea-\n"
+        "Payment Successful\n"
         f"📄 Invoice: {invoice_number}\n"
         f"👤 Player ID: {transaction['player_id']}\n"
         f"🌐 Zone ID: {transaction['zone_id']}\n"
