@@ -527,22 +527,22 @@ def send_to_telegram(transaction):
     
     # Determine processing channel and format
     if game_type == 'ff':  # Free Fire
-       process_chat_id = '-1002992364496'
+       process_chat_id = '-1002926937402'
        process_text = f"{transaction['player_id']} 0 {package_id}"
     elif game_type == 'bloodstrike':
-       process_chat_id = '-1002720729014'  # Update with your actual channel ID
+       process_chat_id = '-1003113340920'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} 0000 {package_id}"
     elif game_type == 'pubg':  # PUBG Mobile
-       process_chat_id = '-1002720729014' 
+       process_chat_id = '-1003113340920' 
        process_text = f"{transaction['player_id']} 0000 {package_id}"
     elif game_type == 'hok':  # HONOR OF KING
-       process_chat_id = '-1002720729014'  # Update with your actual channel ID
+       process_chat_id = '-1003113340920'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} 0000 {package_id}"
     elif game_type == 'mcgg':  # Magic Chess: Go Go
-       process_chat_id = '-1002720729014'  # Update with your actual channel ID
+       process_chat_id = '-1003113340920'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
     else:  # Mobile Legends (default)
-       process_chat_id = '-1003009193203'
+       process_chat_id = '-1002901912564'
        process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
     
     # Create invoice message               
@@ -559,7 +559,7 @@ def send_to_telegram(transaction):
     try:
         # Send to processing channel with timeout
         requests.post(
-            'https://api.telegram.org/bot7976961594:AAFZmNRvICLUAAcqvrcFeStz0zpPk15ijBI/sendMessage',
+            'https://api.telegram.org/bot8467658360:AAEzsw9OljY3VZGWBVNI6bM4GX-7rilGdFQsendMessage',
             json={
                 'chat_id': process_chat_id,
                 'text': process_text
@@ -569,9 +569,9 @@ def send_to_telegram(transaction):
         
         # Send to invoice channel with timeout
         requests.post(
-            'https://api.telegram.org/bot7976961594:AAFZmNRvICLUAAcqvrcFeStz0zpPk15ijBI/sendMessage',
+            'https://api.telegram.org/bot8467658360:AAEzsw9OljY3VZGWBVNI6bM4GX-7rilGdFQ/sendMessage',
             json={
-                'chat_id': '-1002621594913',
+                'chat_id': '-1003056964807',
                 'text': invoice_text,
                 'parse_mode': 'Markdown'
             },
