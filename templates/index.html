@@ -56,61 +56,61 @@
       <span class="step-text">ជ្រើសរើសហ្គេម</span>
       </h2>
       <div class="game-grid">
-        <!-- <div class="game-card" onclick="showMLTopup()"> -->
-          <div class="game-card">
+        <div class="game-card" onclick="showMLTopup()">
+          <!-- <div class="game-card"> -->
           <div class="game-image-container">
             <img src="/static/images/mobile_legend.jpg" alt="Mobile Legend" class="game-image"/>
           </div>
           <div class="game-title english-heading">MOBILE LEGEND</div>
-          <button class="english-heading">Out of stock</button>
-          <!-- <button class="english-heading">TOPUP</button> -->
+          <!-- <button class="english-heading">Out of stock</button> -->
+          <button class="english-heading">TOPUP</button>
         </div>
-        <!-- <div class="game-card" onclick="showFFTopup()"> -->
-          <div class="game-card">
+        <div class="game-card" onclick="showFFTopup()">
+          <!-- <div class="game-card"> -->
           <div class="game-image-container">
             <img src="/static/images/free_fire.jpg" alt="Free Fire" class="game-image"/>
           </div>
           <div class="game-title english-heading">FREE FIRE</div>
-          <button class="english-heading">Out of stock</button>
-          <!-- <button class="english-heading">TOPUP</button> -->
+          <!-- <button class="english-heading">Out of stock</button> -->
+          <button class="english-heading">TOPUP</button>
         </div>
         <!-- In the game-grid section, replace the existing PUBG Mobile card with this: -->
-<!-- <div class="game-card" onclick="showPUBGTopup()"> -->
-  <div class="game-card">
+<div class="game-card" onclick="showPUBGTopup()">
+  <!-- <div class="game-card"> -->
   <div class="game-image-container">
     <img src="/static/images/pubg_mobile.jpg" alt="PUBG Mobile" class="game-image"/>
   </div>
   <div class="game-title english-heading">PUBG MOBILE</div>
-  <button class="english-heading">Out of stock</button>
-  <!-- <button class="english-heading">TOPUP</button> -->
+  <!-- <button class="english-heading">Out of stock</button> -->
+  <button class="english-heading">TOPUP</button>
 </div>
-<!-- <div class="game-card" onclick="showHOKTopup()"> -->
-  <div class="game-card">
+<div class="game-card" onclick="showHOKTopup()">
+  <!-- <div class="game-card"> -->
   <div class="game-image-container">
     <img src="/static/images/h_o_k.jpg" alt="HONOR OF KING" class="game-image"/>
   </div>
   <div class="game-title english-heading">HONOR OF KINGS</div>
-  <button class="english-heading">Out of stock</button>
-  <!-- <button class="english-heading">TOPUP</button> -->
+  <!-- <button class="english-heading">Out of stock</button> -->
+  <button class="english-heading">TOPUP</button>
 </div>
-<!-- <div class="game-card" onclick="showBloodStrikeTopup()"> -->
-  <div class="game-card">
+<div class="game-card" onclick="showBloodStrikeTopup()">
+  <!-- <div class="game-card"> -->
   <div class="game-image-container">
     <img src="/static/images/blood_strike.jpg" alt="Blood Strike" class="game-image"/>
   </div>
   <div class="game-title english-heading">BLOOD STRIKE</div>
-  <button class="english-heading">Out of stock</button>
-  <!-- <button class="english-heading">TOPUP</button> -->
+  <!-- <button class="english-heading">Out of stock</button> -->
+  <button class="english-heading">TOPUP</button>
 </div>
 <!-- Add this to your game-grid section -->
-<!-- <div class="game-card" onclick="showMCGGTopup()"> -->
-  <div class="game-card">
+<div class="game-card" onclick="showMCGGTopup()">
+  <!-- <div class="game-card"> -->
   <div class="game-image-container">
     <img src="/static/images/magic_chess.jpg" alt="Magic Chess: Go Go" class="game-image"/>
   </div>
   <div class="game-title english-heading">MAGIC CHESS</div>
-  <button class="english-heading">Out of stock</button>
-  <!-- <button class="english-heading">TOPUP</button> -->
+  <!-- <button class="english-heading">Out of stock</button> -->
+  <button class="english-heading">TOPUP</button>
 </div>
 <!-- <div class="game-card">
   <div class="game-image-container">
@@ -1146,7 +1146,7 @@ function showBloodStrikeTopup() {
           display.textContent = "❌ Username not found.";
         }
       } catch (err) {
-        display.textContent = "⚠️ Error fetching data.";
+        display.textContent = "undefined.";
       }
     }
 
@@ -1194,7 +1194,7 @@ async function checkMCGGUsername() {
             display.style.color = "white";
         }
     } catch (error) {
-        display.textContent = "✅ Verify.";
+        display.textContent = "undefined.";
         display.style.color = "white";
         console.error(error);
     }
@@ -1226,7 +1226,7 @@ async function checkPUBGUsername() {
             display.style.color = "white";
         }
     } catch (error) {
-        display.textContent = "✅ Verify.";
+        display.textContent = "undefined.";
         display.style.color = "white";
         console.error(error);
     }
@@ -1258,7 +1258,7 @@ async function checkHOKUsername() {
             display.style.color = "white";
         }
     } catch (error) {
-        display.textContent = "✅ Verify.";
+        display.textContent = "undefined.";
         display.style.color = "white";
         console.error(error);
     }
@@ -1283,7 +1283,7 @@ async function checkBloodStrikeUsername() {
             display.style.color = "white";
         }
     } catch (error) {
-        display.textContent = "✅ Verify.";
+        display.textContent = "undefined.";
         display.style.color = "white";
     }
 }
@@ -1820,24 +1820,23 @@ function closeInvoiceModal() {
   try {
     const proxyUrl = 'https://api.allorigins.win/raw?url=';
     
-
-    // const targetUrl = encodeURIComponent(`https://luffytopup.com/api/v1/verify_account.php?id=${uid}&zone=0000&game=freefire_sgmy`);
-    const targetUrl = encodeURIComponent(`https://mengtopup.shop/api/account?uid=${uid}&region=sg`);
+    // const targetUrl = encodeURIComponent(`https://mengtopup.shop/api/account?uid=${uid}&region=sg`);
+    const targetUrl = encodeURIComponent(`https://api-nickname-by-visatopup.vercel.app/api/v1/check_nickname?id=${uid}&zone=0&game=freefire`);
     const response = await fetch(proxyUrl + targetUrl);
 
     if (!response.ok) throw new Error("Network response was not ok");
 
     const data = await response.json();
 
-    if (data.basicInfo.nickname) {
-      display.textContent = `✅ Username: ${data.basicInfo.nickname}`;
+    if (data.nickname) {
+      display.textContent = `✅ Username: ${data.nickname}`;
       display.style.color = "white";
     } else {
       display.textContent = "❌ Username not found.";
       display.style.color = "white";
     }
   } catch (error) {
-    display.textContent = "✅ Verify.";
+    display.textContent = "undefined.";
     display.style.color = "white";
     console.error(error);
   }
