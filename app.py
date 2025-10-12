@@ -528,7 +528,7 @@ def send_to_telegram(transaction):
     # Determine processing channel and format
     if game_type == 'ff':  # Free Fire
        process_chat_id = '-1003148816981'
-       process_text = f"{transaction['player_id']} 0 {package_id}"
+       process_text = f"{transaction['player_id']} {package_id}"
     elif game_type == 'bloodstrike':
        process_chat_id = '-1003148816981'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} 0000 {package_id}"
