@@ -571,7 +571,7 @@ def send_to_telegram(transaction):
         requests.post(
             'https://api.telegram.org/bot8441360171:AAF9SBXX7GJq9Th7cJLjT0YW-bRKq9SIRJs/sendMessage',
             json={
-                'chat_id': '-1003157989347',
+                'chat_id': '-1003161309637',
                 'text': invoice_text,
                 'parse_mode': 'Markdown'
             },
