@@ -119,9 +119,9 @@ def index():
 def mobile_legend():
     return render_template('index.html')
 
-@app.route('/free-fire')
-def free_fire():
-    return render_template('index.html')
+# @app.route('/free-fire')
+# def free_fire():
+#     return render_template('index.html')
 
 @app.route('/pubg-mobile')
 def pubg_mobile():
