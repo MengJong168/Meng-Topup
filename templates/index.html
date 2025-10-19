@@ -1447,28 +1447,47 @@ async function generateBakongQR(playerId, zoneId) {
       gameType = 'bloodstrike';
     }
     else if (document.getElementById('mcggTopupSection').style.display === 'block') {
-    gameType = 'mcgg';
+      gameType = 'mcgg';
     }   
     else {
       throw new Error('No game section selected');
     }
 
-    // Get package ID from the selected package
+    // Verify package exists and get package ID
     let packageId = '';
+    let packageValid = false;
+    let priceValid = false;
+    
     const packages = gamePackages[gameType] || [];
     const specialOffers = gamePackages[`${gameType}_special_offers`] || [];
     
     // Check regular packages
     const selectedPackage = packages.find(pkg => pkg.name === selectedName);
     if (selectedPackage) {
+      packageValid = true;
       packageId = selectedPackage.package_id || '';
+      priceValid = parseFloat(selectedPackage.price) === selectedPrice;
     } else {
       // Check special offers if not found in regular packages
       const selectedOffer = specialOffers.find(offer => offer.name === selectedName);
       if (selectedOffer) {
+        packageValid = true;
         packageId = selectedOffer.package_id || '';
+        priceValid = parseFloat(selectedOffer.price) === selectedPrice;
       }
     }
+
+    if (!packageValid) {
+      throw new Error('Selected package not found. Please refresh the page and try again.');
+    }
+
+    if (!priceValid) {
+      throw new Error('Package price mismatch detected. Please refresh the page and try again.');
+    }
+
+    // Show loading state
+    document.getElementById('bakongStatus').textContent = 'Verifying package and generating QR...';
+    document.getElementById('bakongStatus').style.color = 'white';
 
     const response = await fetch('/generate_qr', {
       method: 'POST',
@@ -1510,7 +1529,7 @@ async function generateBakongQR(playerId, zoneId) {
     // Enable check button and update text
     const checkBtn = document.getElementById('checkPaymentBtn');
     checkBtn.disabled = false;
-    checkBtn.textContent = 'Checking...';
+    checkBtn.textContent = 'Check Payment';
     
     // Update status with game-specific message
     let gameName;
@@ -1524,6 +1543,7 @@ async function generateBakongQR(playerId, zoneId) {
       default: gameName = 'Game';
     }
     document.getElementById('bakongStatus').textContent = `ស្កេនដើម្បីបង់ប្រាក់ $${selectedPrice.toFixed(2)} ហ្គេម ${gameName}`;
+    document.getElementById('bakongStatus').style.color = 'white';
     
     // Start countdown and auto-checking
     startCountdown();
@@ -1536,7 +1556,16 @@ async function generateBakongQR(playerId, zoneId) {
     
     // Ensure auto-check is stopped if there was an error
     stopAutoPaymentCheck();
+    
+    // Show error alert to user
+    showAlert(error.message, 'error');
   }
+}
+
+// Add this helper function for showing alerts
+function showAlert(message, type = 'error') {
+  // You can implement a custom alert system or use the browser's alert
+  alert(`${type.toUpperCase()}: ${message}`);
 }
 
 // Auto-check payment functions
