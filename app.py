@@ -149,14 +149,43 @@ def generate_qr():
     try:
         amount = float(request.form['amount'])
         player_id = request.form.get('player_id', '')
-        zone_id = request.form.get('zone_id', '0')  # Default to 0
+        zone_id = request.form.get('zone_id', '0')
         package = request.form.get('package', '')
-        game_type = request.form.get('game_type', 'ml')  # 'ml' or 'ff'
+        game_type = request.form.get('game_type', 'ml')
 
+        # Validate amount
         if amount <= 0:
             return jsonify({'error': 'Amount must be greater than 0'}), 400
         if amount > 10000:
             return jsonify({'error': 'Maximum amount is $10,000'}), 400
+
+        # Verify package exists and price matches
+        packages = load_packages()
+        valid_package = False
+        valid_price = False
+        
+        # Check in regular packages
+        for pkg in packages.get(game_type, []):
+            if pkg.get('name') == package:
+                valid_package = True
+                if float(pkg.get('price', 0)) == amount:
+                    valid_price = True
+                break
+        
+        # If not found in regular packages, check special offers
+        if not valid_package:
+            for offer in packages.get(f"{game_type}_special_offers", []):
+                if offer.get('name') == package:
+                    valid_package = True
+                    if float(offer.get('price', 0)) == amount:
+                        valid_price = True
+                    break
+
+        if not valid_package:
+            return jsonify({'error': 'Invalid package selected'}), 400
+        
+        if not valid_price:
+            return jsonify({'error': 'Package price does not match selected amount'}), 400
 
         # Generate transaction ID
         transaction_id = f"TRX{int(time.time())}"
@@ -187,7 +216,6 @@ def generate_qr():
         
         # Store current transaction
         expiry = datetime.now() + timedelta(minutes=3)
-        # Store current transaction
         current_transactions[transaction_id] = {
             'amount': amount,
             'md5_hash': md5_hash,
@@ -195,7 +223,7 @@ def generate_qr():
             'player_id': player_id,
             'zone_id': zone_id,
             'package': package,
-            'game_type': game_type  # Add this line
+            'game_type': game_type
         }
         
         return jsonify({
