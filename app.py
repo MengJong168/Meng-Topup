@@ -119,9 +119,9 @@ def index():
 def mobile_legend():
     return render_template('index.html')
 
-# @app.route('/free-fire')
-# def free_fire():
-#     return render_template('index.html')
+@app.route('/free-fire')
+def free_fire():
+    return render_template('index.html')
 
 @app.route('/pubg-mobile')
 def pubg_mobile():
@@ -524,6 +524,38 @@ def update_special_offer():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/transactions')
+def transactions_page():
+    """Display transactions page for users"""
+    return render_template('transactions.html')
+
+@app.route('/api/transactions')
+def api_transactions():
+    """API endpoint to get transactions data"""
+    try:
+        transactions = load_transactions()
+        
+        # Combine all transactions and sort by timestamp (newest first)
+        all_txns = []
+        for status in ['pending', 'completed', 'expired']:
+            for txn in transactions.get(status, []):
+                txn['status'] = status
+                all_txns.append(txn)
+        
+        # Sort by timestamp, newest first
+        all_txns.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
+        
+        return jsonify({
+            'success': True,
+            'transactions': all_txns
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
 
 def send_to_telegram(transaction):
     """Send transaction details to Telegram"""
