@@ -1767,3 +1767,21 @@ p {
     object-fit: cover;
     border-radius: 4px;
 }
+.home-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.home-btn {
+    background: #ffffff;
+    border: 1px solid gold;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: auto;
+    transition: background-color 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
