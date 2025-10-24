@@ -1767,13 +1767,13 @@ p {
     object-fit: cover;
     border-radius: 4px;
 }
-.home-icon {
+.refresh-icon {
     width: 28px;
     height: 28px;
     object-fit: cover;
     border-radius: 4px;
 }
-.home-btn {
+.refresh-btn {
     background: #ffffff;
     border: 1px solid gold;
     padding: 8px 12px;
@@ -1784,4 +1784,16 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.refresh-btn:hover {
+    background: #e65c00;
+    transform: scale(1.05);
+}
+.title-english-heading { 
+  font-family: 'Cabin Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  text-rendering: optimizeLegibility;
 }
