@@ -11,14 +11,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Cabin+Condensed:wght@400;700&family=Dangrek&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header onclick="goToHomepage()">
-        <div class="header-content">
-            <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="header-logo" />
-            <h1 style="font-family: 'Cabin Condensed', sans-serif; font-size: 40px; white-space: nowrap;">
-                ◤MENG TOPUP◢
-            </h1>
-        </div>
-    </header>
+<header onclick="goToHomepage()">
+    <div class="header-content">
+        <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="header-logo" />
+        <h1 style="font-family: 'Cabin Condensed', sans-serif; font-size: 40px; white-space: nowrap;">
+            MENG TOPUP
+        </h1>
+        <a href="" class="home-btn">
+            <img src="/static/images/home.png" alt="home" class="home-icon">
+        </a>
+    </div>
+</header>
 
     <main>
         <div class="transactions-container">
@@ -324,6 +327,4 @@
         setInterval(loadTransactions, 30000);
     </script>
 </body>
-
 </html>
-
