@@ -4,11 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Meng TopUp</title>
-  <!-- Favicon -->
   <link rel="shortcut icon" href="static/images/logo.jpg" type="image/jpg" sizes="32x32" />
   <!-- Main Styles -->
   <link rel="stylesheet" href="/static/style.css" />
-  <!-- Google Fonts: Cabin Condensed, Dangrek, Battambang -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Cabin+Condensed:wght@400;700&family=Dangrek&display=swap" rel="stylesheet">
@@ -17,15 +15,19 @@
   <a href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer" class="support-button">
   <img src="/static/images/support.jpg" alt="Support">
 </a>
-   <header onclick="goToHomepage()">
+<header onclick="goToHomepage()">
     <div class="header-content">
-      <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="header-logo" />
-      <h1 style="font-family: 'Cabin Condensed', sans-serif; font-size: 40px; white-space: nowrap;">
-    ◤MENG TOPUP◢
-</h1>
+        <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="header-logo" />
+        <h1 style="font-family: 'Cabin Condensed', sans-serif; font-size: 40px; white-space: nowrap;">
+            MENG TOPUP
+        </h1>
+        <a href="/transactions" class="transactions-btn">
+            <img src="/static/images/ranking.png" alt="Transactions" class="transactions-icon">
+        </a>
     </div>
-  </header>
+</header>
   <main>
+    
 <!-- Main Banner Slider -->
 <div class="banner-container frame">
   <div class="banner-slider">
@@ -52,8 +54,14 @@
     <!-- Homepage Section -->
     <section id="homepage" class="homepage-section">
       <h2 class="khmer-heading section-step">
-      <span class="step-number">🎮</span>
-      <span class="step-text">ជ្រើសរើសហ្គេម</span>
+      <span class="step-number">🔥</span>
+          <span class="step-text">
+      ជ្រើសរើសហ្គេម
+      <img src="{{ url_for('static', filename='images/zoro-one-piece.gif') }}" alt="heart" class="heart-anime" />
+      <img src="{{ url_for('static', filename='images/luffy-gordo-luffy-gordinho.gif') }}" alt="heart" class="heart-anime" />
+      <img src="{{ url_for('static', filename='images/sanji-so-beautiful-sanji.gif') }}" alt="heart" class="heart-anime" />
+      <img src="{{ url_for('static', filename='images/nami-one-piece.gif') }}" alt="heart" class="heart-anime" />
+    </span>
       </h2>
       <div class="game-grid">
         <div class="game-card" onclick="showMLTopup()">
@@ -65,14 +73,14 @@
           <!-- <button class="english-heading">Out of stock</button> -->
           <button class="english-heading">TOPUP</button>
         </div>
-        <!-- <div class="game-card" onclick="showFFTopup()"> -->
-          <div class="game-card">
+        <div class="game-card" onclick="showFFTopup()">
+          <!-- <div class="game-card"> -->
           <div class="game-image-container">
             <img src="/static/images/free_fire.jpg" alt="Free Fire" class="game-image"/>
           </div>
           <div class="game-title english-heading">FREE FIRE</div>
-          <button class="english-heading">Out of stock</button>
-          <!-- <button class="english-heading">TOPUP</button> -->
+          <!-- <button class="english-heading">Out of stock</button> -->
+          <button class="english-heading">TOPUP</button>
         </div>
         <!-- In the game-grid section, replace the existing PUBG Mobile card with this: -->
 <div class="game-card" onclick="showPUBGTopup()">
@@ -1849,6 +1857,7 @@ function closeInvoiceModal() {
     }, 300);
   }
 }
+
     async function checkFFUsername() {
   const uid = document.getElementById('ffIdInput').value.trim();
   const display = document.getElementById('ffUsernameDisplay');
@@ -1865,16 +1874,15 @@ function closeInvoiceModal() {
   try {
     const proxyUrl = 'https://api.allorigins.win/raw?url=';
     
-    // const targetUrl = encodeURIComponent(`https://mengtopup.shop/api/account?uid=${uid}&region=sg`);
-    const targetUrl = encodeURIComponent(`https://api-nickname-by-visatopup.vercel.app/api/v1/check_nickname?id=${uid}&zone=0&game=freefire`);
+    const targetUrl = encodeURIComponent(`https://mengtopup.shop/api/account?uid=${uid}&region=sg`);
     const response = await fetch(proxyUrl + targetUrl);
 
     if (!response.ok) throw new Error("Network response was not ok");
 
     const data = await response.json();
 
-    if (data.nickname) {
-      display.textContent = `✅ Username: ${data.nickname}`;
+    if (data.basicInfo && data.basicInfo.nickname) {
+      display.textContent = `✅ Username: ${data.basicInfo.nickname}`;
       display.style.color = "white";
     } else {
       display.textContent = "❌ Username not found.";
