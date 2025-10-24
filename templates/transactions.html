@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions - Meng TopUp</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/transactions.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Cabin+Condensed:wght@400;700&family=Dangrek&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header onclick="goToHomepage()">
+        <div class="header-content">
+            <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="header-logo" />
+            <h1 style="font-family: 'Cabin Condensed', sans-serif; font-size: 40px; white-space: nowrap;">
+                ◤MENG TOPUP◢
+            </h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="transactions-container">
+            <h2 class="english-heading" style="text-align: center; margin-bottom: 20px; color: var(--accent-color);">
+                Transaction History
+            </h2>
+
+            <!-- Controls -->
+            <div class="transactions-controls">
+                <div class="control-group">
+                    <label class="khmer-heading">Filter by Status:</label>
+                    <select id="statusFilter" class="english-heading">
+                        <option value="all">All Status</option>
+                        <option value="completed">Completed</option>
+                        <option value="pending">Pending</option>
+                        <option value="expired">Expired</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label class="khmer-heading">Filter by Game:</label>
+                    <select id="gameFilter" class="english-heading">
+                        <option value="all">All Games</option>
+                        <option value="ml">Mobile Legends</option>
+                        <option value="ff">Free Fire</option>
+                        <option value="pubg">PUBG Mobile</option>
+                        <option value="hok">Honor of Kings</option>
+                        <option value="bloodstrike">Blood Strike</option>
+                        <option value="mcgg">Magic Chess</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="khmer-heading">Search:</label>
+                    <input type="text" id="searchInput" placeholder="Transaction ID, Player ID..." class="english-heading">
+                </div>
+            </div>
+
+            <!-- Transactions Table -->
+            <div class="transactions-table-container">
+                <table class="transactions-table">
+                    <thead>
+                        <tr>
+                            <th class="english-heading">Transaction ID</th>
+                            <th class="english-heading">Status</th>
+                            <th class="english-heading">Game</th>
+                            <th class="english-heading">Player ID</th>
+                            <th class="english-heading">Zone ID</th>
+                            <th class="english-heading">Package</th>
+                            <th class="english-heading">Amount</th>
+                            <th class="english-heading">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionsTableBody">
+                        <tr>
+                            <td colspan="8" class="loading-cell english-heading">Loading transactions...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button id="prevBtn" class="pagination-btn" onclick="changePage(-1)">Previous</button>
+                <span id="pageInfo" class="english-heading">Page 1 of 1</span>
+                <button id="nextBtn" class="pagination-btn" onclick="changePage(1)">Next</button>
+            </div>
+
+            <!-- Summary -->
+            <div class="transactions-summary">
+                <div class="summary-item">
+                    <span class="khmer-heading">Total Transactions:</span>
+                    <span id="totalCount" class="english-heading">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="khmer-heading">Completed:</span>
+                    <span id="completedCount" class="english-heading">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="khmer-heading">Pending:</span>
+                    <span id="pendingCount" class="english-heading">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="khmer-heading">Expired:</span>
+                    <span id="expiredCount" class="english-heading">0</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+  <footer id="mainFooter" class="site-footer">
+  <!-- Centered logo and text section -->
+  <div class="footer-center">
+    <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="footer-logo">
+    <p class="khmer-heading footer-text">ទិញពេជ្រ Mobile Legends Free Fire ក្នុងតម្លៃសមរម្យ! តាមរយះអាយឌី ID របស់អ្នក, ជ្រើសរើសកញ្ចប់ពេជ្យ ដែលអ្នកពេញចិត្តទិញ, ដោយបង់ប្រាក់តាមមធ្យោបាយដែលអ្នកមាន, ពេជ្រនឹងបញ្ជូនទៅក្នុងគណនេយ្យ GAME របស់អ្នកក្នុងរយះពេលពីចន្លោះ 10នាទី ដល់ 3ម៉ោង។</p>
+  </div>
+  <!-- Left-aligned content sections -->
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3 class="khmer-heading">អំពីយើង</h3>
+      <p class="khmer-heading">MENG TOPUP ផ្តល់សេវាកម្មបញ្ចូលពេជ្រល្អបំផុត:</p>
+      <p class="khmer-heading">
+        ⚡️ ល្បឿនលឿន – ទទួលពេជ្រភ្លាមៗ បន្ទាប់ពីទូទាត់ <br>
+        🪙 តម្លៃសមរម្យ – ថោកជាង និងមានប្រូម៉ូសិនជាញឹកញាប់<br>
+        🛡️ សុវត្ថិភាព – ទូទាត់ដោយប្រព័ន្ធមានការការពារដ៏ទំនើប<br>
+        💬 សេវាកម្ម 24/7 – មានបុគ្គលិករួសរាន់ជួយគ្រប់ពេល<br></p>
+    </div>
+    <div class="footer-section">
+      <h3 class="khmer-heading">វិធីបង់ប្រាក់</h3>
+      <p class="khmer-heading">យើងទទួលការបង់ប្រាក់តាមរយៈ KHQR</p>
+    </div>
+  <div class="footer-section">
+  <h3 class="khmer-heading">ទំនាក់ទំនង</h3>
+  <p class="english-heading">
+    Telegram: 
+    <a class="telegram-link" href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer">
+      MENGTOPUPP
+    </a>
+  </p>
+  <p class="english-heading">
+    Facebook PAGE: 
+    <a class="facebook-link" href="https://web.facebook.com/profile.php?id=61567102657266" target="_blank" rel="noopener noreferrer">
+      MENG TOPUPP
+    </a>
+  </p>
+  <p class="english-heading">
+    Reseller: 
+    <a class="telegram-link" href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer">
+      Join Reseller
+    </a>
+  </p>
+  <p class="english-heading">
+    Mobile: 
+    <a class="telegram-link" href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer">
+      +855885555479
+    </a>
+  </p>
+</div>
+  <div class="footer-bottom">
+    <p class="english-heading" style="text-align: center;">Copyright © MENG TOPUP. All Rights Reserved.</p>
+    <p class="english-heading" style="text-align: center; margin-top: 20px;">
+      <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffe600; text-decoration: underline;">
+        Privacy Policy | Terms and Conditions
+      </a>
+    </p>
+  </div>
+</footer>
+
+    <script>
+        let allTransactions = [];
+        let currentPage = 1;
+        const itemsPerPage = 10;
+
+        // Load transactions when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTransactions();
+            
+            // Add event listeners for filters
+            document.getElementById('statusFilter').addEventListener('change', filterTransactions);
+            document.getElementById('gameFilter').addEventListener('change', filterTransactions);
+            document.getElementById('searchInput').addEventListener('input', filterTransactions);
+        });
+
+        async function loadTransactions() {
+            try {
+                const response = await fetch('/api/transactions');
+                const data = await response.json();
+                
+                if (data.success) {
+                    allTransactions = data.transactions || [];
+                    updateSummary();
+                    filterTransactions();
+                } else {
+                    throw new Error(data.error || 'Failed to load transactions');
+                }
+            } catch (error) {
+                console.error('Error loading transactions:', error);
+                document.getElementById('transactionsTableBody').innerHTML = 
+                    '<tr><td colspan="8" class="error-cell english-heading">Failed to load transactions</td></tr>';
+            }
+        }
+
+        function filterTransactions() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const gameFilter = document.getElementById('gameFilter').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            let filtered = allTransactions.filter(transaction => {
+                // Status filter
+                if (statusFilter !== 'all' && transaction.status !== statusFilter) {
+                    return false;
+                }
+                
+                // Game filter
+                if (gameFilter !== 'all' && transaction.game_type !== gameFilter) {
+                    return false;
+                }
+                
+                // Search filter
+                if (searchTerm) {
+                    const searchFields = [
+                        transaction.transaction_id,
+                        transaction.player_id,
+                        transaction.zone_id,
+                        transaction.package,
+                        transaction.game_type
+                    ];
+                    return searchFields.some(field => 
+                        field && field.toString().toLowerCase().includes(searchTerm)
+                    );
+                }
+                
+                return true;
+            });
+
+            displayTransactions(filtered);
+        }
+
+        function displayTransactions(transactions) {
+            const tbody = document.getElementById('transactionsTableBody');
+            
+            if (transactions.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="no-data english-heading">No transactions found</td></tr>';
+                updatePagination(0);
+                return;
+            }
+
+            // Calculate pagination
+            const totalPages = Math.ceil(transactions.length / itemsPerPage);
+            currentPage = Math.min(currentPage, totalPages);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const paginatedTransactions = transactions.slice(startIndex, startIndex + itemsPerPage);
+
+            tbody.innerHTML = paginatedTransactions.map(transaction => `
+                <tr class="transaction-row">
+                    <td class="english-heading transaction-id">${transaction.transaction_id}</td>
+                    <td>
+                        <span class="status-badge status-${transaction.status} english-heading">
+                            ${transaction.status.toUpperCase()}
+                        </span>
+                    </td>
+                    <td class="english-heading">${getGameName(transaction.game_type)}</td>
+                    <td class="english-heading">${transaction.player_id}</td>
+                    <td class="english-heading">${transaction.zone_id || 'N/A'}</td>
+                    <td class="english-heading">${transaction.package}</td>
+                    <td class="english-heading amount">$${parseFloat(transaction.amount).toFixed(2)}</td>
+                    <td class="english-heading">${formatDate(transaction.timestamp)}</td>
+                </tr>
+            `).join('');
+
+            updatePagination(transactions.length);
+        }
+
+        function getGameName(gameType) {
+            const gameNames = {
+                'ml': 'Mobile Legends',
+                'ff': 'Free Fire',
+                'pubg': 'PUBG Mobile',
+                'hok': 'Honor of Kings',
+                'bloodstrike': 'Blood Strike',
+                'mcgg': 'Magic Chess'
+            };
+            return gameNames[gameType] || gameType;
+        }
+
+        function formatDate(timestamp) {
+            if (!timestamp) return 'N/A';
+            const date = new Date(timestamp);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+
+        function updatePagination(totalItems) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+            
+            document.getElementById('prevBtn').disabled = currentPage <= 1;
+            document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+        }
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(allTransactions.length / itemsPerPage);
+            currentPage += direction;
+            currentPage = Math.max(1, Math.min(currentPage, totalPages));
+            filterTransactions();
+        }
+
+        function updateSummary() {
+            const completed = allTransactions.filter(t => t.status === 'completed').length;
+            const pending = allTransactions.filter(t => t.status === 'pending').length;
+            const expired = allTransactions.filter(t => t.status === 'expired').length;
+            
+            document.getElementById('totalCount').textContent = allTransactions.length;
+            document.getElementById('completedCount').textContent = completed;
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('expiredCount').textContent = expired;
+        }
+
+        function goToHomepage() {
+            window.location.href = '/';
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadTransactions, 30000);
+    </script>
+</body>
+</html>
