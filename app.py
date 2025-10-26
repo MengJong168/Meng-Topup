@@ -14,7 +14,7 @@ from functools import wraps
 app = Flask(__name__)
 
 # Bakong API setup
-api_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMmEyMDE3MzUxMGU4NDZhMiJ9LCJpYXQiOjE3NTEzNTk1MDQsImV4cCI6MTc1OTEzNTUwNH0.EHVbg8wD4z7wdNP4zkHmUt8VjquH4kCrJgCf_HyLK8o"
+api_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMmEyMDE3MzUxMGU4NDZhMiJ9LCJpYXQiOjE3NTk3MjIzNjAsImV4cCI6MTc2NzQ5ODM2MH0._d3PWPYi-N_mPyt-Ntxj5qbtHghOdtZhka2LbdJlKRw"
 khqr = KHQR(api_token)
 current_transactions = {}
 
