@@ -15,10 +15,10 @@
   <a href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer" class="support-button">
   <img src="/static/images/support.jpg" alt="Support">
 </a>
-<header onclick="goToHomepage()">
+<header onclick="goToHomepage()" style="border-bottom: 1px solid white; border-top: 1px solid white;">
     <div class="header-content">
         <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="header-logo" />
-        <h1 style="font-family: 'Cabin Condensed', sans-serif; font-size: 40px; white-space: nowrap;">
+        <h1 class="meng-topup-text">
             MENG TOPUP
         </h1>
         <a href="/transactions" class="transactions-btn">
@@ -26,8 +26,7 @@
         </a>
     </div>
 </header>
-  <main>
-    
+  <main>  
 <!-- Main Banner Slider -->
 <div class="banner-container frame">
   <div class="banner-slider">
@@ -60,7 +59,6 @@
       <img src="{{ url_for('static', filename='images/zoro-one-piece.gif') }}" alt="heart" class="heart-anime" />
       <img src="{{ url_for('static', filename='images/luffy-gordo-luffy-gordinho.gif') }}" alt="heart" class="heart-anime" />
       <img src="{{ url_for('static', filename='images/sanji-so-beautiful-sanji.gif') }}" alt="heart" class="heart-anime" />
-      <img src="{{ url_for('static', filename='images/nami-one-piece.gif') }}" alt="heart" class="heart-anime" />
     </span>
       </h2>
       <div class="game-grid">
@@ -69,18 +67,18 @@
           <div class="game-image-container">
             <img src="/static/images/mobile_legend.jpg" alt="Mobile Legend" class="game-image"/>
           </div>
-          <div class="game-title english-heading">MOBILE LEGEND</div>
+          <div class="game-title game-title-english-heading">MOBILE LEGEND</div>
           <!-- <button class="english-heading">Out of stock</button> -->
-          <button class="english-heading">TOPUP</button>
+          <button class="english-heading topup-button">TOPUP</button>
         </div>
         <div class="game-card" onclick="showFFTopup()">
           <!-- <div class="game-card"> -->
           <div class="game-image-container">
             <img src="/static/images/free_fire.jpg" alt="Free Fire" class="game-image"/>
           </div>
-          <div class="game-title english-heading">FREE FIRE</div>
+          <div class="game-title game-title-english-heading">FREE FIRE</div>
           <!-- <button class="english-heading">Out of stock</button> -->
-          <button class="english-heading">TOPUP</button>
+          <button class="english-heading topup-button">TOPUP</button>
         </div>
         <!-- In the game-grid section, replace the existing PUBG Mobile card with this: -->
 <div class="game-card" onclick="showPUBGTopup()">
@@ -88,27 +86,27 @@
   <div class="game-image-container">
     <img src="/static/images/pubg_mobile.jpg" alt="PUBG Mobile" class="game-image"/>
   </div>
-  <div class="game-title english-heading">PUBG MOBILE</div>
+  <div class="game-title game-title-english-heading">PUBG MOBILE</div>
   <!-- <button class="english-heading">Out of stock</button> -->
-  <button class="english-heading">TOPUP</button>
+  <button class="english-heading topup-button">TOPUP</button>
 </div>
 <div class="game-card" onclick="showHOKTopup()">
   <!-- <div class="game-card"> -->
   <div class="game-image-container">
     <img src="/static/images/h_o_k.jpg" alt="HONOR OF KING" class="game-image"/>
   </div>
-  <div class="game-title english-heading">HONOR OF KINGS</div>
+  <div class="game-title game-title-english-heading">HONOR OF KINGS</div>
   <!-- <button class="english-heading">Out of stock</button> -->
-  <button class="english-heading">TOPUP</button>
+  <button class="english-heading topup-button">TOPUP</button>
 </div>
 <div class="game-card" onclick="showBloodStrikeTopup()">
   <!-- <div class="game-card"> -->
   <div class="game-image-container">
     <img src="/static/images/blood_strike.jpg" alt="Blood Strike" class="game-image"/>
   </div>
-  <div class="game-title english-heading">BLOOD STRIKE</div>
+  <div class="game-title game-title-english-heading">BLOOD STRIKE</div>
   <!-- <button class="english-heading">Out of stock</button> -->
-  <button class="english-heading">TOPUP</button>
+  <button class="english-heading topup-button">TOPUP</button>
 </div>
 <!-- Add this to your game-grid section -->
 <div class="game-card" onclick="showMCGGTopup()">
@@ -116,24 +114,9 @@
   <div class="game-image-container">
     <img src="/static/images/magic_chess.jpg" alt="Magic Chess: Go Go" class="game-image"/>
   </div>
-  <div class="game-title english-heading">MAGIC CHESS</div>
+  <div class="game-title game-title-english-heading">MAGIC CHESS</div>
   <!-- <button class="english-heading">Out of stock</button> -->
-  <button class="english-heading">TOPUP</button>
-</div>
-
-<div class="game-card" onclick="window.location.href='https://t.me/MENGJONGREAL'">
-  <div class="game-image-container">
-    <img src="/static/images/tiktok.jpg" alt="BOOST" class="game-image"/>
-  </div>
-  <div class="game-title english-heading">100k VIEW</div>
-  <button class="english-heading">BOOST</button>
-</div>
-<div class="game-card" onclick="window.location.href='https://t.me/MENGJONGREAL'">
-  <div class="game-image-container">
-    <img src="/static/images/fb.jpg" alt="BOOST" class="game-image"/>
-  </div>
-  <div class="game-title english-heading">10k FOLLOW</div>
-  <button class="english-heading">BOOST</button>
+  <button class="english-heading topup-button">TOPUP</button>
 </div>
 
 <!-- <div class="game-card">
@@ -718,9 +701,13 @@
         🛡️ សុវត្ថិភាព – ទូទាត់ដោយប្រព័ន្ធមានការការពារដ៏ទំនើប<br>
         💬 សេវាកម្ម 24/7 – មានបុគ្គលិករួសរាន់ជួយគ្រប់ពេល<br></p>
     </div>
-    <div class="footer-section">
-      <h3 class="khmer-heading">វិធីបង់ប្រាក់</h3>
-      <p class="khmer-heading">យើងទទួលការបង់ប្រាក់តាមរយៈ KHQR</p>
+    <div>
+      <h3 class="pay-khmer-heading">វិធីបង់ប្រាក់</h3>
+      <p class="khmer-heading">
+      យើងទទួលការបង់ប្រាក់តាមរយៈ 
+  <img src="/static/images/khqr.png" alt="KHQR Logo" class="khqr-inline">
+</p>
+
     </div>
   <div class="footer-section">
   <h3 class="khmer-heading">ទំនាក់ទំនង</h3>
@@ -759,7 +746,13 @@
   </div>
 </footer>
 
-  <button onclick="initiatePayment()" id="buyNowBtn" style="display: none;" class="khmer-heading">ទិញឥឡូវ $0.00</button>
+  <button onclick="initiatePayment()" 
+        id="buyNowBtn" 
+        style="display: none;" 
+        class="khmer-heading">
+    💎: ទិញឥឡូវ $0.00
+</button>
+
 
   <!-- Bakong Payment Modal -->
   <div id="bakongModal" class="modal">
@@ -1062,13 +1055,16 @@ function selectSpecialOffer(card, price, name, gameType) {
     updateBuyButton();
 }
 
-// Update Buy Button Text
 function updateBuyButton() {
     const buyBtn = document.getElementById('buyNowBtn');
-    buyBtn.textContent = selectedPrice > 0
-        ? `ទិញឥឡូវ $${selectedPrice.toFixed(2)}`
-        : 'ទិញឥឡូវ $0.00';
+    if (selectedPrice > 0 && selectedName) {
+        buyBtn.textContent = `💎: ${selectedName} | ទិញឥឡូវ $${selectedPrice.toFixed(2)}`;
+    } else {
+        buyBtn.textContent = '💎: | ទិញឥឡូវ $0.00';
+    }
 }
+
+
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async function () {
@@ -1089,7 +1085,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       window.scrollTo(0, 0);
       selectedPrice = 0;
       selectedName = "";
-      document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+      document.getElementById('buyNowBtn').textContent = '💎: | ទិញឥឡូវ $0.00';
       updateGameURL('mobile-legend'); // Add this line
     }
 
@@ -1102,7 +1098,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       window.scrollTo(0, 0);
       selectedPrice = 0;
       selectedName = "";
-      document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+      document.getElementById('buyNowBtn').textContent = '💎: | ទិញឥឡូវ $0.00';
        updateGameURL('free-fire'); // Add this line
     }
 
@@ -1117,7 +1113,7 @@ function showPUBGTopup() {
     window.scrollTo(0, 0);
     selectedPrice = 0;
     selectedName = "";
-    document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+    document.getElementById('buyNowBtn').textContent = '💎: | ទិញឥឡូវ $0.00';
     updateGameURL('pubg-mobile'); // Add this line
 }
 
@@ -1132,7 +1128,7 @@ function showHOKTopup() {
     window.scrollTo(0, 0);
     selectedPrice = 0;
     selectedName = "";
-    document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+    document.getElementById('buyNowBtn').textContent = '💎: | ទិញឥឡូវ $0.00';
     updateGameURL('honor-of-kings'); // Add this line
 }
 
@@ -1148,7 +1144,7 @@ function showBloodStrikeTopup() {
     window.scrollTo(0, 0);
     selectedPrice = 0;
     selectedName = "";
-    document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+    document.getElementById('buyNowBtn').textContent = '💎: | ទិញឥឡូវ $0.00';
     updateGameURL('blood-strike'); // Add this line
 }
     async function checkUsername() {
@@ -1187,7 +1183,7 @@ function showMCGGTopup() {
     window.scrollTo(0, 0);
     selectedPrice = 0;
     selectedName = "";
-    document.getElementById('buyNowBtn').textContent = 'ទិញឥឡូវ $0.00';
+    document.getElementById('buyNowBtn').textContent = '💎: | ទិញឥឡូវ $0.00';
     updateGameURL('magic-chess-go-go'); // Add this line
 }
 
@@ -1874,15 +1870,15 @@ function closeInvoiceModal() {
   try {
     const proxyUrl = 'https://api.allorigins.win/raw?url=';
     
-    const targetUrl = encodeURIComponent(`https://mengtopup.shop/api/account?uid=${uid}&region=sg`);
+    const targetUrl = encodeURIComponent(`https://mengtopup.shop/api/check_username/ff=${uid}`);
     const response = await fetch(proxyUrl + targetUrl);
 
     if (!response.ok) throw new Error("Network response was not ok");
 
     const data = await response.json();
 
-    if (data.basicInfo && data.basicInfo.nickname) {
-      display.textContent = `✅ Username: ${data.basicInfo.nickname}`;
+    if (data.success) {
+      display.textContent = `✅ Username: ${data.username}`;
       display.style.color = "white";
     } else {
       display.textContent = "❌ Username not found.";
