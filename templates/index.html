@@ -1203,11 +1203,11 @@ async function checkMCGGUsername() {
     display.style.color = "white";
 
     try {
-        const response = await fetch(`https://luffytopup.com/api/v1/verify_account.php?id=${uid}&zone=${zone}&game=magic_chest_gogo`);
+        const response = await fetch(`https://mengtopup.shop/api/check_username/mcg=${uid}/${zone}`);
         const data = await response.json();
 
-        if (data.success && data.name) {
-            display.textContent = `✅ Username: ${data.name}`;
+        if (data.success) {
+            display.textContent = `✅ Username: ${data.username}`;
             display.style.color = "white";
         } else {
             display.textContent = "❌ Username not found";
@@ -1267,11 +1267,11 @@ async function checkHOKUsername() {
     display.style.color = "white";
 
     try {
-        const response = await fetch(`https://luffytopup.com/api/v1/verify_account.php?id=${uid}&zone=0000&game=hok`);
+        const response = await fetch(`https://mengtopup.shop/api/check_username/hok=${uid}`);
         const data = await response.json();
 
-        if (data.success && data.name) {
-            display.textContent = `✅ Username: ${data.name}`;
+        if (data.success) {
+            display.textContent = `✅ Username: ${data.username}`;
             display.style.color = "white";
         } else {
             display.textContent = "❌ Username not found.";
