@@ -71,10 +71,11 @@ def load_packages():
     except requests.RequestException:
         # Return default packages if API is unavailable
         return {
-            "ml": [], "ff": [], "pubg": [], "hok": [], "bloodstrike": [], "mcgg": [],
+            "ml": [], "ff": [], "pubg": [], "hok": [], "bloodstrike": [], "mcgg": [], "mlph": [],
             "ml_special_offers": [], "ff_special_offers": [], "pubg_special_offers": [],
-            "hok_special_offers": [], "bloodstrike_special_offers": [], "mcgg_special_offers": []
+            "hok_special_offers": [], "bloodstrike_special_offers": [], "mcgg_special_offers": [], "mlph_special_offers": []
         }
+        
 
 # Add this route to app.py
 @app.route('/admin')
@@ -115,7 +116,7 @@ def index():
     return render_template('index.html')
 
 # Add these new routes for each game
-@app.route('/mobile-legend')
+@app.route('/mobile-legends')
 def mobile_legend():
     return render_template('index.html')
 
@@ -138,6 +139,11 @@ def blood_strike():
 @app.route('/magic-chess-go-go')
 def magic_chess_go_go():
     return render_template('index.html')
+
+@app.route('/mobile-legend')
+def mobile_legend_ph():
+    return render_template('index.html')
+
 
 @app.route('/static/<path:filename>')
 def serve_static(filename):
@@ -371,11 +377,12 @@ def admin_packages():
             "pubg": [],
             "hok": [],
             "bloodstrike": [],
-            "mcgg": []
+            "mcgg": [],
+            "mlph": []
         }
     
     # Validate package structure
-    for game_type in ['ml', 'ff', 'pubg', 'hok', 'bloodstrike', 'mcgg']:
+    for game_type in ['ml', 'ff', 'pubg', 'hok', 'bloodstrike', 'mcgg', 'mlph']:
         if not isinstance(packages.get(game_type, []), list):
             packages[game_type] = []
             app.logger.warning(f"Invalid package format for {game_type}, reset to empty list")
@@ -386,7 +393,8 @@ def admin_packages():
                          pubg_packages=packages.get('pubg', []),
                          hok_packages=packages.get('hok', []),
                          bloodstrike_packages=packages.get('bloodstrike', []),
-                         mcgg_packages=packages.get('mcgg', []))
+                         mcgg_packages=packages.get('mcgg', []),
+                         mlph_packages=packages.get('mlph', []))
 
 @app.route('/admin/special_offers')
 @admin_required
@@ -402,11 +410,12 @@ def admin_special_offers():
             "pubg_special_offers": [],
             "hok_special_offers": [],
             "bloodstrike_special_offers": [],
-            "mcgg_special_offers": []
+            "mcgg_special_offers": [],
+            "mlph_special_offers": []
         }
     
     # Validate special offers structure
-    for game_type in ['ml', 'ff', 'pubg', 'hok', 'bloodstrike', 'mcgg']:
+    for game_type in ['ml', 'ff', 'pubg', 'hok', 'bloodstrike', 'mcgg', 'mlph']:
         offer_key = f"{game_type}_special_offers"
         if not isinstance(packages.get(offer_key, []), list):
             packages[offer_key] = []
@@ -418,7 +427,8 @@ def admin_special_offers():
         pubg_offers=packages.get("pubg_special_offers", []),
         hok_offers=packages.get("hok_special_offers", []),
         bloodstrike_offers=packages.get("bloodstrike_special_offers", []),
-        mcgg_offers=packages.get("mcgg_special_offers", [])
+        mcgg_offers=packages.get("mcgg_special_offers", []),
+        mlph_offers=packages.get("mlph_special_offers", [])
     )
 
 @app.route('/admin/update_package', methods=['POST'])
@@ -462,9 +472,9 @@ def get_packages():
         
         # Ensure all required keys exist
         required_keys = [
-            'ml', 'ff', 'pubg', 'hok', 'bloodstrike', 'mcgg',
+            'ml', 'ff', 'pubg', 'hok', 'bloodstrike', 'mcgg', 'mlph',
             'ml_special_offers', 'ff_special_offers', 'pubg_special_offers',
-            'hok_special_offers', 'bloodstrike_special_offers', 'mcgg_special_offers'
+            'hok_special_offers', 'bloodstrike_special_offers', 'mcgg_special_offers', 'mlph_special_offers'
         ]
         
         for key in required_keys:
@@ -488,6 +498,7 @@ def get_packages():
             "hok_special_offers": [],
             "bloodstrike_special_offers": [],
             "mcgg_special_offers": [],
+            "mlph_special_offers": [],
             "error": str(e)
         }), 500
     
@@ -601,6 +612,9 @@ def send_to_telegram(transaction):
     elif game_type == 'mcgg':  # Magic Chess: Go Go
        process_chat_id = '-1003148816981'  # Update with your actual channel ID
        process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
+    elif game_type == 'mlph':  # Mobile Legend PH
+       process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
+       process_chat_id = '-1003148816981'  # Update with your actual channel ID
     else:  # Mobile Legends (default)
        process_chat_id = '-1003148816981'
        process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
