@@ -71,6 +71,14 @@
           <!-- <button class="english-heading">Out of stock</button> -->
           <button class="english-heading topup-button">TOPUP</button>
         </div>
+        <!-- In the game-grid section, add this card after the existing games -->
+<div class="game-card" onclick="showMLPHTopup()">
+  <div class="game-image-container">
+    <img src="/static/images/mobile_legendphmysg.jpg" alt="Mobile Legend PH" class="game-image"/>
+  </div>
+  <div class="game-title game-title-english-heading">MOBILELEGEND PH</div>
+  <button class="english-heading topup-button">TOPUP</button>
+</div>
         <div class="game-card" onclick="showFFTopup()">
           <!-- <div class="game-card"> -->
           <div class="game-image-container">
@@ -118,36 +126,8 @@
   <!-- <button class="english-heading">Out of stock</button> -->
   <button class="english-heading topup-button">TOPUP</button>
 </div>
-
-<!-- <div class="game-card">
-  <div class="game-image-container">
-    <img src="/static/images/mobile_legendphmysg.jpg" alt="Mobile Legend PH MY SG" class="game-image"/>
-  </div>
-  <div class="game-title khmer-heading">MLBB PH MY SG</div>
-  <div class="coming-soon khmer-heading">COMING SOON</div>
-</div>
-<div class="game-card">
-  <div class="game-image-container">
-    <img src="/static/images/mobile_legend_indo.jpg" alt="Mobile Legend INDO" class="game-image"/>
-  </div>
-  <div class="game-title khmer-heading">MLBB INDO</div>
-  <div class="coming-soon khmer-heading">COMING SOON</div>
-</div>    
-<div class="game-card">
-  <div class="game-image-container">
-    <img src="/static/images/free_fire_vn.jpg" alt="Free Fire VN" class="game-image"/>
-  </div>
-  <div class="game-title khmer-heading">FREE FIRE VN</div>
-  <div class="coming-soon khmer-heading">COMING SOON</div>
-</div>     
-<div class="game-card">
-  <div class="game-image-container">
-    <img src="/static/images/free_fire_th.jpg" alt="Free Fire TH" class="game-image"/>
-  </div>
-  <div class="game-title khmer-heading">FREE FIRE TH</div>
-  <div class="coming-soon khmer-heading">COMING SOON</div>
-</div>     -->
     </section>
+    
 <section id="Title" style="display: none;">
   <div class="frame">
     <h2 class="khmer-heading" style="margin-bottom: 15px;">Top-up Mobile Legends, Free Fire</h2>
@@ -258,6 +238,89 @@
         </div>
       </section>
     </section>
+
+    <!-- Mobile Legends PH Topup Section -->
+<section id="mlphTopupSection" style="display: none;">
+  <section class="banner frame">
+    <div class="banner-content">
+      <div class="game-title-container">
+        <img src="/static/images/mobile_legendphmysg.jpg" alt="Mobile Legends PH Logo" class="game-logo" />
+        <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
+          MOBILE LEGENDS PH MY SG
+        </h3>
+      </div>
+    </div>
+  </section>
+  
+  <ul class="feature-list">
+    <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
+    <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
+    <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
+  </ul>
+  
+  <h3 class="khmer-heading section-step">
+    <span class="step-number">1</span>
+    <span class="step-text">បញ្ចូលព័ត៌មាន</span>
+  </h3>
+  
+  <section class="user-input frame">
+    <div class="input-row">
+      <input type="number" id="mlphIdInput" placeholder="Player ID" />
+      <input type="number" id="mlphZoneInput" placeholder="Zone ID" />
+    </div>
+    <button onclick="checkMLPHUsername()" class="english-heading">Check Username</button>
+    <div id="mlphUsernameDisplay" class="english-heading"></div>
+  </section>
+  
+  <!-- ML PH Packages Section -->
+  <section class="package-section">
+    <h3 class="khmer-heading section-step">
+      <span class="step-number">2</span>
+      <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
+    </h3>
+    <div class="frame package-frame">
+      <div class="pricing-grid" id="mlphPackageGrid"></div>
+    </div>
+  </section>
+  
+  <!-- Payment Section -->
+  <section class="package-section">
+    <h3 class="khmer-heading section-step">
+      <span class="step-number">3</span>
+      <span class="step-text">ការទូទាត់ប្រាក់</span>
+    </h3>
+    <div class="khqr-card" id="mlphKhqrCard">
+      <h3 class="english-heading">KHQR</h3>
+      <div class="text-group"></div>
+      <h6>Scan to pay with any banking app</h6>
+      <input type="checkbox" id="mlphKhqrCheck" checked/>
+    </div>
+  </section>
+  
+  <!-- Agreement Section -->
+  <section>
+    <div class="frame-agreement">
+      <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
+        <input type="checkbox" id="mlphAgreementCheck" checked/>
+        ខ្ញុំយល់ព្រមតាម 
+        <a href="javascript:void(0)" onclick="showTerms('mlph')" style="color: #ffe600; text-decoration: underline;">
+          លក្ខខណ្ឌ
+        </a>
+      </label>
+    </div>
+  </section>
+  
+  <section class="banner frame">
+    <div class="banner-content">
+      <div class="game-title">
+        <img src="/static/images/logo.jpg" alt="Mobile Legends PH Logo" class="ml-logo" />
+        <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
+      </div>
+      <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
+    </div>
+  </section>
+</section>
+  
     <!-- Free Fire Topup Section (initially hidden) -->
     <section id="ffTopupSection" style="display: none;">
       <section class="banner frame">
@@ -683,6 +746,7 @@
     </div>
   </section>
 </section>
+
   </main>
   <footer id="mainFooter" class="site-footer">
   <!-- Centered logo and text section -->
@@ -833,12 +897,14 @@
    // Global variables to store packages
 let gamePackages = {
     ml: [],
+    mlph: [], // Add this line
     ff: [],
     pubg: [],
     hok: [],
     bloodstrike: [],
     mcgg: [],
     ml_special_offers: [],
+    mlph_special_offers: [], // Add this line
     ff_special_offers: [],
     pubg_special_offers: [],
     hok_special_offers: [],
@@ -866,12 +932,14 @@ async function loadAllPackages() {
             hok: Array.isArray(data.hok) ? data.hok : [],
             bloodstrike: Array.isArray(data.bloodstrike) ? data.bloodstrike : [],
             mcgg: Array.isArray(data.mcgg) ? data.mcgg : [],
+            mlph: Array.isArray(data.mlph) ? data.mlph : [], // ADD ML_PH
             ml_special_offers: Array.isArray(data.ml_special_offers) ? data.ml_special_offers : [],
             ff_special_offers: Array.isArray(data.ff_special_offers) ? data.ff_special_offers : [],
             pubg_special_offers: Array.isArray(data.pubg_special_offers) ? data.pubg_special_offers : [],
             hok_special_offers: Array.isArray(data.hok_special_offers) ? data.hok_special_offers : [],
             bloodstrike_special_offers: Array.isArray(data.bloodstrike_special_offers) ? data.bloodstrike_special_offers : [],
-            mcgg_special_offers: Array.isArray(data.mcgg_special_offers) ? data.mcgg_special_offers : []
+            mcgg_special_offers: Array.isArray(data.mcgg_special_offers) ? data.mcgg_special_offers : [],
+            mlph_special_offers: Array.isArray(data.mlph_special_offers) ? data.mlph_special_offers : [] // ADD ML_PH SPECIAL OFFERS
         };
 
         console.log('Processed packages:', gamePackages); // Debug log
@@ -887,12 +955,14 @@ async function loadAllPackages() {
             hok: [],
             bloodstrike: [],
             mcgg: [],
+            mlph: [], // Add this
             ml_special_offers: [],
             ff_special_offers: [],
             pubg_special_offers: [],
             hok_special_offers: [],
             bloodstrike_special_offers: [],
-            mcgg_special_offers: []
+            mcgg_special_offers: [],
+            mlph_special_offers: [] // Add this
         };
         
         // Show error to user
@@ -903,6 +973,7 @@ async function loadAllPackages() {
     }
 }
 
+
 // Update initPackageGrids to include MCGG
 function initPackageGrids() {
     const mappings = [
@@ -911,7 +982,8 @@ function initPackageGrids() {
         { gameType: 'pubg', gridId: 'pubgPackageGrid', offersId: 'pubgSpecialOffers' },
         { gameType: 'hok', gridId: 'hokPackageGrid', offersId: 'hokSpecialOffers' },
         { gameType: 'bloodstrike', gridId: 'bloodstrikePackageGrid', offersId: 'bloodstrike_special_offers' },
-        { gameType: 'mcgg', gridId: 'mcggPackageGrid', offersId: 'mcggSpecialOffers' }
+        { gameType: 'mcgg', gridId: 'mcggPackageGrid', offersId: 'mcggSpecialOffers' },
+        { gameType: 'mlph', gridId: 'mlphPackageGrid', offersId: 'mlphSpecialOffers' },
     ];
 
     mappings.forEach(({ gameType, gridId, offersId }) => {
@@ -936,7 +1008,6 @@ function initPackageGrids() {
         }
     });
 }
-
 function createPackageCard(pkg, gameType) {
     const card = document.createElement("div");
     card.className = "card";
@@ -1086,7 +1157,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       selectedPrice = 0;
       selectedName = "";
       document.getElementById('buyNowBtn').textContent = '💎: | ទិញឥឡូវ $0.00';
-      updateGameURL('mobile-legend'); // Add this line
+      updateGameURL('mobile-legends'); // Add this line
     }
 
     function showFFTopup() {
@@ -1157,11 +1228,11 @@ function showBloodStrikeTopup() {
       }
       display.textContent = "Checking username...";
       try {
-        const url = `https://api.isan.eu.org/nickname/ml?id=${encodeURIComponent(id)}&zone=${encodeURIComponent(zone)}`;
+        const url = `https://mengtopup.shop/api/check_username/ml=${encodeURIComponent(id)}/${encodeURIComponent(zone)}`;
         const res = await fetch(url);
         const data = await res.json();
-        if (data.success && data.name) {
-          display.textContent = `✅ Username: ${data.name}`;
+        if (data.success) {
+          display.textContent = `✅ Username: ${data.username}`;
         } else {
           display.textContent = "❌ Username not found.";
         }
@@ -1185,6 +1256,24 @@ function showMCGGTopup() {
     selectedName = "";
     document.getElementById('buyNowBtn').textContent = '💎: | ទិញឥឡូវ $0.00';
     updateGameURL('magic-chess-go-go'); // Add this line
+}
+
+function showMLPHTopup() {
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('mlphTopupSection').style.display = 'block';
+    document.getElementById('mlTopupSection').style.display = 'none';
+    document.getElementById('ffTopupSection').style.display = 'none';
+    document.getElementById('pubgTopupSection').style.display = 'none';
+    document.getElementById('hokTopupSection').style.display = 'none';
+    document.getElementById('bloodstrikeTopupSection').style.display = 'none';
+    document.getElementById('mcggTopupSection').style.display = 'none';
+    document.getElementById('buyNowBtn').style.display = 'block';
+    document.getElementById('mainFooter').style.display = 'none';
+    window.scrollTo(0, 0);
+    selectedPrice = 0;
+    selectedName = "";
+    document.getElementById('buyNowBtn').textContent = '💎: | ទិញឥឡូវ $0.00';
+    updateGameURL('mobile-legend');
 }
 
 // Add MCGG username verification
@@ -1308,6 +1397,41 @@ async function checkBloodStrikeUsername() {
     }
 }
 
+// Check ML PH Username
+async function checkMLPHUsername() {
+  const id = document.getElementById('mlphIdInput').value.trim();
+  const zone = document.getElementById('mlphZoneInput').value.trim();
+  const display = document.getElementById('mlphUsernameDisplay');
+  
+  if (!id || !zone) {
+    display.textContent = "Please enter Player ID and Zone ID!";
+    display.style.color = "white";
+    return;
+  }
+  
+  display.textContent = "Checking username...";
+  display.style.color = "white";
+  try {
+    // You'll need to find the appropriate API endpoint for ML PH
+    // This is a placeholder - replace with the actual API
+    const url = `https://mengtopup.shop/api/check_username/ml=${encodeURIComponent(id)}/${encodeURIComponent(zone)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    if (data.success) {
+      display.textContent = `✅ Username: ${data.username}`;
+      display.style.color = "white";
+    } else {
+      display.textContent = "❌ Username not found.";
+      display.style.color = "white";
+    }
+  } catch (err) {
+    display.textContent = "Error checking username. Please try again.";
+    display.style.color = "white";
+    console.error('ML PH Username check error:', err);
+  }
+}
+
     function openModal() {
       document.getElementById('bakongModal').style.display = 'flex';
     }
@@ -1356,6 +1480,11 @@ function initiatePayment() {
     id = document.getElementById('mcggIdInput').value.trim();
     zone = document.getElementById('mcggZoneInput').value.trim();
     }
+    else if (document.getElementById('mlphTopupSection').style.display === 'block') {
+        gameType = 'mlph';
+        id = document.getElementById('mlphIdInput').value.trim();
+        zone = document.getElementById('mlphZoneInput').value.trim();
+    }
     else {
         alert('No game section selected');
         return;
@@ -1382,6 +1511,9 @@ function initiatePayment() {
         case 'mcgg':
             khqrChecked = document.getElementById('mcggKhqrCheck').checked;
             break;
+        case 'mlph':
+            khqrChecked = document.getElementById('mlphKhqrCheck').checked;
+            break;
     }
 
     // Get the appropriate agreement checkbox
@@ -1404,6 +1536,9 @@ function initiatePayment() {
             break;
         case 'mcgg':
             agreed = document.getElementById('mcggAgreementCheck').checked;
+            break;
+        case 'mlph':
+            agreed = document.getElementById('mlphAgreementCheck').checked;
             break;
     }
 
@@ -1452,7 +1587,10 @@ async function generateBakongQR(playerId, zoneId) {
     }
     else if (document.getElementById('mcggTopupSection').style.display === 'block') {
       gameType = 'mcgg';
-    }   
+    }
+    else if (document.getElementById('mlphTopupSection').style.display === 'block') {
+      gameType = 'mlph';
+    }     
     else {
       throw new Error('No game section selected');
     }
@@ -1544,6 +1682,7 @@ async function generateBakongQR(playerId, zoneId) {
       case 'hok': gameName = 'Honor of Kings'; break;
       case 'bloodstrike': gameName = 'Blood Strike'; break;
       case 'mcgg': gameName = 'Magic Chess: Go Go'; break;
+      case 'mlph': gameName = 'Mobile Legends PH'; break;
       default: gameName = 'Game';
     }
     document.getElementById('bakongStatus').textContent = `ស្កេនដើម្បីបង់ប្រាក់ $${selectedPrice.toFixed(2)} ហ្គេម ${gameName}`;
@@ -1740,6 +1879,13 @@ const GAME_CONFIG = {
     khqrCheck: 'khqrCheck',
     packageGrid: '#packageGrid'
   },
+  mlph: { // Add this
+    idInput: 'mlphIdInput',
+    zoneInput: 'mlphZoneInput',
+    usernameDisplay: 'mlphUsernameDisplay',
+    khqrCheck: 'mlphKhqrCheck',
+    packageGrid: '#mlphPackageGrid'
+  },
   ff: {
     idInput: 'ffIdInput',
     usernameDisplay: 'ffUsernameDisplay',
@@ -1763,7 +1909,7 @@ const GAME_CONFIG = {
     usernameDisplay: 'bloodstrikeUsernameDisplay',
     khqrCheck: 'bloodstrikeKhqrCheck',
     packageGrid: '#bloodstrikePackageGrid'
-  }
+  },
 };
 
 function showInvoice(transaction) {
@@ -2004,6 +2150,7 @@ function showTerms(fromSection = null) {
   document.getElementById('hokTopupSection').style.display = 'none';
   document.getElementById('bloodstrikeTopupSection').style.display = 'none';
   document.getElementById('mcggTopupSection').style.display = 'none';
+  document.getElementById('mlphTopupSection').style.display = 'none';
   document.getElementById('termsSection').style.display = 'block';
   document.getElementById('buyNowBtn').style.display = 'none';
 
@@ -2034,6 +2181,8 @@ function hideTerms() {
   } else if (returnSection === 'mcgg') {
     document.getElementById('mcggTopupSection').style.display = 'block';
     document.getElementById('buyNowBtn').style.display = 'block';
+  } else if (returnSection === 'mlph') { // Add this
+    document.getElementById('mlphTopupSection').style.display = 'block';
   } else {
     document.getElementById('homepage').style.display = 'block';
     document.getElementById('mainFooter').style.display = 'block';
@@ -2269,6 +2418,10 @@ function loadRememberedPrefs() {
       document.getElementById('mcggIdInput').value = rememberedPrefs.mcgg.playerId || '';
       document.getElementById('mcggZoneInput').value = rememberedPrefs.mcgg.zoneId || '';
     }
+    if (rememberedPrefs.mlph) {
+        document.getElementById('mlphIdInput').value = rememberedPrefs.mlph.playerId || '';
+        document.getElementById('mlphZoneInput').value = rememberedPrefs.mlph.zoneId || '';
+    }
   }
 }
 
@@ -2292,6 +2445,9 @@ function saveRememberedPrefs() {
   }
   else if (document.getElementById('mcggTopupSection').style.display === 'block') {
     gameType = 'mcgg';
+  }
+  else if (document.getElementById('mlphTopupSection').style.display === 'block') {
+    gameType = 'mlph';
   }
 
   if (!gameType) return; // No active game section found
@@ -2330,6 +2486,11 @@ function saveRememberedPrefs() {
         zoneId: document.getElementById('mcggZoneInput').value.trim()
       };
       break;
+    case 'mlph':
+      rememberedPrefs.ml = {
+        playerId: document.getElementById('mlphIdInput').value.trim(),
+        zoneId: document.getElementById('mlphZoneInput').value.trim()
+      };
   }
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(rememberedPrefs));
@@ -2347,19 +2508,24 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('bloodstrikeIdInput').addEventListener('input', saveRememberedPrefs);
   document.getElementById('mcggIdInput').addEventListener('input', saveRememberedPrefs);
   document.getElementById('mcggZoneInput').addEventListener('input', saveRememberedPrefs);
+  document.getElementById('mlphIdInput').addEventListener('input', saveRememberedPrefs);
+  document.getElementById('mlphZoneInput').addEventListener('input', saveRememberedPrefs);
 });
 // Add this function to handle URL changes
 function updateGameURL(gameSlug) {
     const newURL = `${window.location.origin}/${gameSlug}`;
     window.history.pushState({game: gameSlug}, '', newURL);
 }
+
 // Add this function to handle back/forward browser navigation
 window.addEventListener('popstate', function(event) {
     // Parse the URL to determine which section to show
     const path = window.location.pathname;
     
-    if (path.includes('mobile-legend')) {
+    if (path.includes('mobile-legends')) {
         showMLTopup();
+    } else if (path.includes('mobile-legend')) {
+        showMLPHTopup();
     } else if (path.includes('free-fire')) {
         showFFTopup();
     } else if (path.includes('pubg-mobile')) {
@@ -2374,6 +2540,7 @@ window.addEventListener('popstate', function(event) {
         // Default to homepage
         document.getElementById('homepage').style.display = 'block';
         document.getElementById('mlTopupSection').style.display = 'none';
+        document.getElementById('mlphTopupSection').style.display = 'none';
         document.getElementById('ffTopupSection').style.display = 'none';
         document.getElementById('pubgTopupSection').style.display = 'none';
         document.getElementById('hokTopupSection').style.display = 'none';
@@ -2388,8 +2555,10 @@ window.addEventListener('popstate', function(event) {
 document.addEventListener('DOMContentLoaded', function() {
     const path = window.location.pathname;
     
-    if (path.includes('mobile-legend')) {
+    if (path.includes('mobile-legends')) {
         showMLTopup();
+    } else if (path.includes('mobile-legend')) {
+        showMLPHTopup();
     } else if (path.includes('free-fire')) {
         showFFTopup();
     } else if (path.includes('pubg-mobile')) {
@@ -2414,7 +2583,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hide all game sections
         const gameSections = [
             'mlTopupSection', 'ffTopupSection', 'pubgTopupSection', 
-            'hokTopupSection', 'bloodstrikeTopupSection', 'mcggTopupSection'
+            'hokTopupSection', 'bloodstrikeTopupSection', 'mcggTopupSection', 'mlphTopupSection'
         ];
         
         gameSections.forEach(section => {
