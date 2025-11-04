@@ -598,26 +598,26 @@ def send_to_telegram(transaction):
     
     # Determine processing channel and format
     if game_type == 'ff':  # Free Fire
-       process_chat_id = '-1003118519493'
-       process_text = f"{transaction['player_id']} {package_id}"
+       process_chat_id = '-1003284732983'
+       process_text = f"ff {transaction['player_id']} {package_id}"
     elif game_type == 'bloodstrike':
-       process_chat_id = '-1003223741664'  # Update with your actual channel ID
-       process_text = f"{transaction['player_id']} 0000 {package_id}"
+       process_chat_id = '-1003284732983'  # Update with your actual channel ID
+       process_text = f"bloodstrike {transaction['player_id']} 0000 {package_id}"
     elif game_type == 'pubg':  # PUBG Mobile
-       process_chat_id = '-1003223741664' 
-       process_text = f"{transaction['player_id']} 0000 {package_id}"
+       process_chat_id = '-1003284732983' 
+       process_text = f"pubg {transaction['player_id']} 0000 {package_id}"
     elif game_type == 'hok':  # HONOR OF KING
-       process_chat_id = '-1003223741664'  # Update with your actual channel ID
-       process_text = f"{transaction['player_id']} 0000 {package_id}"
+       process_chat_id = '-1003284732983'  # Update with your actual channel ID
+       process_text = f"hok {transaction['player_id']} 0000 {package_id}"
     elif game_type == 'mcgg':  # Magic Chess: Go Go
-       process_chat_id = '-1003223741664'  # Update with your actual channel ID
-       process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
+       process_chat_id = '-1003284732983'  # Update with your actual channel ID
+       process_text = f"magicchess {transaction['player_id']} {transaction['zone_id']} {package_id}"
     elif game_type == 'mlph':  # Mobile Legend PH
-       process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
-       process_chat_id = '-1003223741664'  # Update with your actual channel ID
+       process_text = f"mlph {transaction['player_id']} {transaction['zone_id']} {package_id}"
+       process_chat_id = '-1003284732983'  # Update with your actual channel ID
     else:  # Mobile Legends (default)
-       process_chat_id = '-1003148816981'
-       process_text = f"{transaction['player_id']} {transaction['zone_id']} {package_id}"
+       process_chat_id = '-1003284732983'
+       process_text = f"ml {transaction['player_id']} {transaction['zone_id']} {package_id}"
     
     # Create invoice message               
     invoice_text = (
