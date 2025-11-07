@@ -615,11 +615,11 @@ def send_to_telegram(transaction):
        process_chat_id = '-1003284732983'  # Update with your actual channel ID
        process_text = f"magicchess {transaction['player_id']} {transaction['zone_id']} {package_id}"
     elif game_type == 'mlph':  # Mobile Legend PH
-       process_text = f"mlph {transaction['player_id']} {transaction['zone_id']} {package_id}"
+       process_text = f"mlbbph {transaction['player_id']} {transaction['zone_id']} {package_id}"
        process_chat_id = '-1003284732983'  # Update with your actual channel ID
     else:  # Mobile Legends (default)
        process_chat_id = '-1003284732983'
-       process_text = f"ml {transaction['player_id']} {transaction['zone_id']} {package_id}"
+       process_text = f"mlbb {transaction['player_id']} {transaction['zone_id']} {package_id}"
     
     # Create invoice message               
     invoice_text = (
