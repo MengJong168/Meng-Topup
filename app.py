@@ -247,33 +247,26 @@ def generate_qr():
 def check_payment():
     try:
         transaction_id = request.form['transaction_id']
+        
+        # First, check if transaction is already completed in data store
+        transactions = load_transactions()
+        completed_transactions = [t for t in transactions['completed'] if t['transaction_id'] == transaction_id]
+        
+        if completed_transactions:
+            completed_txn = completed_transactions[0]
+            # If already completed, return final status without further checking
+            return jsonify({
+                'status': 'COMPLETED',
+                'message': f'Payment of ${completed_txn["amount"]:.2f} was already processed!',
+                'amount': completed_txn["amount"],
+                'final': True  # Add flag to indicate this is final status
+            })
+        
+        # Check if transaction exists in current session
         if transaction_id not in current_transactions:
             return jsonify({'error': 'Invalid transaction ID'}), 400
             
         transaction = current_transactions[transaction_id]
-        transactions = load_transactions()
-        
-        # Check if already completed first (including Telegram sent status)
-        completed_transactions = [t for t in transactions['completed'] if t['transaction_id'] == transaction_id]
-        if completed_transactions:
-            completed_txn = completed_transactions[0]
-            # Check if Telegram was already sent
-            telegram_sent = completed_txn.get('telegram_sent', False)
-            
-            # If Telegram wasn't sent yet, send it now
-            if not telegram_sent:
-                send_to_telegram(completed_txn)
-                # Update the transaction to mark Telegram as sent
-                for t in transactions['completed']:
-                    if t['transaction_id'] == transaction_id:
-                        t['telegram_sent'] = True
-                save_transactions(transactions)
-            
-            return jsonify({
-                'status': 'PAID',
-                'message': f'Payment of ${completed_txn["amount"]:.2f} was already processed!',
-                'amount': completed_txn["amount"]
-            })
         
         # Check if expired
         if datetime.now() > datetime.fromisoformat(transaction['expiry']):
@@ -289,7 +282,8 @@ def check_payment():
                 
             return jsonify({
                 'status': 'EXPIRED',
-                'message': 'QR​ កូដ បានផុតកំណត់ហើយ។'
+                'message': 'QR​ កូដ បានផុតកំណត់ហើយ។',
+                'final': True  # Final status for expired
             })
         
         md5_hash = transaction['md5_hash']
@@ -304,35 +298,40 @@ def check_payment():
             if status == "PAID":
                 amount = transaction['amount']
                 
-                # Move to completed (mark Telegram as not sent yet)
-                if not any(t['transaction_id'] == transaction_id for t in transactions['completed']):
-                    completed_transaction = {
-                        **transaction,
-                        'transaction_id': transaction_id,
-                        'status': 'completed',
-                        'timestamp': datetime.now().isoformat(),
-                        'telegram_sent': False  # Add this flag
-                    }
-                    transactions['completed'].append(completed_transaction)
-                    # Remove from pending if exists
-                    transactions['pending'] = [t for t in transactions['pending'] 
-                                             if t['transaction_id'] != transaction_id]
-                    save_transactions(transactions)
-                    
-                    # Send to Telegram only once
-                    send_to_telegram(completed_transaction)
-                    
-                    # Update transaction to mark Telegram as sent
-                    for t in transactions['completed']:
-                        if t['transaction_id'] == transaction_id:
-                            t['telegram_sent'] = True
-                    save_transactions(transactions)
+                # Move to completed
+                completed_transaction = {
+                    **transaction,
+                    'transaction_id': transaction_id,
+                    'status': 'completed',
+                    'timestamp': datetime.now().isoformat(),
+                    'telegram_sent': False
+                }
+                transactions['completed'].append(completed_transaction)
+                # Remove from pending if exists
+                transactions['pending'] = [t for t in transactions['pending'] 
+                                         if t['transaction_id'] != transaction_id]
+                save_transactions(transactions)
+                
+                # Send to Telegram only once
+                send_to_telegram(completed_transaction)
+                
+                # Update transaction to mark Telegram as sent
+                for t in transactions['completed']:
+                    if t['transaction_id'] == transaction_id:
+                        t['telegram_sent'] = True
+                save_transactions(transactions)
+                
+                # Remove from current transactions to prevent future checks
+                if transaction_id in current_transactions:
+                    del current_transactions[transaction_id]
                 
                 return jsonify({
                     'status': 'PAID',
                     'message': f'Payment of ${amount:.2f} បានទទួលប្រាក់!',
-                    'amount': amount
+                    'amount': amount,
+                    'final': True  # This is the final status
                 })
+                
             elif status == "UNPAID":
                 # Add to pending if not already there
                 if not any(t['transaction_id'] == transaction_id for t in transactions['pending']):
@@ -346,17 +345,20 @@ def check_payment():
                     
                 return jsonify({
                     'status': 'UNPAID',
-                    'message': 'មិនទាន់ទូទាត់ប្រាក់'
+                    'message': 'មិនទាន់ទូទាត់ប្រាក់',
+                    'final': False  # Can continue checking
                 })
             else:
                 return jsonify({
                     'status': 'ERROR',
-                    'message': f'Status: {status}'
+                    'message': f'Status: {status}',
+                    'final': False
                 })
         else:
             return jsonify({
                 'status': 'ERROR',
-                # 'message': 'Failed to check payment status'
+                'message': 'Failed to check payment status',
+                'final': False
             })
             
     except Exception as e:
