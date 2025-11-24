@@ -712,14 +712,14 @@ def cleanup_recent_transactions():
         if timestamp > cutoff_time
     }
 
-@app.route('/api/cron/check-payments', methods=['POST'])
-def check_payments_cron():
-    """Endpoint to be called by Vercel cron"""
+@app.route('/api/check-pending-payments', methods=['POST', 'GET'])
+def check_pending_payments_api():
+    """API endpoint to check pending payments - call this via cron"""
     try:
         transactions = load_transactions()
         pending_txns = transactions.get('pending', [])
         
-        # Get only the last 5 pending transactions
+        # Get only the last 5 pending transactions (most recent first)
         recent_pending = sorted(
             pending_txns, 
             key=lambda x: x.get('timestamp', ''), 
@@ -753,6 +753,7 @@ def check_payments_cron():
                             
                             save_transactions(transactions)
                             processed_count += 1
+                            print(f"Cron: Payment completed for transaction {transaction_id}")
                             
                 except Exception as e:
                     print(f"Cron check error for {transaction_id}: {str(e)}")
@@ -761,14 +762,13 @@ def check_payments_cron():
         return jsonify({
             'success': True,
             'processed': processed_count,
-            'message': f'Processed {processed_count} payments'
+            'checked': len(recent_pending),
+            'message': f'Processed {processed_count} payments out of {len(recent_pending)} checked'
         })
         
     except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        print(f"Cron job error: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500
         
 # Simple status check endpoint
 @app.route('/check_status/<transaction_id>')
