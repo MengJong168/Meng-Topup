@@ -19,5 +19,11 @@
       "src": "/(.*)",
       "dest": "/app.py"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/check-pending-payments",
+      "schedule": "*/5 * * * *"
+    }
   ]
 }
