@@ -2255,7 +2255,7 @@ function generateCode() {
     // Company name
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(12);
-    doc.text("LUCCI STORE", 15, 35);
+    doc.text("MENG TOP-UP", 15, 35);
 
     // Date
     doc.setFont("Helvetica", "normal");
@@ -2270,8 +2270,10 @@ function generateCode() {
     // Contact info (right aligned)
     doc.setFontSize(9);
     const addr = [
-      "Andong Snay, Andong Snay",
-      "Rolea B'ler, Kompong Chhnang"
+      "P/N: 855885555479",
+      "G-Mail: mengjongmm99@gmail.com",
+      "Phleung Chheh Roteh Lech, Sangkat Phleung Chheh Roteh",
+      "Khan Kamboul, Phnom Penh City, Cambodia"
     ];
     let ay = 12, ax = pw - 15;
     addr.forEach(line => { doc.text(line, ax, ay, { align: "right" }); ay += 5; });
