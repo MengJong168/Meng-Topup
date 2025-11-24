@@ -10,6 +10,7 @@ import os
 from bakong_khqr import KHQR
 import json
 from functools import wraps
+import threading
 
 app = Flask(__name__)
 
@@ -26,7 +27,7 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         password = request.args.get('pass')
-        if password != "1516Coolb":
+        if password != "new1516Coolb":
             return "Unauthorized", 401
         return f(*args, **kwargs)
     return decorated_function
@@ -34,7 +35,7 @@ def admin_required(f):
 # Load transactions from data store API
 def load_transactions():
     try:
-        response = requests.get(f'{DATA_STORE_URL}/transactions?store=mengtopup', timeout=5)
+        response = requests.get(f'{DATA_STORE_URL}/transactions?store=luccist4re', timeout=5)
         response.raise_for_status()
         return response.json()
     except requests.RequestException:
@@ -43,7 +44,7 @@ def load_transactions():
 # Save transactions to data store API
 def save_transactions(transactions):
     try:
-        response = requests.post(f'{DATA_STORE_URL}/transactions?store=mengtopup', 
+        response = requests.post(f'{DATA_STORE_URL}/transactions?store=luccist4re', 
                                json=transactions, timeout=5)
         response.raise_for_status()
         return response.json().get('success', False)
@@ -53,7 +54,7 @@ def save_transactions(transactions):
 # Add a single transaction to data store
 def add_transaction_to_store(transaction_data, status):
     try:
-        response = requests.post(f'{DATA_STORE_URL}/transactions?store=mengtopup/add', 
+        response = requests.post(f'{DATA_STORE_URL}/transactions?store=luccist4re/add', 
                                json={
                                    'status': status,
                                    'transaction': transaction_data
@@ -65,7 +66,7 @@ def add_transaction_to_store(transaction_data, status):
 # Load packages from data store API
 def load_packages():
     try:
-        response = requests.get(f'{DATA_STORE_URL}/packages?store=mengtopup', timeout=5)
+        response = requests.get(f'{DATA_STORE_URL}/packages?store=luccist4re', timeout=5)
         response.raise_for_status()
         return response.json()
     except requests.RequestException:
@@ -451,7 +452,7 @@ def update_package():
             return jsonify({'error': 'Price must be a number'}), 400
 
         # Update via API
-        response = requests.post(f'{DATA_STORE_URL}/packages/update?store=mengtopup', 
+        response = requests.post(f'{DATA_STORE_URL}/packages/update?store=luccist4re', 
                                json={
                                    'game_type': game_type,
                                    'package_name': package_name,
@@ -522,7 +523,7 @@ def update_special_offer():
             return jsonify({'error': 'Price must be a number'}), 400
 
         # Update via API
-        response = requests.post(f'{DATA_STORE_URL}/packages/update?store=mengtopup', 
+        response = requests.post(f'{DATA_STORE_URL}/packages/update?store=luccist4re', 
                                json={
                                    'game_type': game_type,
                                    'package_name': offer_name,
@@ -570,8 +571,33 @@ def api_transactions():
             'error': str(e)
         }), 500
 
+from datetime import datetime, timedelta
+import time
+
+# Add this global variable near the top with other configurations
+DUPLICATE_CHECK_WINDOW = 10  # seconds
+recent_transactions = {}
+
 def send_to_telegram(transaction):
-    """Send transaction details to Telegram"""
+    """Send transaction details to Telegram with duplicate checking"""
+    
+    # Check for duplicate transaction
+    transaction_key = f"{transaction.get('player_id')}_{transaction.get('package')}_{transaction.get('amount')}"
+    current_time = time.time()
+    
+    # Check if this transaction was recently sent
+    if transaction_key in recent_transactions:
+        last_sent_time = recent_transactions[transaction_key]
+        if current_time - last_sent_time < DUPLICATE_CHECK_WINDOW:
+            print(f"Duplicate transaction detected and skipped: {transaction_key}")
+            return None
+    
+    # Update the recent transactions tracker
+    recent_transactions[transaction_key] = current_time
+    
+    # Clean up old entries from recent_transactions (optional, to prevent memory growth)
+    cleanup_recent_transactions()
+    
     # Generate invoice number
     invoice_number = f"INVNO-S{datetime.now().strftime('%Y%m%d%H%M')}"
     
@@ -603,20 +629,20 @@ def send_to_telegram(transaction):
        process_chat_id = '-1003284732983'
        process_text = f"ff {transaction['player_id']} {package_id}"
     elif game_type == 'bloodstrike':
-       process_chat_id = '-1003284732983'  # Update with your actual channel ID
+       process_chat_id = '-1003284732983'
        process_text = f"bloodstrike {transaction['player_id']} 0000 {package_id}"
     elif game_type == 'pubg':  # PUBG Mobile
        process_chat_id = '-1003284732983' 
        process_text = f"pubg {transaction['player_id']} 0000 {package_id}"
     elif game_type == 'hok':  # HONOR OF KING
-       process_chat_id = '-1003284732983'  # Update with your actual channel ID
+       process_chat_id = '-1003284732983'
        process_text = f"hok {transaction['player_id']} 0000 {package_id}"
     elif game_type == 'mcgg':  # Magic Chess: Go Go
-       process_chat_id = '-1003284732983'  # Update with your actual channel ID
+       process_chat_id = '-1003284732983'
        process_text = f"magicchess {transaction['player_id']} {transaction['zone_id']} {package_id}"
     elif game_type == 'mlph':  # Mobile Legend PH
        process_text = f"mlbbph {transaction['player_id']} {transaction['zone_id']} {package_id}"
-       process_chat_id = '-1003284732983'  # Update with your actual channel ID
+       process_chat_id = '-1003284732983'
     else:  # Mobile Legends (default)
        process_chat_id = '-1003284732983'
        process_text = f"mlbb {transaction['player_id']} {transaction['zone_id']} {package_id}"
@@ -634,31 +660,141 @@ def send_to_telegram(transaction):
     
     try:
         # Send to processing channel with timeout
-        requests.post(
+        process_response = requests.post(
             'https://api.telegram.org/bot8441360171:AAF9SBXX7GJq9Th7cJLjT0YW-bRKq9SIRJs/sendMessage',
             json={
                 'chat_id': process_chat_id,
                 'text': process_text
             },
-            timeout=5  # Add timeout
+            timeout=5
         )
         
         # Send to invoice channel with timeout
-        requests.post(
+        invoice_response = requests.post(
             'https://api.telegram.org/bot8441360171:AAF9SBXX7GJq9Th7cJLjT0YW-bRKq9SIRJs/sendMessage',
             json={
                 'chat_id': '-1003157989347',
                 'text': invoice_text,
                 'parse_mode': 'Markdown'
             },
-            timeout=5  # Add timeout
+            timeout=5
         )
         
-        return invoice_number
+        # Log successful sending
+        if process_response.status_code == 200 and invoice_response.status_code == 200:
+            print(f"Telegram messages sent successfully for transaction: {transaction_key}")
+            return invoice_number
+        else:
+            print(f"Failed to send Telegram messages. Process: {process_response.status_code}, Invoice: {invoice_response.status_code}")
+            # Remove from recent transactions if failed to send
+            if transaction_key in recent_transactions:
+                del recent_transactions[transaction_key]
+            return None
         
     except Exception as e:
         print(f"Error sending to Telegram: {e}")
+        # Remove from recent transactions if error occurred
+        if transaction_key in recent_transactions:
+            del recent_transactions[transaction_key]
         return None
+
+def cleanup_recent_transactions():
+    """Clean up old entries from recent_transactions dictionary"""
+    global recent_transactions
+    current_time = time.time()
+    
+    # Remove entries older than 2x the duplicate check window
+    cutoff_time = current_time - (DUPLICATE_CHECK_WINDOW * 2)
+    
+    recent_transactions = {
+        key: timestamp 
+        for key, timestamp in recent_transactions.items() 
+        if timestamp > cutoff_time
+    }
+
+def check_pending_payments_background():
+    """Check last 5 pending payments every 10 seconds"""
+    while True:
+        try:
+            transactions = load_transactions()
+            pending_txns = transactions.get('pending', [])
+            
+            # Get only the last 5 pending transactions (most recent first)
+            recent_pending = sorted(
+                pending_txns, 
+                key=lambda x: x.get('timestamp', ''), 
+                reverse=True
+            )[:5]
+            
+            for txn in recent_pending:
+                md5_hash = txn.get('md5_hash')
+                transaction_id = txn.get('transaction_id')
+                
+                if md5_hash and transaction_id:
+                    try:
+                        response = requests.get(f"https://mengtopup.shop/api/check_payment?md5={md5_hash}", timeout=5)
+                        if response.status_code == 200:
+                            payment_data = response.json()
+                            if payment_data.get('status') == "PAID":
+                                # Move to completed
+                                completed_txn = {**txn, 'status': 'completed', 'telegram_sent': False}
+                                transactions['completed'].append(completed_txn)
+                                transactions['pending'] = [t for t in transactions['pending'] 
+                                                         if t.get('transaction_id') != transaction_id]
+                                
+                                # Send to Telegram
+                                send_to_telegram(completed_txn)
+                                
+                                # Update transaction to mark Telegram as sent
+                                for t in transactions['completed']:
+                                    if t.get('transaction_id') == transaction_id:
+                                        t['telegram_sent'] = True
+                                
+                                save_transactions(transactions)
+                                print(f"Background: Payment completed for transaction {transaction_id}")
+                                
+                    except Exception as e:
+                        print(f"Background check error for {transaction_id}: {str(e)}")
+                        continue
+            
+            time.sleep(10)  # Check every 10 seconds
+            
+        except Exception as e:
+            print(f"Background thread error: {str(e)}")
+            time.sleep(30)  # Wait longer if major error occurs
+
+# Start background thread when app starts (replace the existing code)
+if not any(thread.name == "payment_checker" for thread in threading.enumerate()):
+    background_thread = threading.Thread(
+        target=check_pending_payments_background, 
+        daemon=True,
+        name="payment_checker"
+    )
+    background_thread.start()
+    print("Background payment checker started")
+
+
+
+# Start background thread when app starts
+background_thread = threading.Thread(target=check_pending_payments_background, daemon=True)
+background_thread.start()
+
+# Simple status check endpoint
+@app.route('/check_status/<transaction_id>')
+def check_status(transaction_id):
+    """Simple endpoint to check transaction status"""
+    transactions = load_transactions()
+    
+    # Check all statuses
+    for status in ['completed', 'pending', 'expired']:
+        for txn in transactions.get(status, []):
+            if txn.get('transaction_id') == transaction_id:
+                return jsonify({
+                    'status': status,
+                    'transaction': txn
+                })
+    
+    return jsonify({'status': 'not_found'})
 
 if __name__ == '__main__':
     app.run()
