@@ -14,7 +14,7 @@
 }
 
 body {
-  background-color: var(--secondary-color);
+  background-color: #007cb5;
   color: var(--text-color);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
@@ -25,7 +25,7 @@ body {
 
 /* Header Styles */
 header {
-  background: #0f0f1a;
+  background: #101e76;
   padding: 0px 20px;
   width: 100%;
   position: fixed;   /* Changed from relative to fixed */
@@ -54,18 +54,19 @@ body {
 
 
 .header-logo {
-  width: 50px;
+  width: 70px;
   height: 100%;
   object-fit: contain;
 }
 
 .header-title {
-  font-family: 'Cabin Condensed', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2.0rem;
+  font-weight: 400;
   margin: 0;
-  color: var(--text-color);
+  color: #ffffff;
 }
+
 
 /* Main Content Styles */
 main {
@@ -96,9 +97,8 @@ main {
 }
 
 .game-card {
-  /* Remove width: 120px; */
-  background-color: #161659;
-  border: 2px solid var(--card-bg);
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 15px;
   padding: 8px;
   text-align: center;
@@ -111,31 +111,38 @@ main {
 
 .game-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgb(255, 255, 255);
 }
 
 .game-image-container {
   width: 100%;
-  height: 100px;
-  margin-bottom: 2px;
+  aspect-ratio: 1 / 1; /* keeps it square and consistent */
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .game-image {
-  max-width: 100%;
-  max-height: 100%;
-  margin-bottom: 5px;
+  width: auto;
+  height: 100%;
   object-fit: contain;
   border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.game-card:hover .game-image {
+  transform: scale(1.05);
 }
 
 .game-title {
   font-size: 0.8rem;
-  margin-bottom: 5px;
-  flex-grow: 1;
+  margin-top: 5px;
+  color: #000000;
+  text-align: center;
 }
+
 
 /* Mobile Legends Topup Section */
 #mlTopupSection, #ffTopupSection {
@@ -165,14 +172,32 @@ main {
 }
 
 .frame {
-  border: 2px solid var(--border-color);
+  background-color: #0f3472;
+  border: 2px solid #ADD8E6;
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 5px;
+  box-shadow: 0 0 5px #ffeb3b; /* glowing yellow border */
+  animation: glowPulse 1.5s infinite alternate;
+}
+@keyframes glowPulse {
+  from {
+    box-shadow: 0 0 5px #ffeb3b;
+  }
+  to {
+    box-shadow: 0 0 20px #ffff66; /* brighter yellow at max glow */
+  }
+}
+.frame-agreement {
+  border: 2px solid var(#0f0f1a);
   border-radius: 8px;
   padding: 5px;
   margin-bottom: 5px;
 }
 
-.frame-agreement {
-  border: 2px solid var(#0f0f1a);
+.frame-banner {
+  background-color: #888888;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   padding: 5px;
   margin-bottom: 5px;
@@ -192,25 +217,26 @@ input[type="number"] {
   border-radius: 5px;
   border: none;
   font-size: 1rem;
-  background-color: #2a2a55;
-  color: var(--text-color);
+  background-color: #ffffff;
+  color: #000000;
 }
 
 /* Pricing Grid */
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 15px;
 }
 
 .card {
-  background-color: var(--card-bg);
-  border: 2px solid var(--border-color);
+  background-color: #101e76;
+  border: 2px solid #ADD8E6;
   border-radius: 8px;
   padding: 2px;
-  text-align: center;
+  text-align: right;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 0 5px #000000; /* glowing yellow border */
 }
 
 .card:hover {
@@ -218,27 +244,38 @@ input[type="number"] {
 }
 
 .card.selected {
-  border-color: var(--accent-color);
-  background-color: #2a2a55;
+  border: 2px solid #000000;
+  background-color: #1025ab;
+  animation: glowPulse 1.5s infinite alternate;
+}
+@keyframes glowPulse {
+  from {
+    box-shadow: 0 0 5px #000000;
+  }
+  to {
+    box-shadow: 0 0 10px #ADD8E6; /* brighter yellow at max glow */
+  }
 }
 
 .card img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
+  margin-right: 6px;
+  float: left; /* ← FIXED (semicolon, not comma) */
 }
 
 .new-price {
-  color: var(--accent-color);
+  color: #FFFF00;
   font-weight: bold;
   font-size: 1.1rem;
 }
 
 /* KHQR Payment Section */
 .khqr-card {
-  background-color: #1b1b3a;
-  border: 2px solid #ffffff;
+  background-color: #101e76;
+  border: 2px solid #ADD8E6;
   border-radius: 12px;
   padding: 18px 18px 18px 90px;
   margin-top: 15px;
@@ -251,7 +288,7 @@ input[type="number"] {
 }
 
 .khqr-card:hover {
-  border-color: #f96d00;
+  border-color: #ADD8E6;
 }
 
 .khqr-card::before {
@@ -294,7 +331,7 @@ input[type="number"] {
   width: 22px;
   height: 22px;
   cursor: pointer;
-  accent-color: #f96d00;
+  accent-color: #444444;
   margin-left: 15px;
 }
 
@@ -304,7 +341,7 @@ input[type="number"] {
   border-radius: 12px;
   overflow: hidden;
   margin: 25px 0;
-  background: linear-gradient(135deg, #1b1b3a 0%, #2a2a55 100%);
+  background: linear-gradient(135deg, #101e76 0%, #007cb5 100%);
 }
 
 .banner-content {
@@ -320,7 +357,7 @@ input[type="number"] {
 }
 
 .banner .ml-logo, .banner .ff-logo, .banner .pubg-logo {
-  width: 80px;
+  width: 150px;
   max-width: 100%;
   height: auto;
   object-fit: contain;
@@ -349,7 +386,7 @@ input[type="number"] {
 
 /* Improved Khmer Heading Styles */
 .khmer-heading {
-  font-family: 'Dangrek', cursive;
+  font-family: 'Kdam Thmor Pro', sans-serif;
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.4;
@@ -357,11 +394,59 @@ input[type="number"] {
   text-rendering: optimizeLegibility;
 }
 
-.pay-khmer-heading {
-  font-family: 'Dangrek', cursive;
+.step1-khmer-heading {
+  font-family: 'Kdam Thmor Pro', sans-serif;
   font-weight: 700;
   font-size: 1rem;
-  color: var(--primary-color);
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  text-rendering: optimizeLegibility;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.step2-khmer-heading {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  text-rendering: optimizeLegibility;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.step3-khmer-heading {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  text-rendering: optimizeLegibility;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.home-english-heading {
+  font-family: 'Vampire Wars', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  text-rendering: optimizeLegibility;
+}
+
+.home-title-khmer-heading {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  text-rendering: optimizeLegibility;
+  margin-top: 10px;
+}
+.pay-khmer-heading {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #101e76;
   line-height: 1.4;
   letter-spacing: 0.5px;
   text-rendering: optimizeLegibility;
@@ -384,7 +469,7 @@ input[type="number"] {
 }
 
 .modal-content {
-  background-color: var(--card-bg);
+  background-color: #007cb5;
   border-radius: 10px;
   padding: 20px;
   width: 100%;
@@ -492,11 +577,12 @@ input[type="number"] {
 }
 
 .topup-button {
-  background: var(--primary-color);
-  color: white;
-  border: 1px solid gold; /* golden border */
+  background: #ADD8E6;
+  color: #000000;
+  border: #fb00be;
   padding: 2px;
   border-radius: 8px;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -504,14 +590,33 @@ input[type="number"] {
 }
 
 .topup-button:hover {
-  background: #e65c00;
+  background: #ADD8E6;
+}
+
+.check-name-button {
+  background: #ADD8E6;
+  color: #000000;
+  border: 1px solid #1e0808; /* specify a proper border style */
+  padding: 8px 16px; /* add some padding for better sizing */
+  border-radius: 8px;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-block; /* lets the button size to content */
+  width: auto; /* auto-fit content */
+}
+
+
+.check-name-button:hover {
+  background: #ADD8E6;
 }
 
 /* Buttons */
 button {
-  background: var(--primary-color);
-  color: white;
-  border: 1px solid gold; /* golden border */
+  background: #000000;
+  color: #ffdc00;
+  border: 1px solid rgb(252, 252, 252); /* golden border */
   padding: 12px;
   border-radius: 8px;
   font-size: 1rem;
@@ -521,7 +626,7 @@ button {
 }
 
 button:hover {
-  background: #e65c00;
+  background: #000000;
 }
 
 #buyNowBtn {
@@ -536,7 +641,7 @@ button:hover {
 
 /* Footer Styles */
 .site-footer {
-  background-color: var(--secondary-color);
+  background-color: #007cb5;
   color: white;
   padding: 30px 15px 20px;
   border-top: 2px solid var(--border-color);
@@ -557,7 +662,7 @@ button:hover {
 
 .footer-section h3 {
   margin-bottom: 5px;
-  color: var(--primary-color);
+  color: #0f3472;
 }
 
 .footer-bottom {
@@ -743,27 +848,47 @@ button:hover {
 }
 
 .ff-check-button {
-  background-color: var(--primary-color);
-  color: white;
-  border: 1px solid gold; /* golden border */
-  padding: 10px 16px;
-  border-radius: 6px;
+  background: #ADD8E6;
+  color: #000000;
+  border: 1px solid #1e0808; /* specify a proper border style */
+  padding: 8px 16px; /* add some padding for better sizing */
+  border-radius: 8px;
+  font-family: 'Kdam Thmor Pro', sans-serif;
   font-size: 1rem;
-  font-family: 'Cabin Condensed', sans-serif;  /* Added font */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
+  display: inline-block; /* lets the button size to content */
+  width: auto; /* auto-fit content */
 }
 
 .ff-check-button:hover {
-  background-color: #e65c00;
+  background: #ADD8E6;
+}
+.ml-check-button {
+  background-color: #00deff;
+  color: #0f3472;
+  border: 1px solid rgb(255, 255, 255); /* golden border */
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'Vampire Wars', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.ml-check-button:hover {
+  background-color: #00deff;
 }
 
 .ff-username-result {
-  color: white; /* force white text */
+  font-family: 'Anton', sans-serif;
+  color: #FFDC00 !important;
+  font-weight: 100;
   font-size: 1rem;
-  font-weight: 600;
-  min-height: 24px;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  text-rendering: optimizeLegibility;
 }
+
 .modal-buttons {
   display: flex;
   gap: 10px;
@@ -801,10 +926,9 @@ button:hover {
   }
 }
 
-
 .footer-text {
   font-size: 1.1rem;
-  color: var(--accent-color);
+  color: #FFFF00;
   margin-top: 10px;
   line-height: 1.4;
 }
@@ -813,10 +937,10 @@ button:hover {
 .footer-content {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 0px;
   max-width: 900px;
   margin: 0 auto;
-  padding: 20px 15px;
+  padding: 0px px;
   justify-content: flex-start;
   text-align: left;
 }
@@ -867,7 +991,7 @@ button:hover {
 }
 /* Telegram link styling */
   .telegram-link {
-    color: #f96d00; /* Telegram blue */
+    color: #FFFF00; /* Telegram blue */
     font-weight: bold;
     text-decoration: none;
   }
@@ -878,7 +1002,7 @@ button:hover {
 
   /* Facebook link styling */
   .facebook-link {
-    color: #f96d00; /* Facebook blue */
+    color: #FFFF00; /* Facebook blue */
     font-weight: bold;
     text-decoration: none;
   }
@@ -888,6 +1012,14 @@ button:hover {
   }
   /* Banner Container */
 .banner-container.frame {
+  border: 0px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 5px;
+  padding: 0;
+}
+
+.banner-container-frame.frame-banner {
   border: 0px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
@@ -997,17 +1129,40 @@ button:hover {
   box-sizing: border-box;
 }
 
+.special-offers-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-track {
+  display: flex;
+  gap: 10px;
+  transition: transform 0.4s ease;
+}
+
 .offer-image-container {
-  width: 50%;
+  width: 45%;
   border-radius: 6px;
-  overflow: hidden; /* Optional: ensures rounded corners clip image */
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .offer-image-container img {
   width: 100%;
-  height: auto; /* Maintain aspect ratio */
+  height: auto;
   display: block;
+  border-radius: 6px;
 }
+
+.section-title {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-size: 1.5rem;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+
 
 /* Slider Navigation */
 .slider-nav {
@@ -1247,7 +1402,7 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 25px 0 15px 0;
+    margin: 5px;
     color: #fff;
     font-size: 1.5rem;
     padding-left: 10px;
@@ -1263,7 +1418,7 @@ button:hover {
     left: 10px; /* Align with text */
     width: 80px;
     height: 3px;
-    background: linear-gradient(90deg, #ff9800, #ff5722);
+    background: linear-gradient(135deg, #ffffff, #943adb);
     border-radius: 3px;
     transform: none; /* Remove center alignment */
 }
@@ -1274,7 +1429,7 @@ button:hover {
     justify-content: center;
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, #ff9800, #ff5722);
+    background: linear-gradient(360deg, #101e76, #007cb5);
     color: white;
     border-radius: 50%;
     font-weight: bold;
@@ -1312,13 +1467,13 @@ button:hover {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #FFFF00;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 1000;
-  box-shadow: 0 0 10px #FFFF00, 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px #ffffff, 0 2px 10px rgba(0, 0, 0, 0.2);
   animation: pulseButton 1.5s infinite ease-in-out;
 }
 
@@ -1331,7 +1486,7 @@ button:hover {
   border-radius: 50%;
   top: 0;
   left: 0;
-  box-shadow: 0 0 20px #FFFF00, 0 0 40px #FFFF00, 0 0 60px #FFFF00;
+  box-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff;
   opacity: 0.6;
   animation: glowPulse 1.5s infinite ease-in-out;
   z-index: -1;
@@ -1346,7 +1501,7 @@ button:hover {
 
 .support-button:hover {
   transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px #FFFF00, 0 0 40px #FFFF00;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px #ffffff, 0 0 40px #ffffff;
 }
 
 
@@ -1376,18 +1531,19 @@ p {
     unicode-bidi: isolate;
 }
 .game-title-english-heading { 
-  font-family: 'Cabin Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 0.8rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 100;
+  font-size: 1rem;
   line-height: 1;
   letter-spacing: 0.5px;
   text-rendering: optimizeLegibility;
+  margin-bottom: 10px;
 }
 .english-heading { 
-  font-family: 'Cabin Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.4;
+  font-family: 'Anton', sans-serif;
+  font-weight: 100;
+  font-size: 0.9rem;
+  line-height: 1;
   letter-spacing: 0.5px;
   text-rendering: optimizeLegibility;
 }
@@ -1406,7 +1562,7 @@ p {
   display: inline-flex; /* hugs content */
   align-items: center;
   padding: 4px 8px; /* tight padding around text */
-  background: #95be25c4;
+  background: #0f3472;
   border: none;
   border-radius: 8px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -1446,13 +1602,15 @@ p {
     font-size: 1.5rem;
     justify-content: flex-start; /* Align to left */
 }
-.special-offer-english-heading { 
-  font-family: 'Cabin Condensed', sans-serif;
-  font-weight: 700;
+.special-offer-Khmer-heading { 
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: 400;
   font-size: 1.3rem;
   line-height: 1.4;
   letter-spacing: 0.5px;
   text-rendering: optimizeLegibility;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .heart-anime {
   width: 34px;
@@ -1741,68 +1899,171 @@ p {
     75% { clip: rect(40%, 100%, 45%, 0); transform: translate(-2px, 2px); }
     100% { clip: rect(45%, 100%, 50%, 0); transform: translate(0, 0); }
 }
-/* ===== Vaporwave Cyberpunk Background Effect ===== */
-body {
-  background: linear-gradient(-45deg, #1b1b3a, #2a2a55, #0f0f1a, #f96d00);
-  background-size: 400% 400%;
-  animation: bodyGradientFlow 12s ease infinite;
-  color: var(--text-color);
-  position: relative;
-  overflow-x: hidden;
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/static/fonts/OpenSans-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Footer Styles */
+.site-footer {
+  background-color: #007cb5;
+  color: white;
+  padding: 30px 15px 20px;
+  border-top: 2px solid var(--border-color);
+  margin-top: auto;
 }
 
-/* Neon Floating Particles Layer */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Contact Section */
+.contact-section {
+  margin-bottom: 25px;
+}
+
+.contact-section h3 {
+  margin-bottom: 15px;
+  color: #000000;
+  font-size: 1.3rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.social-link {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.1);
+}
+
+.social-icon {
+  width: 50px;
   height: 100%;
-  pointer-events: none;
-  background:
-    radial-gradient(2px 2px at 20% 20%, rgba(255, 0, 255, 0.7), transparent),
-    radial-gradient(2px 2px at 80% 40%, rgba(0, 255, 255, 0.6), transparent),
-    radial-gradient(2px 2px at 60% 80%, rgba(255, 255, 0, 0.5), transparent),
-    radial-gradient(2px 2px at 10% 60%, rgba(255, 105, 180, 0.7), transparent),
-    radial-gradient(2px 2px at 50% 10%, rgba(0, 255, 255, 0.6), transparent),
-    radial-gradient(2px 2px at 90% 90%, rgba(255, 255, 0, 0.4), transparent);
-  background-size: 250px 250px;
-  animation: neonParticles 10s linear infinite;
-  z-index: 0;
-  opacity: 0.8;
-  filter: blur(0.3px);
+  object-fit: contain;
+  border-radius: 8px;
 }
 
-/* Smooth gradient flow */
-@keyframes bodyGradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Payment Section */
+.payment-section {
+  margin-bottom: 25px;
 }
 
-/* Floating neon particles animation */
-@keyframes neonParticles {
-  0% {
-    background-position: 0 0, 50px 50px, 100px 100px, 150px 150px, 200px 200px, 250px 250px;
+.payment-section h3 {
+  margin-bottom: 15px;
+  color: #000000;
+  font-size: 1.3rem;
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-logo {
+  height: 40px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  width: 100%;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.footer-bottom p {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #ffffff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .social-links {
+    gap: 15px;
   }
-  100% {
-    background-position: -300px -300px, -250px -250px, -200px -200px, -150px -150px, -100px -100px, -50px -50px;
+  
+  .social-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .payment-logo {
+    height: 35px;
   }
 }
 
-/* Optional: subtle glow around the whole page */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(circle at center, rgba(255, 0, 255, 0.05), transparent 70%);
-  animation: pulseGlow 6s ease-in-out infinite;
-  z-index: -1;
+@media (max-width: 480px) {
+  .site-footer {
+    padding: 20px 10px 15px;
+  }
+  
+  .contact-section h3,
+  .payment-section h3 {
+    font-size: 1.1rem;
+  }
+  
+  .social-links {
+    gap: 12px;
+  }
+  
+  .social-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .payment-logo {
+    height: 30px;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.9rem;
+  }
 }
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.6; filter: blur(10px); }
-  50% { opacity: 0.9; filter: blur(20px); }
+/* CSS */
+.full-width-banner {
+  width: 100%;       /* Takes full width of the container */
+  height: auto;      /* Maintains aspect ratio */
+  display: block;    /* Removes inline spacing */
+  border-radius: 10px; /* Optional rounded corners */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.username-row {
+  display: flex;
+  align-items: center; /* vertical alignment */
+  gap: 10px; /* spacing between button and display */
+}
+.username { 
+  font-family: 'Anton', sans-serif;
+  color: #FFDC00 !important;
+  font-weight: 100;
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  text-rendering: optimizeLegibility;
 }
