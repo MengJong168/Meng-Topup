@@ -2839,24 +2839,7 @@ document.addEventListener('contextmenu', function(e) {
     return false;
 });
 
-// Add to your existing JavaScript
-function startPaymentPolling() {
-    setInterval(async () => {
-        try {
-            const response = await fetch('/api/cron/check-payments', {
-                method: 'POST'
-            });
-            console.log('Payment check completed');
-        } catch (error) {
-            console.log('Payment check failed');
-        }
-    }, 5000); // 5 seconds
-}
 
-// Start when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    startPaymentPolling();
-});
 </script>
 </body>
 </html>
