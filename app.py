@@ -716,7 +716,6 @@ def cleanup_recent_transactions():
 def check_payments_cron():
     """Endpoint to be called by Vercel cron"""
     try:
-        # Your existing payment checking logic here
         transactions = load_transactions()
         pending_txns = transactions.get('pending', [])
         
