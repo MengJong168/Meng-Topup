@@ -712,73 +712,65 @@ def cleanup_recent_transactions():
         if timestamp > cutoff_time
     }
 
-def check_pending_payments_background():
-    """Check last 5 pending payments every 10 seconds"""
-    while True:
-        try:
-            transactions = load_transactions()
-            pending_txns = transactions.get('pending', [])
+@app.route('/api/cron/check-payments', methods=['POST'])
+def check_payments_cron():
+    """Endpoint to be called by Vercel cron"""
+    try:
+        # Your existing payment checking logic here
+        transactions = load_transactions()
+        pending_txns = transactions.get('pending', [])
+        
+        # Get only the last 5 pending transactions
+        recent_pending = sorted(
+            pending_txns, 
+            key=lambda x: x.get('timestamp', ''), 
+            reverse=True
+        )[:5]
+        
+        processed_count = 0
+        for txn in recent_pending:
+            md5_hash = txn.get('md5_hash')
+            transaction_id = txn.get('transaction_id')
             
-            # Get only the last 5 pending transactions (most recent first)
-            recent_pending = sorted(
-                pending_txns, 
-                key=lambda x: x.get('timestamp', ''), 
-                reverse=True
-            )[:5]
-            
-            for txn in recent_pending:
-                md5_hash = txn.get('md5_hash')
-                transaction_id = txn.get('transaction_id')
-                
-                if md5_hash and transaction_id:
-                    try:
-                        response = requests.get(f"https://mengtopup.shop/api/check_payment?md5={md5_hash}", timeout=5)
-                        if response.status_code == 200:
-                            payment_data = response.json()
-                            if payment_data.get('status') == "PAID":
-                                # Move to completed
-                                completed_txn = {**txn, 'status': 'completed', 'telegram_sent': False}
-                                transactions['completed'].append(completed_txn)
-                                transactions['pending'] = [t for t in transactions['pending'] 
-                                                         if t.get('transaction_id') != transaction_id]
-                                
-                                # Send to Telegram
-                                send_to_telegram(completed_txn)
-                                
-                                # Update transaction to mark Telegram as sent
-                                for t in transactions['completed']:
-                                    if t.get('transaction_id') == transaction_id:
-                                        t['telegram_sent'] = True
-                                
-                                save_transactions(transactions)
-                                print(f"Background: Payment completed for transaction {transaction_id}")
-                                
-                    except Exception as e:
-                        print(f"Background check error for {transaction_id}: {str(e)}")
-                        continue
-            
-            time.sleep(10)  # Check every 10 seconds
-            
-        except Exception as e:
-            print(f"Background thread error: {str(e)}")
-            time.sleep(30)  # Wait longer if major error occurs
-
-# Start background thread when app starts (replace the existing code)
-if not any(thread.name == "payment_checker" for thread in threading.enumerate()):
-    background_thread = threading.Thread(
-        target=check_pending_payments_background, 
-        daemon=True,
-        name="payment_checker"
-    )
-    background_thread.start()
-    print("Background payment checker started")
-
-
-
-# Start background thread when app starts
-background_thread = threading.Thread(target=check_pending_payments_background, daemon=True)
-background_thread.start()
-
+            if md5_hash and transaction_id:
+                try:
+                    response = requests.get(f"https://mengtopup.shop/api/check_payment?md5={md5_hash}", timeout=5)
+                    if response.status_code == 200:
+                        payment_data = response.json()
+                        if payment_data.get('status') == "PAID":
+                            # Move to completed
+                            completed_txn = {**txn, 'status': 'completed', 'telegram_sent': False}
+                            transactions['completed'].append(completed_txn)
+                            transactions['pending'] = [t for t in transactions['pending'] 
+                                                     if t.get('transaction_id') != transaction_id]
+                            
+                            # Send to Telegram
+                            send_to_telegram(completed_txn)
+                            
+                            # Update transaction to mark Telegram as sent
+                            for t in transactions['completed']:
+                                if t.get('transaction_id') == transaction_id:
+                                    t['telegram_sent'] = True
+                            
+                            save_transactions(transactions)
+                            processed_count += 1
+                            
+                except Exception as e:
+                    print(f"Cron check error for {transaction_id}: {str(e)}")
+                    continue
+        
+        return jsonify({
+            'success': True,
+            'processed': processed_count,
+            'message': f'Processed {processed_count} payments'
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+        
 # Simple status check endpoint
 @app.route('/check_status/<transaction_id>')
 def check_status(transaction_id):
