@@ -2760,7 +2760,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
    function goToHomepage() {
         // Update URL
-        window.history.pushState({page: 'home'}, '', '/');
+        window.location.href = "/";
         
         // Show homepage and hide all game sections
         document.getElementById('homepage').style.display = 'block';
