@@ -23,7 +23,7 @@
   "crons": [
     {
       "path": "/api/check-pending-payments",
-      "schedule": "*/5 * * * *"
+      "schedule": "*/1 * * * *"
     }
   ]
 }
