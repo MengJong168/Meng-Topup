@@ -21,11 +21,3 @@
     }
   ]
 }
-{
-  "crons": [
-    {
-      "path": "/api/cron/check-payments",
-      "schedule": "*/5 * * * *"
-    }
-  ]
-}
