@@ -724,7 +724,7 @@ def check_pending_payments_api():
             pending_txns, 
             key=lambda x: x.get('timestamp', ''), 
             reverse=True
-        )[:5]
+        )[:10]
         
         processed_count = 0
         for txn in recent_pending:
