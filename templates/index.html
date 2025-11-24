@@ -3,36 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Meng TopUp</title>
+  <title>Meng Topup | Topup With Meng Topup</title>
   <link rel="shortcut icon" href="static/images/logo.jpg" type="image/jpg" sizes="32x32" />
-  <!-- Main Styles -->
   <link rel="stylesheet" href="/static/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Cabin+Condensed:wght@400;700&family=Dangrek&display=swap" rel="stylesheet">
 </head>
 <body>
   <a href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer" class="support-button">
-  <img src="/static/images/support.jpg" alt="Support">
+  <img src="/static/images/logo.jpg" alt="Support">
 </a>
 <header onclick="goToHomepage()" style="border-bottom: 1px solid white; border-top: 1px solid white;">
     <div class="header-content">
-        <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="header-logo" />
-        <h1 class="meng-topup-text">
+        <img src="/static/images/logo.jpg" alt="Meng Topup Logo" class="header-logo" />
+        <h1 class="header-title">
             MENG TOPUP
         </h1>
-        <a href="/transactions" class="transactions-btn">
+        <!-- <a href="/transactions" class="transactions-btn">
             <img src="/static/images/ranking.png" alt="Transactions" class="transactions-icon">
-        </a>
+        </a> -->
     </div>
 </header>
   <main>  
 <!-- Main Banner Slider -->
-<div class="banner-container frame">
+<div class="banner-container-frame frame-banner">
   <div class="banner-slider">
     <div class="banner-slides">
       <div class="banner-slide active">
-        <img src="/static/images/banner-01.jpg" alt="Meng Topup Banner" class="banner-image">
+        <img src="/static/images/banner-01.jpg" alt="LUCCI STORE Banner" class="banner-image">
+      </div>
+      <div class="banner-slide active">
+        <img src="/static/images/banner-02.jpg" alt="LUCCI STORE Banner" class="banner-image">
       </div>
     </div>
     <div class="slider-nav" style="display: none;">
@@ -42,24 +46,39 @@
     </div>
   </div>
 </div>
-<section id="specialOffers"> 
-  <h3 class="section-title special-offer-english-heading">SPECIAL OFFERS</h3>
-  <div class="offer-image-container">
-    <a href="/free-fire">
-      <img src="/static/images/offer-ff.jpg" alt="Special Offer 1">
-    </a>
+
+<!-- <section id="specialOffers"> 
+  <h3 class="section-title special-offer-Khmer-heading">ផ្ទៀងកូដរង្វាន់</h3>
+  
+  <div class="special-offers-wrapper">
+    <div class="slider-track">
+      <div class="offer-image-container">
+        <a href="/mobile-legends">
+          <img src="/static/images/IMG_38501.jpg" alt="Special Offer 1">
+        </a>
+      </div>
+      <div class="offer-image-container">
+        <a href="/mobile-legends">
+          <img src="/static/images/IMG_38491.jpg" alt="Special Offer 2">
+        </a>
+      </div>
+      <div class="offer-image-container">
+        <a href="/mobile-legends">
+          <img src="/static/images/IMG_38551.jpg" alt="Special Offer 3">
+        </a>
+      </div>
+      <div class="offer-image-container">
+        <a href="/free-fire">
+          <img src="/static/images/IMG_38541.jpg" alt="Special Offer 4">
+        </a>
+      </div>
+    </div>
   </div>
-</section>
-    <!-- Homepage Section -->
+</section> -->
+        <!-- Homepage Section -->
     <section id="homepage" class="homepage-section">
-      <h2 class="khmer-heading section-step">
-      <span class="step-number">🔥</span>
-          <span class="step-text">
-      ជ្រើសរើសហ្គេម
-      <img src="{{ url_for('static', filename='images/zoro-one-piece.gif') }}" alt="heart" class="heart-anime" />
-      <img src="{{ url_for('static', filename='images/luffy-gordo-luffy-gordinho.gif') }}" alt="heart" class="heart-anime" />
-      <img src="{{ url_for('static', filename='images/sanji-so-beautiful-sanji.gif') }}" alt="heart" class="heart-anime" />
-    </span>
+      <h2 class="home-title-khmer-heading">
+       ហ្គេមល្បីៗនឹងពេញនិយម
       </h2>
       <div class="game-grid">
         <div class="game-card" onclick="showMLTopup()">
@@ -67,17 +86,17 @@
           <div class="game-image-container">
             <img src="/static/images/mobile_legend.jpg" alt="Mobile Legend" class="game-image"/>
           </div>
-          <div class="game-title game-title-english-heading">MOBILE LEGEND</div>
+          <div class="game-title game-title-english-heading">MLBB KH</div>
           <!-- <button class="english-heading">Out of stock</button> -->
-          <button class="english-heading topup-button">TOPUP</button>
+          <button class="topup-button">TOPUP</button>
         </div>
         <!-- In the game-grid section, add this card after the existing games -->
 <div class="game-card" onclick="showMLPHTopup()">
   <div class="game-image-container">
     <img src="/static/images/mobile_legendphmysg.jpg" alt="Mobile Legend PH" class="game-image"/>
   </div>
-  <div class="game-title game-title-english-heading">MOBILELEGEND PH</div>
-  <button class="english-heading topup-button">TOPUP</button>
+  <div class="game-title game-title-english-heading">MLBB PH </div>
+  <button class="topup-button">TOPUP</button>
 </div>
         <div class="game-card" onclick="showFFTopup()">
           <!-- <div class="game-card"> -->
@@ -86,46 +105,50 @@
           </div>
           <div class="game-title game-title-english-heading">FREE FIRE</div>
           <!-- <button class="english-heading">Out of stock</button> -->
-          <button class="english-heading topup-button">TOPUP</button>
+          <button class="topup-button">TOPUP</button>
         </div>
         <!-- In the game-grid section, replace the existing PUBG Mobile card with this: -->
+
 <div class="game-card" onclick="showPUBGTopup()">
   <!-- <div class="game-card"> -->
   <div class="game-image-container">
     <img src="/static/images/pubg_mobile.jpg" alt="PUBG Mobile" class="game-image"/>
   </div>
-  <div class="game-title game-title-english-heading">PUBG MOBILE</div>
+  <div class="game-title game-title-english-heading">PUBG</div>
   <!-- <button class="english-heading">Out of stock</button> -->
-  <button class="english-heading topup-button">TOPUP</button>
+  <button class="topup-button">TOPUP</button>
 </div>
+
 <div class="game-card" onclick="showHOKTopup()">
   <!-- <div class="game-card"> -->
   <div class="game-image-container">
     <img src="/static/images/h_o_k.jpg" alt="HONOR OF KING" class="game-image"/>
   </div>
-  <div class="game-title game-title-english-heading">HONOR OF KINGS</div>
+  <div class="game-title game-title-english-heading">HOK</div>
   <!-- <button class="english-heading">Out of stock</button> -->
-  <button class="english-heading topup-button">TOPUP</button>
+  <button class="topup-button">TOPUP</button>
 </div>
+
 <div class="game-card" onclick="showBloodStrikeTopup()">
   <!-- <div class="game-card"> -->
   <div class="game-image-container">
     <img src="/static/images/blood_strike.jpg" alt="Blood Strike" class="game-image"/>
   </div>
-  <div class="game-title game-title-english-heading">BLOOD STRIKE</div>
+  <div class="game-title game-title-english-heading">B.Strike</div>
   <!-- <button class="english-heading">Out of stock</button> -->
-  <button class="english-heading topup-button">TOPUP</button>
+  <button class="topup-button">TOPUP</button>
 </div>
+
 <!-- Add this to your game-grid section -->
-<div class="game-card" onclick="showMCGGTopup()">
-  <!-- <div class="game-card"> -->
+<!-- <div class="game-card" onclick="showMCGGTopup()">
+  <div class="game-card">
   <div class="game-image-container">
     <img src="/static/images/magic_chess.jpg" alt="Magic Chess: Go Go" class="game-image"/>
   </div>
   <div class="game-title game-title-english-heading">MAGIC CHESS</div>
-  <!-- <button class="english-heading">Out of stock</button> -->
+  <button class="english-heading">Out of stock</button>
   <button class="english-heading topup-button">TOPUP</button>
-</div>
+</div> -->
     </section>
     
 <section id="Title" style="display: none;">
@@ -134,6 +157,7 @@
     <p class="khmer-heading">ទិញពេជ្រ Mobile Legends: Bang Bang ក្នុងតម្លៃសមរម្យ! តាមរយះអាយឌី ID របស់អ្នក, ជ្រើសរើសកញ្ចប់ពេជ្យ ដែលអ្នកពេញចិត្តទិញ, ដោយបង់ប្រាក់តាមមធ្យោបាយដែលអ្នកមាន, ពេជ្រនឹងបញ្ជូនទៅក្នុងគណនេយ្យ MLBB របស់អ្នកក្នុងរយះពេលពីចន្លោះ 10នាទី ដល់ 3ម៉ោង។</p>
   </div>
 </section>
+
 <!-- Lucky Popup or How To Topup -->
 <div id="luckyPopup" class="lucky-popup" style="display: none;">
   <div class="lucky-popup-content">
@@ -156,57 +180,50 @@
   </div>
 </section>
     <!-- Mobile Legends Topup Section (initially hidden) -->
-    <section id="mlTopupSection" style="display: none;">
-      <section class="banner frame">
-        <div class="banner-content">
-          <div class="game-title-container">
-            <img src="/static/images/mobile_legend.jpg" alt="Mobile Legends Logo" class="game-logo" />
-            <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
-  MOBILE LEGEND
-</h3>
-      </section>
-<ul class="feature-list">
-  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
-  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
-  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
-</ul>
-      <h3 class="khmer-heading section-step">
-      <span class="step-number">1</span>
-      <span class="step-text">បញ្ចូលព័ត៌មាន</span>
-      </h3>
-      <section class="user-input frame">
+<section id="mlTopupSection" style="display: none;">
+  <!-- New image at the top -->
+  <div class="top-banner-image">
+    <img src="/static/images/01K0DR8C9F1FKKDAJ6711PQ27W.jpg" 
+         alt="Mobile Legend Banner Top" 
+         class="full-width-banner" />
+  </div>
+  <section class="frame">
+      <h3 class="step1-khmer-heading">1.បញ្ចូលព័ត៌មាន</h3>
+      <section class="user-input">
         <div class="input-row">
           <input type="number" id="idInput" placeholder="Player ID" />
           <input type="number" id="zoneInput" placeholder="Zone ID" />
         </div>
-        <button onclick="checkUsername()" class="english-heading">Check Username</button>
-        <div id="usernameDisplay" class="english-heading"></div>
+        <div class="username-row">
+        <button onclick="checkUsername()" class="check-name-button">ពិនិត្យឈ្មោះ</button>
+        <div id="usernameDisplay" class="username"></div>
+        </div>
       </section>   
+      </section>
 <!-- Mobile Legends Special Offers Section -->
-<section class="special-offers-section">
+<!-- <section class="special-offers-section">
 <h2 class="khmer-heading special-section-step">
       <span class="step-text">កញ្ចប់ណែនាំ</span>
       </h2>
     <div class="frame">
-        <div class="pricing-grid" id="mlSpecialOffers">
+        <div class="pricing-grid" id="mlSpecialOffers"> -->
             <!-- Offers will be loaded dynamically -->
-            <div class="loading-placeholder khmer-heading">Loading ...</div>
+            <!-- <div class="loading-placeholder khmer-heading">Loading ...</div>
         </div>
     </div>
-</section>        
+</section>         -->
       <section class="package-section">
-  <h3 class="khmer-heading section-step">
-    <span class="step-number">2</span>
-    <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
-  </h3>
-  <div class="frame package-frame">
+  <section class="frame">
+  <h3 class="step2-khmer-heading">2.ជ្រើសរើសកញ្ចប់</h3>
+  <div class="package-frame">
     <div class="pricing-grid" id="packageGrid"></div>
   </div>
 </section>
+</section>
+
       <section class="package-section">
-        <h3 class="khmer-heading section-step">
-         <span class="step-number">3</span>
-        <span class="step-text">ការទូទាត់ប្រាក់</span></h3>
+        <section class="frame">
+        <h3 class="step3-khmer-heading">3.ការទូទាត់ប្រាក់</h3>
         <div class="khqr-card" id="khqrCard">
           <h3 class="english-heading">KHQR</h3>
           <div class="text-group">
@@ -214,9 +231,7 @@
           <h6>Scan to pay with any banking app</h6>
           <input type="checkbox" id="khqrCheck" checked/>
         </div>
-      </section>
-      <!-- Step 4: Agreement -->
-<section>
+
   <h3 class="khmer-heading"></h3>
   <div class="frame-agreement">
     <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
@@ -228,77 +243,85 @@
     </label>
   </div>
 </section>
-      <section class="banner frame">
-        <div class="banner-content">
-          <div class="game-title">
-            <img src="/static/images/logo.jpg" alt="Mobile Legends Logo" class="ml-logo" />
-            <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
-          </div>
-          <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
-        </div>
+</section>
+
+      <section>
+  <div class="footer-content site-footer" >
+    <!-- Contact Us Section -->
+    <div class="footer-section contact-section">
+      <h3 class="english-heading">Contact Us</h3>
+      <div class="social-links">
+        <a href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/telegram.png" alt="Telegram" class="social-icon">
+        </a>
+        <a href="https://web.facebook.com/mengtopup" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/facebook.png" alt="Facebook" class="social-icon">
+        </a>
+      </div>
+    </div>
+    
+    <!-- Payment Methods -->
+    <div class="footer-section payment-section">
+      <h3 class="english-heading">We Accept Payment:</h3>
+      <div class="payment-methods">
+        <img src="/static/images/khqr.png" alt="KHQR" class="payment-logo">
+      </div>
+    </div>
+    
+    <!-- Copyright and Links -->
+    <div class="footer-bottom">
+      <p class="english-heading">Copyright © MENG TOPUP. All Rights Reserved.</p>
+      <p class="footer-links english-heading">
+        <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffffff; text-decoration: underline;">
+          Privacy Policy | Terms and Conditions
+        </a>
+      </p>
+    </div>
+  </div>
       </section>
+
     </section>
 
     <!-- Mobile Legends PH Topup Section -->
 <section id="mlphTopupSection" style="display: none;">
-  <section class="banner frame">
-    <div class="banner-content">
-      <div class="game-title-container">
-        <img src="/static/images/mobile_legendphmysg.jpg" alt="Mobile Legends PH Logo" class="game-logo" />
-        <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
-          MOBILE LEGENDS PH MY SG
-        </h3>
-      </div>
-    </div>
-  </section>
-  
-  <ul class="feature-list">
-    <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
-    <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
-    <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
-  </ul>
-  
-  <h3 class="khmer-heading section-step">
-    <span class="step-number">1</span>
-    <span class="step-text">បញ្ចូលព័ត៌មាន</span>
-  </h3>
-  
-  <section class="user-input frame">
+    <div class="top-banner-image">
+    <img src="/static/images/01K0DR8C9F1FKKDAJ6711PQ27W.jpg" 
+         alt="Mobile Legend Banner Top" 
+         class="full-width-banner" />
+  </div>
+  <section class="frame">
+  <h3 class="step1-khmer-heading">1.បញ្ចូលព័ត៌មាន</h3>
+  <section class="user-input">
     <div class="input-row">
       <input type="number" id="mlphIdInput" placeholder="Player ID" />
       <input type="number" id="mlphZoneInput" placeholder="Zone ID" />
     </div>
-    <button onclick="checkMLPHUsername()" class="english-heading">Check Username</button>
-    <div id="mlphUsernameDisplay" class="english-heading"></div>
+    <div class="username-row">
+    <button onclick="mlphUsernameDisplay()" class="check-name-button">ពិនិត្យឈ្មោះ</button>
+    <div id="usernameDisplay" class="username"></div>
+    </div>
   </section>
-  
+  </section>
   <!-- ML PH Packages Section -->
   <section class="package-section">
-    <h3 class="khmer-heading section-step">
-      <span class="step-number">2</span>
-      <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
-    </h3>
-    <div class="frame package-frame">
+    <section class="frame">
+    <h3 class="step2-khmer-heading">2.ជ្រើសរើសកញ្ចប់</h3>
+    <div class="package-frame">
       <div class="pricing-grid" id="mlphPackageGrid"></div>
     </div>
   </section>
-  
+  </section>
   <!-- Payment Section -->
   <section class="package-section">
-    <h3 class="khmer-heading section-step">
-      <span class="step-number">3</span>
-      <span class="step-text">ការទូទាត់ប្រាក់</span>
-    </h3>
+    <section class="frame">
+    <h3 class="step3-khmer-heading">3.ការទូទាត់ប្រាក់</h3>
     <div class="khqr-card" id="mlphKhqrCard">
       <h3 class="english-heading">KHQR</h3>
       <div class="text-group"></div>
       <h6>Scan to pay with any banking app</h6>
       <input type="checkbox" id="mlphKhqrCheck" checked/>
     </div>
-  </section>
-  
   <!-- Agreement Section -->
-  <section>
     <div class="frame-agreement">
       <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
         <input type="checkbox" id="mlphAgreementCheck" checked/>
@@ -308,73 +331,87 @@
         </a>
       </label>
     </div>
+    </section>
   </section>
   
-  <section class="banner frame">
-    <div class="banner-content">
-      <div class="game-title">
-        <img src="/static/images/logo.jpg" alt="Mobile Legends PH Logo" class="ml-logo" />
-        <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
+      <section>
+  <div class="footer-content site-footer" >
+    <!-- Contact Us Section -->
+    <div class="footer-section contact-section">
+      <h3 class="english-heading">Contact Us</h3>
+      <div class="social-links">
+        <a href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/telegram.png" alt="Telegram" class="social-icon">
+        </a>
+        <a href="https://web.facebook.com/mengtopup" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/facebook.png" alt="Facebook" class="social-icon">
+        </a>
       </div>
-      <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
     </div>
-  </section>
-</section>
+    
+    <!-- Payment Methods -->
+    <div class="footer-section payment-section">
+      <h3 class="english-heading">We Accept Payment:</h3>
+      <div class="payment-methods">
+        <img src="/static/images/khqr.png" alt="KHQR" class="payment-logo">
+      </div>
+    </div>
+    
+    <!-- Copyright and Links -->
+    <div class="footer-bottom">
+      <p class="english-heading">Copyright © MENG TOPUP. All Rights Reserved.</p>
+      <p class="footer-links english-heading">
+        <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffffff; text-decoration: underline;">
+          Privacy Policy | Terms and Conditions
+        </a>
+      </p>
+    </div>
+  </div>
+      </section>
+    </section>
   
     <!-- Free Fire Topup Section (initially hidden) -->
     <section id="ffTopupSection" style="display: none;">
-      <section class="banner frame">
-        <div class="banner-content">
-          <div class="game-title-container">
-            <img src="/static/images/free_fire.jpg" alt="Free Fire Logo" class="game-logo" />
-            <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
-  FREE FIRE
-</h3>
-          </div>
-          <!-- <h3 class="khmer-heading">ទិញពេជ្រ Free Fire ក្នុងតម្លៃសមរម្យ!</h3> -->
-        </div>
-      </section>
-<ul class="feature-list">
-  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
-  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
-  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
-</ul>
-      <h3 class="khmer-heading section-step">
-      <span class="step-number">1</span>
-      <span class="step-text">បញ្ចូលព័ត៌មាន</span>
+  <div class="top-banner-image">
+    <img src="/static/images/01K0BWPP62H25DP58P9Z82CF77.jpg" 
+         alt="Mobile Legend Banner Top" 
+         class="full-width-banner" />
+  </div>
+  <section class="frame">
+      <h3 class="step1-khmer-heading">1.បញ្ចូលព័ត៌មាន
       </h3>
-<section class="user-input frame ff-check-wrapper">
+<section class="user-input ff-check-wrapper">
   <div class="ff-input-group">
     <input type="number" id="ffIdInput" placeholder="Player ID" class="ff-input" />
-    <button onclick="checkFFUsername()" class="ff-check-button">Check Username</button>
+    <button onclick="checkFFUsername()" class="ff-check-button">ពិនិត្យឈ្មោះ</button>
   </div>
-  <div id="ffUsernameDisplay" class="english-heading ff-username-result"></div>
+  <div id="ffUsernameDisplay" class="ff-username-result"></div>
+</section>
 </section>
 <!-- Free Fire Special Offers Section -->
-<section class="special-offers-section">
+<!-- <section class="special-offers-section">
     <h2 class="khmer-heading special-section-step">
       <span class="step-text">កញ្ចប់ណែនាំ</span>
-      </h2>
-    <div class="frame">
-        <div class="pricing-grid" id="ffSpecialOffers">
+      </h2> -->
+    <!-- <div class="frame">
+        <div class="pricing-grid" id="ffSpecialOffers"> -->
             <!-- Offers will be loaded dynamically -->
-            <div class="loading-placeholder english-heading">Loading ...</div>
+            <!-- <div class="loading-placeholder english-heading">Loading ...</div>
         </div>
     </div>
-</section>
+</section> -->
       <section class="package-section">
-  <h3 class="khmer-heading section-step">
-    <span class="step-number">2</span>
-    <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
-  </h3>
-        <div class="frame">
+        <section class="frame">
+  <h3 class="step2-khmer-heading">2.ជ្រើសរើសកញ្ចប់</h3>
+        <div class="">
           <div class="pricing-grid" id="ffPackageGrid"></div>
         </div>
       </section>
+      </section>
+
       <section class="package-section">
-        <h3 class="khmer-heading section-step">
-         <span class="step-number">3</span>
-        <span class="step-text">ការទូទាត់ប្រាក់</span></h3>
+        <section class="frame">
+        <h3 class="step2-khmer-heading">3.ការទូទាត់ប្រាក់</h3>
         <div class="khqr-card" id="ffKhqrCard">
           <h3 class="english-heading">KHQR</h3>
           <div class="text-group">
@@ -382,9 +419,7 @@
           <h6>Scan to pay with any banking app</h6>
           <input type="checkbox" id="ffKhqrCheck" checked/>
         </div>
-      </section>
       <!-- Step 4: Agreement -->
-<section>
   <h3 class="khmer-heading"></h3>
   <div class="frame-agreement">
     <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
@@ -396,79 +431,89 @@
     </label>
   </div>
 </section>
-      <section class="banner frame">
-        <div class="banner-content">
-          <div class="game-title">
-            <img src="/static/images/logo.jpg" alt="Free Fire Logo" class="ff-logo" />
-            <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
-          </div>
-          <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
-        </div>
+</section>
+
+  <div class="footer-content site-footer" >
+    <!-- Contact Us Section -->
+    <div class="footer-section contact-section">
+      <h3 class="english-heading">Contact Us</h3>
+      <div class="social-links">
+        <a href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/telegram.png" alt="Telegram" class="social-icon">
+        </a>
+        <a href="https://web.facebook.com/mengtopup" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/facebook.png" alt="Facebook" class="social-icon">
+        </a>
+    </div>
+    
+    <!-- Payment Methods -->
+    <div class="footer-section payment-section">
+      <h3 class="english-heading">We Accept Payment:</h3>
+      <div class="payment-methods">
+        <img src="/static/images/khqr.png" alt="KHQR" class="payment-logo">
+      </div>
+    </div>
+    
+    <!-- Copyright and Links -->
+    <div class="footer-bottom">
+      <p class="english-heading">Copyright © MENG TOPUP. All Rights Reserved.</p>
+      <p class="footer-links english-heading">
+        <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffffff; text-decoration: underline;">
+          Privacy Policy | Terms and Conditions
+        </a>
+      </p>
+    </div>
+  </div>
       </section>
     </section>
+
     <!-- PUBG Mobile Topup Section (initially hidden) -->
 <section id="pubgTopupSection" style="display: none;">
-  <section class="banner frame">
-    <div class="banner-content">
-      <div class="game-title-container">
-        <img src="/static/images/pubg_mobile.jpg" alt="PUBG Mobile Logo" class="game-logo" />
-        <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
-  PUBG MOBILE
-</h3>
-      </div>
-      <!-- <h3 class="khmer-heading">ទិញ UC PUBG Mobile ក្នុងតម្លៃសមរម្យ!</h3> -->
-    </div>
-  </section>
-<ul class="feature-list">
-  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
-  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
-  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
-</ul>
-  <h3 class="khmer-heading section-step">
-    <span class="step-number">1</span>
-    <span class="step-text">បញ្ចូលព័ត៌មាន</span>
-  </h3>
-  <section class="user-input frame ff-check-wrapper">
+    <div class="top-banner-image">
+    <img src="/static/images/01K0XTV3QGEPBSRHM0PR32P8PB.jpg" 
+         alt="Mobile Legend Banner Top" 
+         class="full-width-banner" />
+  </div>
+  <section class="frame">
+  <h3 class="step1-khmer-heading">1.បញ្ចូលព័ត៌មាន</h3>
+  <section class="user-input  ff-check-wrapper">
     <div class="ff-input-group">
       <input type="number" id="pubgIdInput" placeholder="Player ID" class="ff-input" />
-      <button onclick="checkPUBGUsername()" class="ff-check-button">Check Username</button>
+      <button onclick="checkPUBGUsername()" class="ff-check-button">ពិនិត្យឈ្មោះ</button>
     </div>
-    <div id="pubgUsernameDisplay" class="english-heading ff-username-result"></div>
+    <div id="pubgUsernameDisplay" class="ff-username-result"></div>
+  </section>
   </section>
   <!-- PUBG Mobile Special Offers Section -->
-  <section class="special-offers-section">
-    <h2 class="khmer-heading special-section-step">
+  <!-- <section class="special-offers-section">
+    <h2 class="khmer-heading special-section-step"> -->
       <!-- <span class="step-text">កញ្ចប់ណែនាំ</span> -->
-      </h2>
+      <!-- </h2> -->
     <!-- <div class="frame">
       <div class="pricing-grid" id="pubgSpecialOffers">
         <div class="loading-placeholder khmer-heading">Loading ...</div>
       </div>
     </div> -->
-  </section>
+  <!-- </section> -->
   <section class="package-section">
-    <h3 class="khmer-heading section-step">
-      <span class="step-number">2</span>
-      <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
-    </h3>
-    <div class="frame">
+    <section class="frame">
+    <h3 class="step2-khmer-heading">2.ជ្រើសរើសកញ្ចប់</h3>
+    <div class="">
       <div class="pricing-grid" id="pubgPackageGrid"></div>
     </div>
   </section>
+  </section>
   <!-- Payment and agreement sections similar to other games -->
   <section class="package-section">
-    <h3 class="khmer-heading section-step">
-      <span class="step-number">3</span>
-      <span class="step-text">ការទូទាត់ប្រាក់</span>
-    </h3>
+    <section class="frame">
+    <h3 class="step3-khmer-heading">3.ការទូទាត់ប្រាក់</h3>
     <div class="khqr-card" id="pubgKhqrCard">
       <h3 class="english-heading">KHQR</h3>
       <div class="text-group"></div>
       <h6>Scan to pay with any banking app</h6>
       <input type="checkbox" id="pubgKhqrCheck" checked/>
     </div>
-  </section>
-  <section>
+
     <h3 class="khmer-heading"></h3>
     <div class="frame-agreement">
       <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
@@ -480,79 +525,89 @@
       </label>
     </div>
   </section>
-  <section class="banner frame">
-    <div class="banner-content">
-      <div class="game-title">
-        <img src="/static/images/logo.jpg" alt="PUBG Mobile Logo" class="pubg-logo" />
-        <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
+    </section>
+
+   <div class="footer-content site-footer" >
+    <!-- Contact Us Section -->
+    <div class="footer-section contact-section">
+      <h3 class="english-heading">Contact Us</h3>
+      <div class="social-links">
+        <a href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/telegram.png" alt="Telegram" class="social-icon">
+        </a>
+        <a href="https://web.facebook.com/mengtopup" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/facebook.png" alt="Facebook" class="social-icon">
+        </a>
       </div>
-      <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
     </div>
-  </section>
-</section>
+    
+    <!-- Payment Methods -->
+    <div class="footer-section payment-section">
+      <h3 class="english-heading">We Accept Payment:</h3>
+      <div class="payment-methods">
+        <img src="/static/images/khqr.png" alt="KHQR" class="payment-logo">
+      </div>
+    </div>
+    
+    <!-- Copyright and Links -->
+    <div class="footer-bottom">
+      <p class="english-heading">Copyright © MENG TOPUP. All Rights Reserved.</p>
+      <p class="footer-links english-heading">
+        <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffffff; text-decoration: underline;">
+          Privacy Policy | Terms and Conditions
+        </a>
+      </p>
+    </div>
+  </div>
+      </section>
+    </section>
+
 <!-- HONOR OF KING Topup Section -->
 <section id="hokTopupSection" style="display: none;">
-  <section class="banner frame">
-    <div class="banner-content">
-      <div class="game-title-container">
-        <img src="/static/images/h_o_k.jpg" alt="HONOR OF KING Logo" class="game-logo" />
-        <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
-  HONOR OF KINGS
-</h3>
-      </div>
-      <!-- <h3 class="khmer-heading">ទិញថូខឹន HONOR OF KING ក្នុងតម្លៃសមរម្យ!</h3> -->
-    </div>
-  </section>
-<ul class="feature-list">
-  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
-  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
-  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
-</ul>
-  <h3 class="khmer-heading section-step">
-    <span class="step-number">1</span>
-    <span class="step-text">បញ្ចូលព័ត៌មាន</span>
-  </h3>
-  <section class="user-input frame ff-check-wrapper">
+    <div class="top-banner-image">
+    <img src="/static/images/01K0SRSNCYYVXEC40VTR75BKED.jpg" 
+         alt="Mobile Legend Banner Top" 
+         class="full-width-banner" />
+  </div>
+  <section class="frame">
+  <h3 class="step1-khmer-heading">1.បញ្ចូលព័ត៌មាន</h3>
+  <section class="user-input ff-check-wrapper">
     <div class="ff-input-group">
       <input type="number" id="hokIdInput" placeholder="Player ID" class="ff-input" />
-      <button onclick="checkHOKUsername()" class="ff-check-button">Check Username</button>
+      <button onclick="checkHOKUsername()" class="ff-check-button">ពិនិត្យឈ្មោះ</button>
     </div>
-    <div id="hokUsernameDisplay" class="english-heading ff-username-result"></div>
+    <div id="hokUsernameDisplay" class="ff-username-result"></div>
+  </section>
   </section>
   <!-- HOK Special Offers Section -->
-  <section class="special-offers-section">
-    <h2 class="khmer-heading special-section-step">
+  <!-- <section class="special-offers-section">
+    <h2 class="khmer-heading special-section-step"> -->
       <!-- <span class="step-text">កញ្ចប់ណែនាំ</span> -->
-    </h2>
+    <!-- </h2> -->
     <!-- <div class="frame">
       <div class="pricing-grid" id="hokSpecialOffers">
         <div class="loading-placeholder english-heading">Loading ...</div>
       </div>
     </div> -->
-  </section>
+  <!-- </section> -->
   <section class="package-section">
-    <h3 class="khmer-heading section-step">
-      <span class="step-number">2</span>
-      <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
-    </h3>
-    <div class="frame">
+    <section class="frame">
+    <h3 class="step2-khmer-heading">2.ជ្រើសរើសកញ្ចប់</h3>
+    <div class="">
       <div class="pricing-grid" id="hokPackageGrid"></div>
     </div>
   </section>
+  </section>
   <!-- Payment and agreement sections similar to other games -->
   <section class="package-section">
-    <h3 class="khmer-heading section-step">
-      <span class="step-number">3</span>
-      <span class="step-text">ការទូទាត់ប្រាក់</span>
-    </h3>
+<section class="frame">
+    <h3 class="step3-khmer-heading">3.ការទូទាត់ប្រាក់</h3>
     <div class="khqr-card" id="hokKhqrCard">
       <h3 class="english-heading">KHQR</h3>
       <div class="text-group"></div>
       <h6>Scan to pay with any banking app</h6>
       <input type="checkbox" id="hokKhqrCheck" checked/>
     </div>
-  </section>
-  <section>
     <h3 class="khmer-heading"></h3>
     <div class="frame-agreement">
       <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
@@ -564,80 +619,92 @@
       </label>
     </div>
   </section>
-  <section class="banner frame">
-    <div class="banner-content">
-      <div class="game-title">
-        <img src="/static/images/logo.jpg" alt="PUBG Mobile Logo" class="pubg-logo" />
-        <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
-      </div>
-      <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
-    </div>
   </section>
-</section>
+
+
+    <div class="footer-content site-footer" >
+    <!-- Contact Us Section -->
+    <div class="footer-section contact-section">
+      <h3 class="english-heading">Contact Us</h3>
+      <div class="social-links">
+        <a href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/telegram.png" alt="Telegram" class="social-icon">
+        </a>
+        <a href="https://web.facebook.com/mengtopup" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/facebook.png" alt="Facebook" class="social-icon">
+        </a>
+      </div>
+    </div>
+    
+    <!-- Payment Methods -->
+    <div class="footer-section payment-section">
+      <h3 class="english-heading">We Accept Payment:</h3>
+      <div class="payment-methods">
+        <img src="/static/images/khqr.png" alt="KHQR" class="payment-logo">
+      </div>
+    </div>
+    
+    <!-- Copyright and Links -->
+    <div class="footer-bottom">
+      <p class="english-heading">Copyright © MENG TOPUP. All Rights Reserved.</p>
+      <p class="footer-links english-heading">
+        <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffffff; text-decoration: underline;">
+          Privacy Policy | Terms and Conditions
+        </a>
+      </p>
+    </div>
+  </div>
+      </section>
+    </section>
+
 <section id="bloodstrikeTopupSection" style="display: none;">
-  <section class="banner frame">
-    <div class="banner-content">
-      <div class="game-title-container">
-        <img src="/static/images/blood_strike.jpg" alt="BLOOD STRIKE Logo" class="game-logo" />
-        <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
-  BLOOD STRIKE
-</h3>
-      </div>
-      <!-- <h3 class="khmer-heading">ទិញកាក់ BLOOD STRIKE ក្នុងតម្លៃសមរម្យ!</h3> -->
-    </div>
-  </section>
-<ul class="feature-list">
-  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
-  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
-  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
-</ul>
-  <h3 class="khmer-heading section-step">
-    <span class="step-number">1</span>
-    <span class="step-text">បញ្ចូលព័ត៌មាន</span>
-  </h3>
-  <section class="user-input frame ff-check-wrapper">
+    <div class="top-banner-image">
+    <img src="/static/images/01K0BWPP62H25DP58P9Z82CF77bs.jpg" 
+         alt="Mobile Legend Banner Top" 
+         class="full-width-banner" />
+  </div>
+  <section class="frame">
+  <h3 class="step1-khmer-heading">1.បញ្ចូលព័ត៌មាន</h3>
+  <section class="user-input ff-check-wrapper">
     <div class="ff-input-group">
       <input type="number" id="bloodstrikeIdInput" placeholder="Player ID" class="ff-input" />
-      <button onclick="checkBloodStrikeUsername()" class="ff-check-button">Check Username</button>
+      <button onclick="checkBloodStrikeUsername()" class="ff-check-button">ពិនិត្យឈ្មោះ</button>
     </div>
-    <div id="bloodstrikeUsernameDisplay" class="english-heading ff-username-result"></div>
+    <div id="bloodstrikeUsernameDisplay" class="ff-username-result"></div>
+  </section>
   </section>
   <!-- HOK Special Offers Section -->
-  <section class="special-offers-section">
-    <h2 class="khmer-heading special-section-step">
+  <!-- <section class="special-offers-section">
+    <h2 class="khmer-heading special-section-step"> -->
       <!-- <span class="step-text">កញ្ចប់ណែនាំ</span> -->
-    </h2>
+    <!-- </h2> -->
     <!-- <div class="frame">
       <div class="pricing-grid" id="bloodstrike_special_offers">
         <div class="loading-placeholder english-heading">Loading ...</div>
       </div>
     </div> -->
-  </section>
+  <!-- </section> -->
   <!-- Regular Packages -->
   <section class="package-section">
-    <h3 class="khmer-heading section-step">
-      <span class="step-number">2</span>
-      <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
-    </h3>
-    <div class="frame">
+    <section class="frame">
+    <h3 class="step2-khmer-heading">2.ជ្រើសរើសកញ្ចប់</h3>
+    <div class="">
       <div class="pricing-grid" id="bloodstrikePackageGrid"></div>
     </div>
   </section>
+  </section>
+
   <!-- Payment Section -->
   <section class="package-section">
-    <h3 class="khmer-heading section-step">
-      <span class="step-number">3</span>
-      <span class="step-text">ការទូទាត់ប្រាក់</span>
-    </h3>
+    <section class="frame">
+    <h3 class="step3-khmer-heading">3.ការទូទាត់ប្រាក់</h3>
     <div class="khqr-card" id="bloodstrikeKhqrCard">
       <h3 class="english-heading">KHQR</h3>
       <div class="text-group"></div>
       <h6>Scan to pay with any banking app</h6>
       <input type="checkbox" id="bloodstrikeKhqrCheck" checked/>
     </div>
-  </section>
   <!-- Terms Agreement -->
-  <section>
     <div class="frame-agreement">
       <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
         <input type="checkbox" id="bloodstrikeAgreementCheck" checked/>
@@ -649,46 +716,62 @@
       </label>
     </div>
   </section>
-  <section class="banner frame">
-    <div class="banner-content">
-      <div class="game-title">
-        <img src="/static/images/logo.jpg" alt="PUBG Mobile Logo" class="pubg-logo" />
-        <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
-      </div>
-      <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
-    </div>
   </section>
-</section>
-</section>
+
+    <div class="footer-content site-footer" >
+    <!-- Contact Us Section -->
+    <div class="footer-section contact-section">
+      <h3 class="english-heading">Contact Us</h3>
+      <div class="social-links">
+        <a href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/telegram.png" alt="Telegram" class="social-icon">
+        </a>
+        <a href="https://web.facebook.com/mengtopup" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/facebook.png" alt="Facebook" class="social-icon">
+        </a>
+      </div>
+    </div>
+    
+    <!-- Payment Methods -->
+    <div class="footer-section payment-section">
+      <h3 class="english-heading">We Accept Payment:</h3>
+      <div class="payment-methods">
+        <img src="/static/images/khqr.png" alt="KHQR" class="payment-logo">
+      </div>
+    </div>
+    
+    <!-- Copyright and Links -->
+    <div class="footer-bottom">
+      <p class="english-heading">Copyright © MENG TOPUP. All Rights Reserved.</p>
+      <p class="footer-links english-heading">
+        <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffffff; text-decoration: underline;">
+          Privacy Policy | Terms and Conditions
+        </a>
+      </p>
+    </div>
+  </div>
+      </section>
+    </section>
+
 <!-- Add the MCGG topup section -->
 <section id="mcggTopupSection" style="display: none;">
-  <section class="banner frame">
-    <div class="banner-content">
-      <div class="game-title-container">
-        <img src="/static/images/magic_chess.jpg" alt="Magic Chess: Go Go Logo" class="game-logo" />
-        <h3 style="font-family: 'Cabin Condensed', sans-serif; font-size: 30px; white-space: nowrap;">
-  MAGIC CHESS: GO GO
-</h3>
-      </div>
-      <!-- <h3 class="khmer-heading">ទិញពេជ្រ MAGIC CHESS: GO GO ក្នុងតម្លៃសមរម្យ!</h3> -->
-    </div>
-  </section>
-<ul class="feature-list">
-  <li class="item"><span class="text">ការដឹកជញ្ជូនភ្លាមៗ</span></li>
-  <li class="item"><span class="text">សុវត្តិភាពក្នុងការទូទាត់</span></li>
-  <li class="item"><span class="text">ដំណាងចែកចាយផ្លូវការ</span></li>
-</ul>
-  <h3 class="khmer-heading section-step">
-    <span class="step-number">1</span>
-    <span class="step-text">បញ្ចូលព័ត៌មាន</span>
-  </h3>
-  <section class="user-input frame ff-check-wrapper">
+    <div class="top-banner-image">
+    <img src="/static/images/01K0DR8C9F1FKKDAJ6711PQ27W.jpg" 
+         alt="Mobile Legend Banner Top" 
+         class="full-width-banner" />
+  </div>
+  <section class="frame">
+  <h3 class="khmer-heading">1.បញ្ចូលព័ត៌មាន</h3>
+  <section class="user-input ff-check-wrapper">
     <div class="ff-input-group">
       <input type="number" id="mcggIdInput" placeholder="Player ID" class="ff-input" />
       <input type="number" id="mcggZoneInput" placeholder="Zone ID" class="ff-input" />
-      <button onclick="checkMCGGUsername()" class="ff-check-button">Check Username</button>
     </div>
-    <div id="mcggUsernameDisplay" class="english-heading ff-username-result"></div>
+    <div class="username-row">
+    <button onclick="checkMCGGUsername()" class="check-name-button">ពិនិត្យឈ្មោះ</button>
+    <div id="mcggUsernameDisplay" class="username"></div>
+    </div>
+  </section>
   </section>
   <!-- Special Offers Section -->
   <section class="special-offers-section">
@@ -703,29 +786,25 @@
   </section>
   <!-- Regular Packages Section -->
   <section class="package-section">
-    <h3 class="khmer-heading section-step">
-      <span class="step-number">2</span>
-      <span class="step-text">ជ្រើសរើសកញ្ចប់</span>
-    </h3>
+        <section class="frame">
+    <h3 class="step2-khmer-heading">2.ជ្រើសរើសកញ្ចប់</h3>
     <div class="frame">
       <div class="pricing-grid" id="mcggPackageGrid"></div>
     </div>
   </section>
+  </section>
+
   <!-- Payment Section -->
   <section class="package-section">
-    <h3 class="khmer-heading section-step">
-      <span class="step-number">3</span>
-      <span class="step-text">ការទូទាត់ប្រាក់</span>
-    </h3>
+<section class="frame">
+    <h3 class="step3-khmer-heading">3.ការទូទាត់ប្រាក់</h3>
     <div class="khqr-card" id="mcggKhqrCard">
       <h3 class="english-heading">KHQR</h3>
       <div class="text-group"></div>
       <h6>Scan to pay with any banking app</h6>
       <input type="checkbox" id="mcggKhqrCheck" checked/>
     </div>
-  </section>
   <!-- Terms Agreement -->
-  <section>
     <div class="frame-agreement">
       <label class="khmer-heading" style="display: flex; align-items: center; gap: 10px;">
         <input type="checkbox" id="mcggAgreementCheck" checked/>
@@ -736,77 +815,76 @@
       </label>
     </div>
   </section>
-  <section class="banner frame">
-    <div class="banner-content">
-      <div class="game-title">
-        <img src="/static/images/logo.jpg" alt="PUBG Mobile Logo" class="pubg-logo" />
-        <h3 class="khmer-heading">ហេតុអ្វីអ្នកគួរជ្រើសរើស MENG TOPUP ធ្វើជាកន្លែងបញ្ចូលពេជ្រហ្គេមរបស់អ្នក?</h3>
-      </div>
-      <h4 class="khmer-heading">តម្លៃសមរម្យ សេវាកម្មរហ័ស សុវត្តិភាព និង ទំនុកចិត្ត</h4>
-    </div>
   </section>
-</section>
+
+  <div class="footer-content site-footer" >
+    <!-- Contact Us Section -->
+    <div class="footer-section contact-section">
+      <h3 class="english-heading">Contact Us</h3>
+      <div class="social-links">
+        <a href="" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/telegram.png" alt="Telegram" class="social-icon">
+        </a>
+        <a href="" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/facebook.png" alt="Facebook" class="social-icon">
+        </a>
+      </div>
+    </div>
+    
+    <!-- Payment Methods -->
+    <div class="footer-section payment-section">
+      <h3 class="english-heading">We Accept Payment:</h3>
+      <div class="payment-methods">
+        <img src="/static/images/khqr.png" alt="KHQR" class="payment-logo">
+      </div>
+    </div>
+    
+    <!-- Copyright and Links -->
+    <div class="footer-bottom">
+      <p class="english-heading">Copyright © MENG TOPUP. All Rights Reserved.</p>
+      <p class="footer-links english-heading">
+        <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffffff; text-decoration: underline;">
+          Privacy Policy | Terms and Conditions
+        </a>
+      </p>
+    </div>
+  </div>
+      </section>
+    </section>
 
   </main>
-  <footer id="mainFooter" class="site-footer">
-  <!-- Centered logo and text section -->
-  <div class="footer-center">
-    <img src="/static/images/logo.jpg" alt="MENG TOPUP Logo" class="footer-logo">
-    <p class="khmer-heading footer-text">ទិញពេជ្រ Mobile Legends Free Fire ក្នុងតម្លៃសមរម្យ! តាមរយះអាយឌី ID របស់អ្នក, ជ្រើសរើសកញ្ចប់ពេជ្យ ដែលអ្នកពេញចិត្តទិញ, ដោយបង់ប្រាក់តាមមធ្យោបាយដែលអ្នកមាន, ពេជ្រនឹងបញ្ជូនទៅក្នុងគណនេយ្យ GAME របស់អ្នកក្នុងរយះពេលពីចន្លោះ 10នាទី ដល់ 3ម៉ោង។</p>
-  </div>
-  <!-- Left-aligned content sections -->
+<footer id="mainFooter" class="site-footer">
   <div class="footer-content">
-    <div class="footer-section">
-      <h3 class="khmer-heading">អំពីយើង</h3>
-      <p class="khmer-heading">MENG TOPUP ផ្តល់សេវាកម្មបញ្ចូលពេជ្រល្អបំផុត:</p>
-      <p class="khmer-heading">
-        ⚡️ ល្បឿនលឿន – ទទួលពេជ្រភ្លាមៗ បន្ទាប់ពីទូទាត់ <br>
-        🪙 តម្លៃសមរម្យ – ថោកជាង និងមានប្រូម៉ូសិនជាញឹកញាប់<br>
-        🛡️ សុវត្ថិភាព – ទូទាត់ដោយប្រព័ន្ធមានការការពារដ៏ទំនើប<br>
-        💬 សេវាកម្ម 24/7 – មានបុគ្គលិករួសរាន់ជួយគ្រប់ពេល<br></p>
+    <!-- Contact Us Section -->
+    <div class="footer-section contact-section">
+      <h3 class="english-heading">Contact Us</h3>
+      <div class="social-links">
+        <a href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/telegram.png" alt="Telegram" class="social-icon">
+        </a>
+        <a href="https://web.facebook.com/mengtopup" target="_blank" rel="noopener noreferrer" class="social-link">
+          <img src="/static/images/facebook.png" alt="Facebook" class="social-icon">
+        </a>
+      </div>
     </div>
-    <div>
-      <h3 class="pay-khmer-heading">វិធីបង់ប្រាក់</h3>
-      <p class="khmer-heading">
-      យើងទទួលការបង់ប្រាក់តាមរយៈ 
-  <img src="/static/images/khqr.png" alt="KHQR Logo" class="khqr-inline">
-</p>
-
+    
+    <!-- Payment Methods -->
+    <div class="footer-section payment-section">
+      <h3 class="english-heading">We Accept Payment:</h3>
+      <div class="payment-methods">
+        <img src="/static/images/khqr.png" alt="KHQR" class="payment-logo">
+      </div>
     </div>
-  <div class="footer-section">
-  <h3 class="khmer-heading">ទំនាក់ទំនង</h3>
-  <p class="english-heading">
-    Telegram: 
-    <a class="telegram-link" href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer">
-      MENGTOPUPP
-    </a>
-  </p>
-  <p class="english-heading">
-    Facebook PAGE: 
-    <a class="facebook-link" href="https://web.facebook.com/profile.php?id=61567102657266" target="_blank" rel="noopener noreferrer">
-      MENG TOPUPP
-    </a>
-  </p>
-  <p class="english-heading">
-    Reseller: 
-    <a class="telegram-link" href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer">
-      Join Reseller
-    </a>
-  </p>
-  <p class="english-heading">
-    Mobile: 
-    <a class="telegram-link" href="https://t.me/MENGJONGREAL" target="_blank" rel="noopener noreferrer">
-      +855885555479
-    </a>
-  </p>
-</div>
-  <div class="footer-bottom">
-    <p class="english-heading" style="text-align: center;">Copyright © MENG TOPUP. All Rights Reserved.</p>
-    <p class="english-heading" style="text-align: center; margin-top: 20px;">
-      <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffe600; text-decoration: underline;">
-        Privacy Policy | Terms and Conditions
-      </a>
-    </p>
+    
+    <!-- Copyright and Links -->
+    <div class="footer-bottom">
+      <p class="english-heading">Copyright © MENG TOPUP. All Rights Reserved.</p>
+      <p class="footer-links english-heading">
+        <a href="javascript:void(0)" onclick="showTerms()" style="color: #ffffff; text-decoration: underline;">
+          Privacy Policy | Terms and Conditions
+        </a>
+      </p>
+    </div>
   </div>
 </footer>
 
@@ -828,7 +906,7 @@
 <div class="qr-container">
   <div class="qr-header">KHQR</div>
 <div class="qr-details">
-  <div>MENG TOPUP</div>
+  <div>Meng Topup</div>
   <h2 id="qrAmount"></h2>
   <hr class="qr-line">
 </div>
@@ -1039,16 +1117,16 @@ function createPackageCard(pkg, gameType) {
             displayName = pkg.name.includes('Pass') ? pkg.name : `${pkg.name} Gold`;
             break;
         case 'mcgg':
-            displayName = pkg.name.includes('Diamonds') ? pkg.name : `${pkg.name} Diamonds`;
+            displayName = pkg.name.includes('Diamond') ? pkg.name : `${pkg.name} Diamond`;
             break;
         default: // ml, ff
             displayName = (pkg.name.includes('Weekly') || 
                          pkg.name.includes('Monthly') || 
-                         pkg.name.includes('Evo') || 
+                         pkg.name.includes('EVO') || 
                          pkg.name.includes('lite') || 
                          pkg.name.includes('Pass'))
                        ? pkg.name
-                       : `${pkg.name} Diamonds`;
+                       : `${pkg.name} `;
     }
 
     // Create the card HTML
@@ -1232,7 +1310,7 @@ function showBloodStrikeTopup() {
         const res = await fetch(url);
         const data = await res.json();
         if (data.success) {
-          display.textContent = `✅ Username: ${data.username}`;
+          display.textContent = `${data.username}`;
         } else {
           display.textContent = "❌ Username not found.";
         }
@@ -1296,7 +1374,7 @@ async function checkMCGGUsername() {
         const data = await response.json();
 
         if (data.success) {
-            display.textContent = `✅ Username: ${data.username}`;
+            display.textContent = `${data.username}`;
             display.style.color = "white";
         } else {
             display.textContent = "❌ Username not found";
@@ -1328,14 +1406,14 @@ async function checkPUBGUsername() {
         const data = await response.json();
 
         if (data.success && data.name) {
-            display.textContent = `✅ Username: ${data.name}`;
+            display.textContent = `Username:${data.name}`;
             display.style.color = "white";
         } else {
             display.textContent = "❌ Username not found.";
             display.style.color = "white";
         }
     } catch (error) {
-        display.textContent = "undefined.";
+        display.textContent = "ត្រូវប្រាកដថា ID របស់អ្នកត្រឹម";
         display.style.color = "white";
         console.error(error);
     }
@@ -1360,7 +1438,7 @@ async function checkHOKUsername() {
         const data = await response.json();
 
         if (data.success) {
-            display.textContent = `✅ Username: ${data.username}`;
+            display.textContent = `Username:${data.username}`;
             display.style.color = "white";
         } else {
             display.textContent = "❌ Username not found.";
@@ -1385,14 +1463,14 @@ async function checkBloodStrikeUsername() {
         const data = await response.json();
         
         if (data.success) {
-            display.textContent = `✅ Username: ${data.name}`;
+            display.textContent = `Username:${data.name}`;
             display.style.color = "white";
         } else {
             display.textContent = "❌ Player not found";
             display.style.color = "white";
         }
     } catch (error) {
-        display.textContent = "undefined.";
+        display.textContent = "ត្រូវប្រាកដថា ID របស់អ្នកត្រឹមត្រូវ";
         display.style.color = "white";
     }
 }
@@ -1419,7 +1497,7 @@ async function checkMLPHUsername() {
     const data = await res.json();
     
     if (data.success) {
-      display.textContent = `✅ Username: ${data.username}`;
+      display.textContent = `${data.username}`;
       display.style.color = "white";
     } else {
       display.textContent = "❌ Username not found.";
@@ -1445,6 +1523,81 @@ async function checkMLPHUsername() {
     function closeInvoiceModal() {
       document.getElementById('invoiceModal').style.display = 'none';
     }
+
+// Save transaction ID when payment starts
+function saveTransactionId(transactionId) {
+    localStorage.setItem('lastTransaction', transactionId);
+}
+
+// Check for previous transaction on page load
+function checkPreviousTransaction() {
+    const lastTransaction = localStorage.getItem('lastTransaction');
+    if (lastTransaction) {
+        // Show a simple message
+        showRecoveryMessage(lastTransaction);
+    }
+}
+
+// Show recovery message
+function showRecoveryMessage(transactionId) {
+    const recoveryDiv = document.createElement('div');
+    recoveryDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 10000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            max-width: 300px;
+        ">
+            <h4 style="margin:0 0 10px 0;">Payment Recovery</h4>
+            <p style="margin:0 0 10px 0; font-size:14px;">Checking your previous payment...</p>
+            <button onclick="checkPaymentStatus('${transactionId}')" 
+                    style="background:white; color:#4CAF50; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;">
+                Check Status
+            </button>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="background:transparent; color:white; border:1px solid white; padding:5px 10px; border-radius:4px; cursor:pointer; margin-left:5px;">
+                Close
+            </button>
+        </div>
+    `;
+    document.body.appendChild(recoveryDiv);
+}
+
+// Check payment status
+async function checkPaymentStatus(transactionId) {
+    try {
+        const response = await fetch(`/check_status/${transactionId}`);
+        const result = await response.json();
+        
+        if (result.status === 'completed') {
+            alert(`✅ Payment Successful! $${result.transaction.amount} was processed.`);
+            localStorage.removeItem('lastTransaction');
+            // Remove recovery message
+            document.querySelectorAll('div').forEach(div => {
+                if (div.innerHTML.includes('Payment Recovery')) {
+                    div.remove();
+                }
+            });
+        } else if (result.status === 'pending') {
+            alert('⏳ Payment still pending. Please wait...');
+        } else if (result.status === 'expired') {
+            alert('❌ Payment expired. Please try again.');
+            localStorage.removeItem('lastTransaction');
+        } else {
+            alert('❌ Transaction not found.');
+            localStorage.removeItem('lastTransaction');
+        }
+    } catch (error) {
+        alert('Error checking payment status. Please try again.');
+    }
+}
+
 let countdownInterval = null;
 function initiatePayment() {
     let id, zone, gameType;
@@ -1489,6 +1642,12 @@ function initiatePayment() {
         alert('No game section selected');
         return;
     }
+      // After generating QR, save transaction ID
+    if (currentTransaction && currentTransaction.id) {
+        saveTransactionId(currentTransaction.id);
+    }
+
+
 
     // Get the appropriate checkbox based on game type
     let khqrChecked;
@@ -1943,8 +2102,12 @@ function showInvoice(transaction) {
   } catch (error) {
     console.error('Error showing invoice:', error);
   }
+    localStorage.removeItem('lastTransaction');
 }
-
+// Check for previous transactions when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    checkPreviousTransaction();
+});
 function backToTopup() {
   try {
     closeInvoiceModal();
@@ -2000,7 +2163,7 @@ function closeInvoiceModal() {
   }
 }
 
-    async function checkFFUsername() {
+async function checkFFUsername() {
   const uid = document.getElementById('ffIdInput').value.trim();
   const display = document.getElementById('ffUsernameDisplay');
 
@@ -2014,17 +2177,16 @@ function closeInvoiceModal() {
   display.style.color = "white";
 
   try {
-    const proxyUrl = 'https://api.allorigins.win/raw?url=';
-    
-    const targetUrl = encodeURIComponent(`https://mengtopup.shop/api/check_username/ff=${uid}`);
-    const response = await fetch(proxyUrl + targetUrl);
+    // Removed proxy
+    const targetUrl = `https://mengtopup.shop/api/check_username/ff=${uid}`;
+    const response = await fetch(targetUrl);
 
     if (!response.ok) throw new Error("Network response was not ok");
 
     const data = await response.json();
 
     if (data.success) {
-      display.textContent = `✅ Username: ${data.username}`;
+      display.textContent = `Username: ${data.username}`;
       display.style.color = "white";
     } else {
       display.textContent = "❌ Username not found.";
@@ -2036,6 +2198,7 @@ function closeInvoiceModal() {
     console.error(error);
   }
 }
+
 
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -2059,6 +2222,28 @@ async function downloadInvoicePDF() {
   const now = new Date();
   const invoiceNumber = `INVNO-S${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`;
 
+  // Generate 6-digit code in format "10000XXXXXX" excluding 10000538377
+function generateCode() {
+  const disabledCodes = [
+    "10000204576",
+    "10000557875",
+    "10000619186",
+    "10000913462"
+  ];
+
+  let sixDigitCode;
+  let fullCode;
+
+  do {
+    sixDigitCode = Math.floor(100000 + Math.random() * 900000); // Generates random 6-digit number
+    fullCode = `10000${sixDigitCode}`;
+  } while (disabledCodes.includes(fullCode)); // Keep generating until it's not disabled
+
+  return fullCode;
+}
+
+  
+  const generatedCode = generateCode();
 
   const logo = new Image();
   logo.src = "/static/images/logo.jpg";
@@ -2070,7 +2255,7 @@ async function downloadInvoicePDF() {
     // Company name
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(12);
-    doc.text("MENG TOPUP", 15, 35);
+    doc.text("LUCCI STORE", 15, 35);
 
     // Date
     doc.setFont("Helvetica", "normal");
@@ -2085,10 +2270,8 @@ async function downloadInvoicePDF() {
     // Contact info (right aligned)
     doc.setFontSize(9);
     const addr = [
-      "+855 88 5555 479",
-      "mengjongmm99@gmail.com",
-      "Phleung Chheh Roteh Lech, Sangkat Phleung Chheh Roteh",
-      "Khan Kamboul, Phnom Penh City, Cambodia"
+      "Andong Snay, Andong Snay",
+      "Rolea B'ler, Kompong Chhnang"
     ];
     let ay = 12, ax = pw - 15;
     addr.forEach(line => { doc.text(line, ax, ay, { align: "right" }); ay += 5; });
@@ -2117,7 +2300,8 @@ async function downloadInvoicePDF() {
         ["Price", priceStr],
         ["Time", timeOnly],
         ["Status", "Successful"],
-        ["Invoice No", invoiceNumber]
+        ["Invoice No", invoiceNumber],
+        ["CODE", generatedCode],
       ],
       startY: boxY + boxH + 10,
       tableWidth: 160,
@@ -2602,6 +2786,57 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('homepage').classList.remove('page-transition');
         }, 300);
     }
+
+const track = document.querySelector('.slider-track');
+const slides = document.querySelectorAll('.offer-image-container');
+let index = 0;
+let startX = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+let dragging = false;
+
+function setPosition() {
+  track.style.transform = `translateX(${currentTranslate}px)`;
+}
+
+function touchStart(e) {
+  dragging = true;
+  startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+}
+
+function touchMove(e) {
+  if (!dragging) return;
+  const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+  const diff = currentX - startX;
+  currentTranslate = prevTranslate + diff;
+  setPosition();
+}
+
+function touchEnd() {
+  dragging = false;
+  const moveBy = currentTranslate - prevTranslate;
+  const slideWidth = track.clientWidth / 2; // roughly 2 slides visible
+  if (moveBy < -50 && index < slides.length - 2) index++;
+  if (moveBy > 50 && index > 0) index--;
+  currentTranslate = -index * (track.clientWidth * 0.55); // 55% shift per set
+  prevTranslate = currentTranslate;
+  setPosition();
+}
+
+// Touch and Mouse Support
+track.addEventListener('touchstart', touchStart);
+track.addEventListener('touchmove', touchMove);
+track.addEventListener('touchend', touchEnd);
+track.addEventListener('mousedown', touchStart);
+track.addEventListener('mousemove', touchMove);
+track.addEventListener('mouseup', touchEnd);
+track.addEventListener('mouseleave', () => (dragging = false));
+// Disable right-click context menu
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+});
+
 
 </script>
 </body>
