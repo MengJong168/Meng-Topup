@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Package Management - MENG TOPUP</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/static/style.css">-->
 <!-- Add this near the top of both admin.html and admin_packages.html -->
 <div class="admin-nav">
-        <a href="/admin?pass=1516Coolb" class="admin-link">Transactions</a>
-        <a href="/admin/special_offers?pass=1516Coolb" class="admin-link">Special Offers</a>
+        <a href="/admin/packages?pass=new1516Coolb" class="admin-link">Packages</a>
     </div>
+</div>
     <style>
         .admin-nav {
             display: flex;
@@ -48,314 +48,149 @@
             margin: 20px auto;
             padding: 20px;
         }
-        .package-tabs {
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .status-tabs {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
         }
-        .package-tab {
+        .status-tab {
             padding: 10px 20px;
             background: var(--card-bg);
             border-radius: 5px;
             cursor: pointer;
         }
-        .package-tab.active {
+        .status-tab.active {
             background: var(--primary-color);
             color: white;
         }
-        .packages-table {
+        .search-box {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+        .transactions-table {
             width: 100%;
             border-collapse: collapse;
         }
-        .packages-table th, .packages-table td {
+        .transactions-table th, .transactions-table td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
-        .packages-table th {
+        .transactions-table th {
             background: var(--primary-color);
             color: white;
         }
-        .packages-table tr:hover {
+        .transactions-table tr:hover {
             background: rgba(255, 255, 255, 0.05);
         }
-        .edit-price {
-            display: flex;
-            gap: 10px;
-            align-items: center;
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
-        .edit-price input {
-            width: 80px;
-            padding: 5px;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
+        .status-pending {
+            background: #FFA500;
+            color: black;
+        }
+        .status-completed {
+            background: #4CAF50;
+            color: white;
+        }
+        .status-expired {
+            background: #F44336;
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="admin-container">
-        <h1>Package Management</h1>
-        
-        <div class="package-tabs">
-            <div class="package-tab active" onclick="showGamePackages('ml')">Mobile Legends</div>
-            <div class="package-tab" onclick="showGamePackages('ff')">Free Fire</div>
-             <div class="package-tab" onclick="showGamePackages('pubg')">PUBG Mobile</div>
-             <!-- Add this to the package-tabs section -->
-<div class="package-tab" onclick="showGamePackages('hok')">HONOR OF KING</div>
-<div class="package-tab" onclick="showGamePackages('bloodstrike')">BLOOD STRIKE</div>
-<div class="package-tab" onclick="showGamePackages('mcgg')">Magic Chess: Go Go</div>
+        <div class="admin-header">
+            <h1>MENG TOPUP Admin Panel</h1>
+            <input type="text" class="search-box" id="searchInput" placeholder="Search transactions..." 
+                   value="{{ search_query }}" oninput="updateSearch()">
         </div>
         
-        <!-- Mobile Legends Packages -->
-        <table class="packages-table" id="mlPackagesTable">
-            <thead>
-                <tr>
-                    <th>Package Name</th>
-                    <th>Current Price</th>
-                    <th>New Price</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for package in ml_packages %}
-                <tr>
-                    <td>{{ package.name }}</td>
-                    <td>${{ "%.2f"|format(package.price) }}</td>
-                    <td>
-                        <div class="edit-price">
-                            <input type="number" step="0.01" min="0" id="ml_{{ package.name }}_price" 
-                                   value="{{ "%.2f"|format(package.price) }}">
-                        </div>
-                    </td>
-                    <td>
-                        <button onclick="updatePackage('ml', '{{ package.name }}')">Update</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            <!-- Add this table for PUBG packages -->
-<table class="packages-table" id="pubgPackagesTable" style="display: none;">
-    <thead>
-        <tr>
-            <th>Package Name</th>
-            <th>Current Price</th>
-            <th>New Price</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for package in pubg_packages %}
-        <tr>
-            <td>{{ package.name }} UC</td>
-            <td>${{ "%.2f"|format(package.price) }}</td>
-            <td>
-                <div class="edit-price">
-                    <input type="number" step="0.01" min="0" id="pubg_{{ package.name }}_price" 
-                           value="{{ "%.2f"|format(package.price) }}">
-                </div>
-            </td>
-            <td>
-                <button onclick="updatePackage('pubg', '{{ package.name }}')">Update</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-        </table>
+        <div class="status-tabs">
+            <div class="status-tab {% if current_status == 'pending' %}active{% endif %}" 
+                 onclick="filterByStatus('pending')">Pending</div>
+            <div class="status-tab {% if current_status == 'expired' %}active{% endif %}" 
+                 onclick="filterByStatus('expired')">Expired</div>
+            <div class="status-tab {% if current_status == 'completed' %}active{% endif %}" 
+                 onclick="filterByStatus('completed')">Completed</div>
+        </div>
         
-        <!-- Free Fire Packages -->
-        <table class="packages-table" id="ffPackagesTable" style="display: none;">
+        <table class="transactions-table">
             <thead>
                 <tr>
-                    <th>Package Name</th>
-                    <th>Current Price</th>
-                    <th>New Price</th>
-                    <th>Action</th>
+                    <th>ID</th>
+                    <th>Player ID</th>
+                    <th>Zone ID</th>
+                    <th>Amount</th>
+                    <th>Package</th>
+                    <th>Game</th>
+                    <th>Time</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                {% for package in ff_packages %}
+                {% for transaction in transactions %}
                 <tr>
-                    <td>{{ package.name }}</td>
-                    <td>${{ "%.2f"|format(package.price) }}</td>
+                    <td>{{ transaction.transaction_id }}</td>
+                    <td>{{ transaction.player_id }}</td>
+                    <td>{{ transaction.zone_id }}</td>
+                    <td>${{ "%.2f"|format(transaction.amount) }}</td>
+                    <td>{{ transaction.package }}</td>
+                    <td>{{ transaction.game_type|upper }}</td>
+                    <td>{{ transaction.timestamp|datetimeformat }}</td>
                     <td>
-                        <div class="edit-price">
-                            <input type="number" step="0.01" min="0" id="ff_{{ package.name }}_price" 
-                                   value="{{ "%.2f"|format(package.price) }}">
-                        </div>
+                        <span class="status-badge status-{{ transaction.status }}">
+                            {{ transaction.status|title }}
+                        </span>
                     </td>
-                    <td>
-                        <button onclick="updatePackage('ff', '{{ package.name }}')">Update</button>
-                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" style="text-align: center;">No transactions found</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <!-- Add this table for HOK packages -->
-<table class="packages-table" id="hokPackagesTable" style="display: none;">
-    <thead>
-        <tr>
-            <th>Package Name</th>
-            <th>Current Price</th>
-            <th>New Price</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for package in hok_packages %}
-        <tr>
-            <td>{{ package.name }} TOKENS</td>
-            <td>${{ "%.2f"|format(package.price) }}</td>
-            <td>
-                <div class="edit-price">
-                    <input type="number" step="0.01" min="0" id="hok_{{ package.name }}_price" 
-                           value="{{ "%.2f"|format(package.price) }}">
-                </div>
-            </td>
-            <td>
-                <button onclick="updatePackage('hok', '{{ package.name }}')">Update</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<!-- Add this table -->
-<table class="packages-table" id="bloodstrikePackagesTable" style="display: none;">
-    <thead>
-        <tr>
-            <th>Package Name</th>
-            <th>Current Price</th>
-            <th>New Price</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for package in bloodstrike_packages %}
-        <tr>
-            <td>{{ package.name }}</td>
-            <td>${{ "%.2f"|format(package.price) }}</td>
-            <td>
-                <div class="edit-price">
-                    <input type="number" step="0.01" min="0" 
-                           id="bloodstrike_{{ package.name|replace(' ', '_') }}_price" 
-                           value="{{ "%.2f"|format(package.price) }}">
-                </div>
-            </td>
-            <td>
-                <button onclick="updatePackage('bloodstrike', '{{ package.name }}')">Update</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<!-- MCGG Packages -->
-<table class="packages-table" id="mcggPackagesTable" style="display: none;">
-    <thead>
-        <tr>
-            <th>Package Name</th>
-            <th>Current Price</th>
-            <th>New Price</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for package in mcgg_packages %}
-        <tr>
-            <td>{{ package.name }}</td>
-            <td>${{ "%.2f"|format(package.price) }}</td>
-            <td>
-                <div class="edit-price">
-                    <input type="number" step="0.01" min="0" 
-                           id="mcgg_{{ package.name|replace(' ', '_') }}_price" 
-                           value="{{ "%.2f"|format(package.price) }}">
-                </div>
-            </td>
-            <td>
-                <button onclick="updatePackage('mcgg', '{{ package.name }}')">Update</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
     </div>
 
     <script>
-            function showGamePackages(gameType) {
-        // Hide all tables first
-        document.querySelectorAll('.packages-table').forEach(table => {
-            table.style.display = 'none';
-        });
-        
-        // Show the selected table
-        document.getElementById(gameType + 'PackagesTable').style.display = 'table';
-        
-        // Update active tab
-        document.querySelectorAll('.package-tab').forEach(tab => tab.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-    }
-        
-        // In admin_packages.html and admin_special_offers.html
-function updatePackage(gameType, packageName) {
-    // Replace spaces with underscores in packageName to match the ID format
-    const sanitizedPackageName = packageName.replace(/ /g, '_');
-    const priceInput = document.getElementById(`${gameType}_${sanitizedPackageName}_price`);
-    const newPrice = parseFloat(priceInput.value);
-    
-    if (isNaN(newPrice)) {
-        showAlert('Please enter a valid number', 'error');
-        return;
-    }
-
-    fetch(`/admin/update_package?pass=1516Coolb`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            game_type: gameType,
-            package_name: packageName,  // Keep original name here for backend
-            new_price: newPrice
-        })
-    })
-    .then(response => {
-        if (response.status === 401) {
-            throw new Error('Unauthorized - Please login again');
+        function filterByStatus(status) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('status', status);
+            window.location.href = url.toString();
         }
-        return response.json();
-    })
-    .then(data => {
-        if (data.error) throw new Error(data.error);
-        showAlert('Price updated successfully!', 'success');
-        // Update display
-        priceInput.value = newPrice.toFixed(2);
-    })
-    .catch(error => {
-        showAlert(error.message, 'error');
-        console.error('Error:', error);
-    });
-}
-
-function showSuccessMessage(message) {
-    const alertDiv = document.createElement('div');
-    alertDiv.className = 'alert success';
-    alertDiv.textContent = message;
-    document.body.appendChild(alertDiv);
-    setTimeout(() => alertDiv.remove(), 3000);
-}
-
-function showErrorMessage(message) {
-    const alertDiv = document.createElement('div');
-    alertDiv.className = 'alert error';
-    alertDiv.textContent = message;
-    document.body.appendChild(alertDiv);
-    setTimeout(() => alertDiv.remove(), 3000);
-}
-function showAlert(message, type) {
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `alert ${type}`;
-    alertDiv.textContent = message;
-    document.body.appendChild(alertDiv);
-    setTimeout(() => alertDiv.remove(), 3000);
-}
+        
+        function updateSearch() {
+            const searchValue = document.getElementById('searchInput').value;
+            const url = new URL(window.location.href);
+            
+            if (searchValue) {
+                url.searchParams.set('search', searchValue);
+            } else {
+                url.searchParams.delete('search');
+            }
+            
+            // Debounce the search to avoid too many requests
+            clearTimeout(window.searchTimeout);
+            window.searchTimeout = setTimeout(() => {
+                window.location.href = url.toString();
+            }, 500);
+        }
     </script>
 </body>
 </html>
