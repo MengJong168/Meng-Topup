@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="/static/style.css">-->
-<!-- Add this near the top of both admin.html and admin_packages.html -->
-<div class="admin-nav">
-        <a href="/admin/packages?pass=new1516Coolb" class="admin-link">Packages</a>
+    <title>Package Management</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Add this near the top of both admin.html and admin_packages.html -->
+    <div class="admin-nav">
+        <a href="/admin?pass=new1516Coolb" class="admin-link">Transactions</a>
     </div>
-</div>
     <style>
         .admin-nav {
             display: flex;
@@ -48,120 +47,300 @@
             margin: 20px auto;
             padding: 20px;
         }
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .status-tabs {
+        .package-tabs {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
-        .status-tab {
+        .package-tab {
             padding: 10px 20px;
             background: var(--card-bg);
             border-radius: 5px;
             cursor: pointer;
+            border: 1px solid var(--border-color);
         }
-        .status-tab.active {
+        .package-tab.active {
             background: var(--primary-color);
             color: white;
         }
-        .search-box {
-            padding: 10px;
-            width: 300px;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            color: var(--text-color);
-        }
-        .transactions-table {
+        .packages-table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
-        .transactions-table th, .transactions-table td {
+        .packages-table th, .packages-table td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
-        .transactions-table th {
+        .packages-table th {
             background: var(--primary-color);
             color: white;
         }
-        .transactions-table tr:hover {
-            background: rgba(255, 255, 255, 0.05);
+        .packages-table tr:hover {
+            background: rgba(0, 0, 0, 0.02);
         }
-        .status-badge {
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
+        .edit-price {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .edit-price input {
+            width: 80px;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+        button {
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
             font-weight: bold;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
         }
-        .status-pending {
-            background: #FFA500;
-            color: black;
-        }
-        .status-completed {
+        .alert.success {
             background: #4CAF50;
-            color: white;
         }
-        .status-expired {
+        .alert.error {
             background: #F44336;
-            color: white;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
         }
     </style>
 </head>
 <body>
     <div class="admin-container">
-        <div class="admin-header">
-            <h1>MENG TOPUP Admin Panel</h1>
-            <input type="text" class="search-box" id="searchInput" placeholder="Search transactions..." 
-                   value="{{ search_query }}" oninput="updateSearch()">
+        <h1>Package Management</h1>
+        
+        <div class="package-tabs">
+            <div class="package-tab active" onclick="showGamePackages('ml')">Mobile Legends</div>
+            <div class="package-tab" onclick="showGamePackages('ff')">Free Fire</div>
+            <div class="package-tab" onclick="showGamePackages('pubg')">PUBG Mobile</div>
+            <div class="package-tab" onclick="showGamePackages('hok')">HONOR OF KING</div>
+            <div class="package-tab" onclick="showGamePackages('bloodstrike')">BLOOD STRIKE</div>
+            <div class="package-tab" onclick="showGamePackages('mcgg')">Magic Chess: Go Go</div>
+            <div class="package-tab" onclick="showGamePackages('mlph')">ML Philippines</div>
         </div>
         
-        <div class="status-tabs">
-            <div class="status-tab {% if current_status == 'pending' %}active{% endif %}" 
-                 onclick="filterByStatus('pending')">Pending</div>
-            <div class="status-tab {% if current_status == 'expired' %}active{% endif %}" 
-                 onclick="filterByStatus('expired')">Expired</div>
-            <div class="status-tab {% if current_status == 'completed' %}active{% endif %}" 
-                 onclick="filterByStatus('completed')">Completed</div>
-        </div>
-        
-        <table class="transactions-table">
+        <!-- Mobile Legends Packages -->
+        <table class="packages-table" id="mlPackagesTable">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Player ID</th>
-                    <th>Zone ID</th>
-                    <th>Amount</th>
-                    <th>Package</th>
-                    <th>Game</th>
-                    <th>Time</th>
-                    <th>Status</th>
+                    <th>Package Name</th>
+                    <th>Current Price</th>
+                    <th>New Price</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                {% for transaction in transactions %}
+                {% for package in ml_packages %}
                 <tr>
-                    <td>{{ transaction.transaction_id }}</td>
-                    <td>{{ transaction.player_id }}</td>
-                    <td>{{ transaction.zone_id }}</td>
-                    <td>${{ "%.2f"|format(transaction.amount) }}</td>
-                    <td>{{ transaction.package }}</td>
-                    <td>{{ transaction.game_type|upper }}</td>
-                    <td>{{ transaction.timestamp|datetimeformat }}</td>
+                    <td>{{ package.name }}</td>
+                    <td>${{ "%.2f"|format(package.price) }}</td>
                     <td>
-                        <span class="status-badge status-{{ transaction.status }}">
-                            {{ transaction.status|title }}
-                        </span>
+                        <div class="edit-price">
+                            <input type="number" step="0.01" min="0" id="ml_{{ package.name }}_price" 
+                                   value="{{ "%.2f"|format(package.price) }}">
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="updatePackage('ml', '{{ package.name }}')">Update</button>
                     </td>
                 </tr>
-                {% else %}
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <!-- Free Fire Packages -->
+        <table class="packages-table" id="ffPackagesTable" style="display: none;">
+            <thead>
                 <tr>
-                    <td colspan="8" style="text-align: center;">No transactions found</td>
+                    <th>Package Name</th>
+                    <th>Current Price</th>
+                    <th>New Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for package in ff_packages %}
+                <tr>
+                    <td>{{ package.name }}</td>
+                    <td>${{ "%.2f"|format(package.price) }}</td>
+                    <td>
+                        <div class="edit-price">
+                            <input type="number" step="0.01" min="0" id="ff_{{ package.name }}_price" 
+                                   value="{{ "%.2f"|format(package.price) }}">
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="updatePackage('ff', '{{ package.name }}')">Update</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- PUBG Mobile Packages -->
+        <table class="packages-table" id="pubgPackagesTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Package Name</th>
+                    <th>Current Price</th>
+                    <th>New Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for package in pubg_packages %}
+                <tr>
+                    <td>{{ package.name }} UC</td>
+                    <td>${{ "%.2f"|format(package.price) }}</td>
+                    <td>
+                        <div class="edit-price">
+                            <input type="number" step="0.01" min="0" id="pubg_{{ package.name }}_price" 
+                                   value="{{ "%.2f"|format(package.price) }}">
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="updatePackage('pubg', '{{ package.name }}')">Update</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- HONOR OF KING Packages -->
+        <table class="packages-table" id="hokPackagesTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Package Name</th>
+                    <th>Current Price</th>
+                    <th>New Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for package in hok_packages %}
+                <tr>
+                    <td>{{ package.name }} TOKENS</td>
+                    <td>${{ "%.2f"|format(package.price) }}</td>
+                    <td>
+                        <div class="edit-price">
+                            <input type="number" step="0.01" min="0" id="hok_{{ package.name }}_price" 
+                                   value="{{ "%.2f"|format(package.price) }}">
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="updatePackage('hok', '{{ package.name }}')">Update</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- BLOOD STRIKE Packages -->
+        <table class="packages-table" id="bloodstrikePackagesTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Package Name</th>
+                    <th>Current Price</th>
+                    <th>New Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for package in bloodstrike_packages %}
+                <tr>
+                    <td>{{ package.name }}</td>
+                    <td>${{ "%.2f"|format(package.price) }}</td>
+                    <td>
+                        <div class="edit-price">
+                            <input type="number" step="0.01" min="0" 
+                                   id="bloodstrike_{{ package.name|replace(' ', '_') }}_price" 
+                                   value="{{ "%.2f"|format(package.price) }}">
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="updatePackage('bloodstrike', '{{ package.name }}')">Update</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Magic Chess: Go Go Packages -->
+        <table class="packages-table" id="mcggPackagesTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Package Name</th>
+                    <th>Current Price</th>
+                    <th>New Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for package in mcgg_packages %}
+                <tr>
+                    <td>{{ package.name }}</td>
+                    <td>${{ "%.2f"|format(package.price) }}</td>
+                    <td>
+                        <div class="edit-price">
+                            <input type="number" step="0.01" min="0" 
+                                   id="mcgg_{{ package.name|replace('+', '_plus_')|replace(' ', '_') }}_price" 
+                                   value="{{ "%.2f"|format(package.price) }}">
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="updatePackage('mcgg', '{{ package.name }}')">Update</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- ML Philippines Packages -->
+        <table class="packages-table" id="mlphPackagesTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Package Name</th>
+                    <th>Current Price</th>
+                    <th>New Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for package in mlph_packages %}
+                <tr>
+                    <td>{{ package.name }} DIAMONDS</td>
+                    <td>${{ "%.2f"|format(package.price) }}</td>
+                    <td>
+                        <div class="edit-price">
+                            <input type="number" step="0.01" min="0" id="mlph_{{ package.name }}_price" 
+                                   value="{{ "%.2f"|format(package.price) }}">
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="updatePackage('mlph', '{{ package.name }}')">Update</button>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -169,28 +348,106 @@
     </div>
 
     <script>
-        function filterByStatus(status) {
-            const url = new URL(window.location.href);
-            url.searchParams.set('status', status);
-            window.location.href = url.toString();
-        }
-        
-        function updateSearch() {
-            const searchValue = document.getElementById('searchInput').value;
-            const url = new URL(window.location.href);
+        function showGamePackages(gameType) {
+            // Hide all tables first
+            document.querySelectorAll('.packages-table').forEach(table => {
+                table.style.display = 'none';
+            });
             
-            if (searchValue) {
-                url.searchParams.set('search', searchValue);
-            } else {
-                url.searchParams.delete('search');
+            // Show the selected table
+            const selectedTable = document.getElementById(gameType + 'PackagesTable');
+            if (selectedTable) {
+                selectedTable.style.display = 'table';
             }
             
-            // Debounce the search to avoid too many requests
-            clearTimeout(window.searchTimeout);
-            window.searchTimeout = setTimeout(() => {
-                window.location.href = url.toString();
-            }, 500);
+            // Update active tab
+            document.querySelectorAll('.package-tab').forEach(tab => tab.classList.remove('active'));
+            event.currentTarget.classList.add('active');
         }
+        
+        function updatePackage(gameType, packageName) {
+            // Replace special characters in the packageName to match the ID format
+            let sanitizedPackageName = packageName;
+            
+            // Handle different game types with special characters
+            if (gameType === 'mcgg') {
+                sanitizedPackageName = packageName.replace(/\+/g, '_plus_').replace(/ /g, '_');
+            } else if (gameType === 'bloodstrike') {
+                sanitizedPackageName = packageName.replace(/ /g, '_');
+            } else {
+                sanitizedPackageName = packageName;
+            }
+            
+            const priceInput = document.getElementById(`${gameType}_${sanitizedPackageName}_price`);
+            
+            if (!priceInput) {
+                showAlert(`Could not find price input for ${gameType} ${packageName}`, 'error');
+                console.error(`Element not found: ${gameType}_${sanitizedPackageName}_price`);
+                return;
+            }
+
+            const newPrice = parseFloat(priceInput.value);
+            
+            if (isNaN(newPrice)) {
+                showAlert('Please enter a valid number', 'error');
+                return;
+            }
+
+            if (newPrice < 0) {
+                showAlert('Price cannot be negative', 'error');
+                return;
+            }
+
+            fetch(`/admin/update_package?pass=new1516Coolb`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    game_type: gameType,
+                    package_name: packageName,  // Keep original name here for backend
+                    new_price: newPrice
+                })
+            })
+            .then(response => {
+                if (response.status === 401) {
+                    throw new Error('Unauthorized - Please login again');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) throw new Error(data.error);
+                showAlert('Price updated successfully!', 'success');
+                // Update the current price display
+                const currentPriceCell = priceInput.closest('tr').querySelector('td:nth-child(2)');
+                currentPriceCell.textContent = `$${newPrice.toFixed(2)}`;
+            })
+            .catch(error => {
+                showAlert(error.message, 'error');
+                console.error('Error:', error);
+            });
+        }
+
+        function showAlert(message, type) {
+            // Remove any existing alerts
+            const existingAlerts = document.querySelectorAll('.alert');
+            existingAlerts.forEach(alert => alert.remove());
+            
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${type}`;
+            alertDiv.textContent = message;
+            document.body.appendChild(alertDiv);
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.parentNode.removeChild(alertDiv);
+                }
+            }, 3000);
+        }
+
+        // Initialize the page with ML packages visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showGamePackages('ml');
+        });
     </script>
 </body>
 </html>
