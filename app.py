@@ -35,7 +35,7 @@ def admin_required(f):
 # Load transactions from data store API
 def load_transactions():
     try:
-        response = requests.get(f'{DATA_STORE_URL}/transactions?store=luccist4re', timeout=5)
+        response = requests.get(f'{DATA_STORE_URL}/api/v1/transactions?store=mengtopup', timeout=5)
         response.raise_for_status()
         return response.json()
     except requests.RequestException:
@@ -44,7 +44,7 @@ def load_transactions():
 # Save transactions to data store API
 def save_transactions(transactions):
     try:
-        response = requests.post(f'{DATA_STORE_URL}/transactions?store=luccist4re', 
+        response = requests.post(f'{DATA_STORE_URL}/api/v1/transactions?store=mengtopup', 
                                json=transactions, timeout=5)
         response.raise_for_status()
         return response.json().get('success', False)
@@ -54,7 +54,7 @@ def save_transactions(transactions):
 # Add a single transaction to data store
 def add_transaction_to_store(transaction_data, status):
     try:
-        response = requests.post(f'{DATA_STORE_URL}/transactions?store=luccist4re/add', 
+        response = requests.post(f'{DATA_STORE_URL}/api/v1/transactions?store=mengtopup/add', 
                                json={
                                    'status': status,
                                    'transaction': transaction_data
@@ -66,7 +66,7 @@ def add_transaction_to_store(transaction_data, status):
 # Load packages from data store API
 def load_packages():
     try:
-        response = requests.get(f'{DATA_STORE_URL}/packages?store=luccist4re', timeout=5)
+        response = requests.get(f'{DATA_STORE_URL}/api/v1/packages?store=mengtopup', timeout=5)
         response.raise_for_status()
         return response.json()
     except requests.RequestException:
@@ -452,7 +452,7 @@ def update_package():
             return jsonify({'error': 'Price must be a number'}), 400
 
         # Update via API
-        response = requests.post(f'{DATA_STORE_URL}/packages/update?store=luccist4re', 
+        response = requests.post(f'{DATA_STORE_URL}/api/v1/packages/update?store=mengtopup', 
                                json={
                                    'game_type': game_type,
                                    'package_name': package_name,
@@ -523,7 +523,7 @@ def update_special_offer():
             return jsonify({'error': 'Price must be a number'}), 400
 
         # Update via API
-        response = requests.post(f'{DATA_STORE_URL}/packages/update?store=luccist4re', 
+        response = requests.post(f'{DATA_STORE_URL}/api/v1/packages/update?store=mengtopup', 
                                json={
                                    'game_type': game_type,
                                    'package_name': offer_name,
@@ -712,64 +712,73 @@ def cleanup_recent_transactions():
         if timestamp > cutoff_time
     }
 
-@app.route('/api/check-pending-payments', methods=['POST', 'GET'])
-def check_pending_payments_api():
-    """API endpoint to check pending payments - call this via cron"""
-    try:
-        transactions = load_transactions()
-        pending_txns = transactions.get('pending', [])
-        
-        # Get only the last 5 pending transactions (most recent first)
-        recent_pending = sorted(
-            pending_txns, 
-            key=lambda x: x.get('timestamp', ''), 
-            reverse=True
-        )[:10]
-        
-        processed_count = 0
-        for txn in recent_pending:
-            md5_hash = txn.get('md5_hash')
-            transaction_id = txn.get('transaction_id')
+def check_pending_payments_background():
+    """Check last 5 pending payments every 10 seconds"""
+    while True:
+        try:
+            transactions = load_transactions()
+            pending_txns = transactions.get('pending', [])
             
-            if md5_hash and transaction_id:
-                try:
-                    response = requests.get(f"https://mengtopup.shop/api/check_payment?md5={md5_hash}", timeout=5)
-                    if response.status_code == 200:
-                        payment_data = response.json()
-                        if payment_data.get('status') == "PAID":
-                            # Move to completed
-                            completed_txn = {**txn, 'status': 'completed', 'telegram_sent': False}
-                            transactions['completed'].append(completed_txn)
-                            transactions['pending'] = [t for t in transactions['pending'] 
-                                                     if t.get('transaction_id') != transaction_id]
-                            
-                            # Send to Telegram
-                            send_to_telegram(completed_txn)
-                            
-                            # Update transaction to mark Telegram as sent
-                            for t in transactions['completed']:
-                                if t.get('transaction_id') == transaction_id:
-                                    t['telegram_sent'] = True
-                            
-                            save_transactions(transactions)
-                            processed_count += 1
-                            print(f"Cron: Payment completed for transaction {transaction_id}")
-                            
-                except Exception as e:
-                    print(f"Cron check error for {transaction_id}: {str(e)}")
-                    continue
-        
-        return jsonify({
-            'success': True,
-            'processed': processed_count,
-            'checked': len(recent_pending),
-            'message': f'Processed {processed_count} payments out of {len(recent_pending)} checked'
-        })
-        
-    except Exception as e:
-        print(f"Cron job error: {str(e)}")
-        return jsonify({'success': False, 'error': str(e)}), 500
-        
+            # Get only the last 5 pending transactions (most recent first)
+            recent_pending = sorted(
+                pending_txns, 
+                key=lambda x: x.get('timestamp', ''), 
+                reverse=True
+            )[:5]
+            
+            for txn in recent_pending:
+                md5_hash = txn.get('md5_hash')
+                transaction_id = txn.get('transaction_id')
+                
+                if md5_hash and transaction_id:
+                    try:
+                        response = requests.get(f"https://mengtopup.shop/api/check_payment?md5={md5_hash}", timeout=5)
+                        if response.status_code == 200:
+                            payment_data = response.json()
+                            if payment_data.get('status') == "PAID":
+                                # Move to completed
+                                completed_txn = {**txn, 'status': 'completed', 'telegram_sent': False}
+                                transactions['completed'].append(completed_txn)
+                                transactions['pending'] = [t for t in transactions['pending'] 
+                                                         if t.get('transaction_id') != transaction_id]
+                                
+                                # Send to Telegram
+                                send_to_telegram(completed_txn)
+                                
+                                # Update transaction to mark Telegram as sent
+                                for t in transactions['completed']:
+                                    if t.get('transaction_id') == transaction_id:
+                                        t['telegram_sent'] = True
+                                
+                                save_transactions(transactions)
+                                print(f"Background: Payment completed for transaction {transaction_id}")
+                                
+                    except Exception as e:
+                        print(f"Background check error for {transaction_id}: {str(e)}")
+                        continue
+            
+            time.sleep(10)  # Check every 10 seconds
+            
+        except Exception as e:
+            print(f"Background thread error: {str(e)}")
+            time.sleep(30)  # Wait longer if major error occurs
+
+# Start background thread when app starts (replace the existing code)
+if not any(thread.name == "payment_checker" for thread in threading.enumerate()):
+    background_thread = threading.Thread(
+        target=check_pending_payments_background, 
+        daemon=True,
+        name="payment_checker"
+    )
+    background_thread.start()
+    print("Background payment checker started")
+
+
+
+# Start background thread when app starts
+background_thread = threading.Thread(target=check_pending_payments_background, daemon=True)
+background_thread.start()
+
 # Simple status check endpoint
 @app.route('/check_status/<transaction_id>')
 def check_status(transaction_id):
