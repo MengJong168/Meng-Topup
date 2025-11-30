@@ -27,7 +27,7 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         password = request.args.get('pass')
-        if password != "new1516Coolb":
+        if password != "new1516Coolbflash":
             return "Unauthorized", 401
         return f(*args, **kwargs)
     return decorated_function
