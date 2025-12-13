@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, render_template_string, request, jsonify, send_from_directory, redirect, url_for
 from datetime import datetime, timedelta
 import qrcode
 from io import BytesIO
@@ -11,6 +11,9 @@ from bakong_khqr import KHQR
 import json
 from functools import wraps
 import threading
+import secrets
+import hashlib
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -21,16 +24,169 @@ current_transactions = {}
 
 # Data Store API configuration
 DATA_STORE_URL = 'https://mengtopup.shop'  # Change this to your data store server URL
+# Add these global variables near the top
+TELEGRAM_BOT_TOKEN = "8441360171:AAF9SBXX7GJq9Th7cJLjT0YW-bRKq9SIRJs"
+ADMIN_CHAT_ID = "-1003284732983"  # Your admin chat ID
+admin_verification_codes = {}  # Store verification codes
+admin_verified_sessions = set()  # Store verified session IDs
+VERIFICATION_TIMEOUT = 300  # 5 minutes
 
-# Admin authentication decorator
+# Add this function to send verification codes
+def send_telegram_verification_code(session_id, ip_address):
+    """Send a 6-digit verification code to Telegram"""
+    # Generate 6-digit code
+    code = ''.join([str(secrets.randbelow(10)) for _ in range(6)])
+    
+    # Store code with timestamp
+    admin_verification_codes[session_id] = {
+        'code': code,
+        'timestamp': time.time(),
+        'ip_address': ip_address
+    }
+    
+    # Clean up old codes
+    cleanup_expired_codes()
+    
+    # Send to Telegram
+    message = (
+        f"🔐 Admin Login Verification\n"
+        f"Session ID: {session_id[:8]}...\n"
+        f"IP Address: {ip_address}\n"
+        f"🕐 Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+        f"🔢 Verification Code: {code}\n"
+        f"⏳ Code expires in 5 minutes"
+    )
+    
+    try:
+        response = requests.post(
+            f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage',
+            json={
+                'chat_id': ADMIN_CHAT_ID,
+                'text': message
+            },
+            timeout=5
+        )
+        return response.status_code == 200
+    except:
+        return False
+
+def cleanup_expired_codes():
+    """Remove expired verification codes"""
+    current_time = time.time()
+    expired_sessions = []
+    
+    for session_id, data in admin_verification_codes.items():
+        if current_time - data['timestamp'] > VERIFICATION_TIMEOUT:
+            expired_sessions.append(session_id)
+    
+    for session_id in expired_sessions:
+        del admin_verification_codes[session_id]
+
+# Update the admin_required decorator
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
+        # Check password first
         password = request.args.get('pass')
         if password != "new1516Coolbflash":
             return "Unauthorized", 401
+        
+        # Check if session is verified
+        session_id = request.cookies.get('admin_session')
+        if not session_id or session_id not in admin_verified_sessions:
+            # Generate redirect URL with all query parameters
+            full_url = request.url
+            base_url = request.base_url
+            query_string = request.query_string.decode('utf-8')
+            
+            # Build redirect URL
+            redirect_url = f'/admin/verify'
+            if query_string:
+                # Include the pass parameter in redirect
+                redirect_url += f'?{query_string}'
+            
+            return redirect(redirect_url)
+        
         return f(*args, **kwargs)
     return decorated_function
+
+@app.route('/admin/verify')
+def admin_verify():
+    """Show verification page"""
+    # Get the pass parameter from the original URL
+    password = request.args.get('pass')
+    if password != "new1516Coolbflash":
+        return "Unauthorized", 401
+    
+    # Get the original destination URL
+    original_path = request.args.get('redirect', '/admin')
+    
+    # Reconstruct the full URL with pass parameter
+    if '?' in original_path:
+        redirect_url = f"{original_path}&pass={password}"
+    else:
+        redirect_url = f"{original_path}?pass={password}"
+    
+    return render_template('admin_verify.html', redirect_url=redirect_url)
+
+@app.route('/admin/send_code', methods=['POST'])
+def send_verification_code():
+    """Send verification code to Telegram"""
+    try:
+        session_id = request.cookies.get('admin_session')
+        if not session_id:
+            # Generate new session ID
+            session_id = secrets.token_hex(16)
+        
+        # Send verification code
+        ip_address = request.remote_addr
+        success = send_telegram_verification_code(session_id, ip_address)
+        
+        if success:
+            response = jsonify({'success': True, 'session_id': session_id})
+            response.set_cookie('admin_session', session_id, max_age=3600, httponly=True)
+            return response
+        else:
+            return jsonify({'success': False, 'error': 'Failed to send code'}), 500
+            
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/admin/check_code', methods=['POST'])
+def check_verification_code():
+    """Verify the 6-digit code"""
+    try:
+        data = request.get_json()
+        code = data.get('code')
+        session_id = request.cookies.get('admin_session')
+        
+        if not session_id or not code:
+            return jsonify({'success': False, 'error': 'Missing data'}), 400
+        
+        # Check if code exists and is not expired
+        if session_id not in admin_verification_codes:
+            return jsonify({'success': False, 'error': 'Code expired or not found'}), 400
+        
+        code_data = admin_verification_codes[session_id]
+        
+        # Check timeout
+        if time.time() - code_data['timestamp'] > VERIFICATION_TIMEOUT:
+            del admin_verification_codes[session_id]
+            return jsonify({'success': False, 'error': 'Code expired'}), 400
+        
+        # Check code
+        if code_data['code'] == code:
+            # Mark session as verified
+            admin_verified_sessions.add(session_id)
+            # Remove used code
+            del admin_verification_codes[session_id]
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'error': 'Invalid code'}), 400
+            
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 
 # Load transactions from data store API
 def load_transactions():
@@ -795,6 +951,8 @@ def check_status(transaction_id):
                 })
     
     return jsonify({'status': 'not_found'})
+
+
 
 if __name__ == '__main__':
     app.run()
