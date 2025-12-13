@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Verification - MENG TOPUP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .verification-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+        }
+        
+        .verification-header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .verification-header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .verification-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .verification-body {
+            padding: 30px;
+        }
+        
+        .telegram-icon {
+            width: 80px;
+            height: 80px;
+            background: #0088cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 40px;
+        }
+        
+        .instruction {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .code-inputs {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .code-input {
+            width: 100%;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .code-input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        .code-input.filled {
+            border-color: #10b981;
+            background-color: #f0fdf4;
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 14px;
+            margin-top: 5px;
+            text-align: center;
+            min-height: 20px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+        
+        .timer {
+            text-align: center;
+            margin-top: 15px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .timer.expired {
+            color: #ef4444;
+        }
+        
+        .success-message {
+            text-align: center;
+            color: #10b981;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.3s ease-in-out;
+        }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-container">
+        <div class="verification-header">
+            <h1>🔐 Admin Verification</h1>
+            <p>Two-factor authentication required</p>
+        </div>
+        
+        <div class="verification-body">
+            <div class="telegram-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.562 8.936c-.432.175-3.644 1.518-7.121 2.969-1.911.802-3.636 1.527-3.77 1.606-.178.102-.271.216-.271.354 0 .118.047.243.255.33.175.076 1.639.526 2.954.96 1.262.417 1.881.619 2.102.681.44.124.784.065 1.077-.165.299-.234.672-.649 1.293-1.334 2.121-2.317 2.85-2.949 3.103-3.116.146-.096.326-.086.417.022.086.102.075.238-.018.362-.299.408-2.384 2.526-2.687 2.835-.218.222-.497.495-.728.712-.504.475-1.073 1.012-.627 1.802.402.702 1.826 2.424 2.551 3.126.285.276.568.551.85.826.165.163.322.319.478.472.207.204.407.402.61.596.281.27.571.548.942.548.232 0 .486-.079.71-.234.237-.165 1.065-.891 2.359-2.451 1.294-1.561 1.701-2.151 1.863-2.383.191-.274.229-.564.114-.842-.116-.278-.437-.461-1.197-.861z"/>
+                </svg>
+            </div>
+            
+            <div class="instruction">
+                <p>A 6-digit verification code has been sent to your Telegram admin channel.</p>
+                <p>Please enter the code below to continue:</p>
+            </div>
+            
+            <form id="verificationForm">
+                <div class="code-inputs">
+                    <input type="text" class="code-input" maxlength="1" data-index="0" oninput="moveToNext(this)">
+                    <input type="text" class="code-input" maxlength="1" data-index="1" oninput="moveToNext(this)">
+                    <input type="text" class="code-input" maxlength="1" data-index="2" oninput="moveToNext(this)">
+                    <input type="text" class="code-input" maxlength="1" data-index="3" oninput="moveToNext(this)">
+                    <input type="text" class="code-input" maxlength="1" data-index="4" oninput="moveToNext(this)">
+                    <input type="text" class="code-input" maxlength="1" data-index="5" oninput="moveToNext(this)">
+                </div>
+                
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+                
+                <div class="timer" id="timer">Code expires in: 05:00</div>
+                
+                <div class="buttons">
+                    <button type="button" class="btn btn-secondary" onclick="sendNewCode()" id="resendBtn">
+                        <span id="resendText">Resend Code</span>
+                        <div class="spinner hidden" id="resendSpinner"></div>
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="verifyBtn">
+                        <span id="verifyText">Verify & Continue</span>
+                        <div class="spinner hidden" id="verifySpinner"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const codeInputs = document.querySelectorAll('.code-input');
+        let countdown = 300; // 5 minutes in seconds
+        let timerInterval;
+        const redirectUrl = '{{ redirect_url }}';
+        
+        // Focus first input on load
+        document.addEventListener('DOMContentLoaded', function() {
+            codeInputs[0].focus();
+            startTimer();
+            sendCode();
+        });
+        
+        function moveToNext(input) {
+            const value = input.value;
+            const index = parseInt(input.dataset.index);
+            
+            // Only allow numbers
+            if (!/^\d$/.test(value)) {
+                input.value = '';
+                return;
+            }
+            
+            input.classList.add('filled');
+            
+            // Move to next input if there's a value
+            if (value !== '' && index < 5) {
+                codeInputs[index + 1].focus();
+            }
+            
+            // Check if all inputs are filled
+            checkCodeComplete();
+        }
+        
+        function moveToPrevious(input) {
+            const index = parseInt(input.dataset.index);
+            if (input.value === '' && index > 0) {
+                codeInputs[index - 1].focus();
+            }
+        }
+        
+        // Handle backspace
+        codeInputs.forEach(input => {
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace') {
+                    if (this.value === '' && parseInt(this.dataset.index) > 0) {
+                        codeInputs[parseInt(this.dataset.index) - 1].focus();
+                    }
+                    this.value = '';
+                    this.classList.remove('filled');
+                }
+            });
+        });
+        
+        function checkCodeComplete() {
+            let complete = true;
+            let code = '';
+            
+            codeInputs.forEach(input => {
+                if (input.value === '') complete = false;
+                code += input.value;
+            });
+            
+            if (complete && code.length === 6) {
+                // Auto-submit when complete
+                verifyCode();
+            }
+        }
+        
+        function startTimer() {
+            clearInterval(timerInterval);
+            countdown = 300;
+            
+            timerInterval = setInterval(() => {
+                countdown--;
+                const minutes = Math.floor(countdown / 60);
+                const seconds = countdown % 60;
+                const timerElement = document.getElementById('timer');
+                
+                timerElement.textContent = `Code expires in: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (countdown <= 30) {
+                    timerElement.classList.add('expired');
+                }
+                
+                if (countdown <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.textContent = 'Code expired';
+                    document.getElementById('errorMessage').textContent = 'Verification code has expired. Please request a new one.';
+                    document.getElementById('resendBtn').disabled = false;
+                }
+            }, 1000);
+        }
+        
+        function sendCode() {
+            const resendBtn = document.getElementById('resendBtn');
+            const resendSpinner = document.getElementById('resendSpinner');
+            const resendText = document.getElementById('resendText');
+            
+            resendBtn.disabled = true;
+            resendSpinner.classList.remove('hidden');
+            resendText.classList.add('hidden');
+            
+            fetch('/admin/send_code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('successMessage').textContent = 'New code sent to Telegram!';
+                    setTimeout(() => {
+                        document.getElementById('successMessage').textContent = '';
+                    }, 3000);
+                    
+                    // Reset inputs
+                    codeInputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('filled');
+                    });
+                    codeInputs[0].focus();
+                    
+                    // Reset timer
+                    startTimer();
+                    document.getElementById('errorMessage').textContent = '';
+                } else {
+                    document.getElementById('errorMessage').textContent = data.error || 'Failed to send code';
+                    document.getElementById('resendBtn').classList.add('shake');
+                    setTimeout(() => {
+                        document.getElementById('resendBtn').classList.remove('shake');
+                    }, 300);
+                }
+            })
+            .catch(error => {
+                document.getElementById('errorMessage').textContent = 'Network error. Please try again.';
+            })
+            .finally(() => {
+                resendBtn.disabled = false;
+                resendSpinner.classList.add('hidden');
+                resendText.classList.remove('hidden');
+            });
+        }
+        
+        function sendNewCode() {
+            const resendBtn = document.getElementById('resendBtn');
+            if (resendBtn.disabled) return;
+            
+            sendCode();
+        }
+        
+        function verifyCode() {
+            const verifyBtn = document.getElementById('verifyBtn');
+            const verifySpinner = document.getElementById('verifySpinner');
+            const verifyText = document.getElementById('verifyText');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Get the complete code
+            let code = '';
+            codeInputs.forEach(input => code += input.value);
+            
+            if (code.length !== 6) {
+                errorMessage.textContent = 'Please enter all 6 digits';
+                return;
+            }
+            
+            verifyBtn.disabled = true;
+            verifySpinner.classList.remove('hidden');
+            verifyText.classList.add('hidden');
+            errorMessage.textContent = '';
+            
+            fetch('/admin/check_code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code: code })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('successMessage').textContent = '✓ Verified! Redirecting...';
+                    
+                    // Redirect to original destination
+                    setTimeout(() => {
+                        window.location.href = redirectUrl;
+                    }, 1000);
+                } else {
+                    errorMessage.textContent = data.error || 'Invalid verification code';
+                    
+                    // Clear inputs and shake them
+                    codeInputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('filled');
+                        input.classList.add('shake');
+                    });
+                    
+                    setTimeout(() => {
+                        codeInputs.forEach(input => input.classList.remove('shake'));
+                        codeInputs[0].focus();
+                    }, 300);
+                }
+            })
+            .catch(error => {
+                errorMessage.textContent = 'Network error. Please try again.';
+            })
+            .finally(() => {
+                verifyBtn.disabled = false;
+                verifySpinner.classList.add('hidden');
+                verifyText.classList.remove('hidden');
+            });
+        }
+        
+        // Handle form submission
+        document.getElementById('verificationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            verifyCode();
+        });
+        
+        // Allow pasting code
+        document.addEventListener('paste', function(e) {
+            const pasteData = e.clipboardData.getData('text');
+            if (/^\d{6}$/.test(pasteData)) {
+                e.preventDefault();
+                for (let i = 0; i < 6; i++) {
+                    codeInputs[i].value = pasteData[i];
+                    codeInputs[i].classList.add('filled');
+                }
+                codeInputs[5].focus();
+                setTimeout(() => verifyCode(), 100);
+            }
+        });
+    </script>
+</body>
+</html>
