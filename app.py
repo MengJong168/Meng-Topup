@@ -1,5 +1,7 @@
 from flask import Flask, render_template, render_template_string, request, jsonify, send_from_directory, redirect, url_for
 from datetime import datetime, timedelta
+from flask import Flask, render_template, request, redirect, url_for, session, abort
+from datetime import datetime, timedelta
 import qrcode
 from io import BytesIO
 import base64
@@ -14,8 +16,11 @@ import threading
 import secrets
 import hashlib
 from datetime import datetime
+import hashlib
+from functools import wraps
 
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(32)  # Generate a secure secret key
 
 # Bakong API setup
 api_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMmEyMDE3MzUxMGU4NDZhMiJ9LCJpYXQiOjE3NTk3MjIzNjAsImV4cCI6MTc2NzQ5ODM2MH0._d3PWPYi-N_mPyt-Ntxj5qbtHghOdtZhka2LbdJlKRw"
@@ -30,6 +35,24 @@ ADMIN_CHAT_ID = "-1003284732983"  # Your admin chat ID
 admin_verification_codes = {}  # Store verification codes
 admin_verified_sessions = set()  # Store verified session IDs
 VERIFICATION_TIMEOUT = 300  # 5 minutes
+
+# Hash the password (do this once and store the hash)
+ADMIN_PASSWORD_HASH = hashlib.sha256("new1516Coolbflash".encode()).hexdigest()
+
+def verify_password(password):
+    """Verify password against stored hash"""
+    return hashlib.sha256(password.encode()).hexdigest() == ADMIN_PASSWORD_HASH
+
+def admin_login_required(f):
+    """Decorator for admin pages requiring login"""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # Check if user has verified session
+        if not session.get('admin_verified'):
+            # Redirect to login page
+            return redirect('/admin/login')
+        return f(*args, **kwargs)
+    return decorated_function
 
 # Add this function to send verification codes
 def send_telegram_verification_code(session_id, ip_address):
@@ -82,86 +105,133 @@ def cleanup_expired_codes():
     for session_id in expired_sessions:
         del admin_verification_codes[session_id]
 
-# Update the admin_required decorator
+# Update admin_required decorator
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        # Check password first
-        password = request.args.get('pass')
-        if password != "new1516Coolbflash":
-            return "Unauthorized", 401
-        
         # Check if session is verified
-        session_id = request.cookies.get('admin_session')
-        if not session_id or session_id not in admin_verified_sessions:
-            # Generate redirect URL with all query parameters
-            full_url = request.url
-            base_url = request.base_url
-            query_string = request.query_string.decode('utf-8')
-            
-            # Build redirect URL
-            redirect_url = f'/admin/verify'
-            if query_string:
-                # Include the pass parameter in redirect
-                redirect_url += f'?{query_string}'
-            
-            return redirect(redirect_url)
+        if not session.get('admin_verified'):
+            return redirect('/admin/login')
+        
+        # Check session age (optional)
+        session_created = session.get('session_created')
+        if session_created:
+            session_age = time.time() - session_created
+            if session_age > 3600:  # 1 hour
+                session.clear()
+                return redirect('/admin/login')
         
         return f(*args, **kwargs)
     return decorated_function
+    
+# Add login route
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'GET':
+        return render_template('admin_login.html')
+    
+    # POST request - verify password
+    data = request.get_json()
+    password = data.get('password')
+    
+    if verify_password(password):
+        # Password correct, store in session
+        session['admin_authenticated'] = True
+        return jsonify({'success': True})
+    else:
+        return jsonify({'success': False, 'error': 'Invalid password'}), 401
 
+# Add logout route
+@app.route('/admin/logout')
+def admin_logout():
+    """Clear admin session"""
+    session_id = session.get('admin_session_id')
+    if session_id:
+        if session_id in admin_verified_sessions:
+            admin_verified_sessions.remove(session_id)
+        if session_id in admin_verification_codes:
+            del admin_verification_codes[session_id]
+    
+    # Clear all session data
+    session.clear()
+    
+    return redirect('/admin/login')
+# Generate CSRF token for forms
+def generate_csrf_token():
+    if 'csrf_token' not in session:
+        session['csrf_token'] = secrets.token_hex(32)
+    return session['csrf_token']
+
+app.jinja_env.globals['csrf_token'] = generate_csrf_token
+
+# Verify CSRF token in POST requests
+def csrf_protect():
+    if request.method == "POST":
+        token = session.get('csrf_token')
+        if not token or token != request.form.get('csrf_token'):
+            abort(403)
+
+@app.after_request
+def add_security_headers(response):
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'DENY'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    return response
+
+# Update verification route to check session
 @app.route('/admin/verify')
 def admin_verify():
-    """Show verification page"""
-    # Get the pass parameter from the original URL
-    password = request.args.get('pass')
-    if password != "new1516Coolbflash":
-        return "Unauthorized", 401
+    """Show verification page - requires password first"""
+    if not session.get('admin_authenticated'):
+        return redirect('/admin/login')
     
-    # Get the original destination URL
-    original_path = request.args.get('redirect', '/admin')
-    
-    # Reconstruct the full URL with pass parameter
-    if '?' in original_path:
-        redirect_url = f"{original_path}&pass={password}"
-    else:
-        redirect_url = f"{original_path}?pass={password}"
-    
+    # Get redirect URL
+    redirect_url = request.args.get('redirect', '/admin')
     return render_template('admin_verify.html', redirect_url=redirect_url)
 
+# Update verification code sending
 @app.route('/admin/send_code', methods=['POST'])
 def send_verification_code():
-    """Send verification code to Telegram"""
+    """Send verification code to Telegram - requires password first"""
+    if not session.get('admin_authenticated'):
+        return jsonify({'success': False, 'error': 'Not authenticated'}), 401
+    
     try:
-        session_id = request.cookies.get('admin_session')
-        if not session_id:
-            # Generate new session ID
-            session_id = secrets.token_hex(16)
+        # Generate session ID if not exists
+        if 'admin_session_id' not in session:
+            session['admin_session_id'] = secrets.token_hex(16)
+        
+        session_id = session['admin_session_id']
         
         # Send verification code
         ip_address = request.remote_addr
         success = send_telegram_verification_code(session_id, ip_address)
         
         if success:
-            response = jsonify({'success': True, 'session_id': session_id})
-            response.set_cookie('admin_session', session_id, max_age=3600, httponly=True)
-            return response
+            return jsonify({'success': True})
         else:
             return jsonify({'success': False, 'error': 'Failed to send code'}), 500
             
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
+# Update verification code checking
 @app.route('/admin/check_code', methods=['POST'])
 def check_verification_code():
     """Verify the 6-digit code"""
+    if not session.get('admin_authenticated'):
+        return jsonify({'success': False, 'error': 'Not authenticated'}), 401
+    
     try:
         data = request.get_json()
         code = data.get('code')
-        session_id = request.cookies.get('admin_session')
         
-        if not session_id or not code:
-            return jsonify({'success': False, 'error': 'Missing data'}), 400
+        if 'admin_session_id' not in session:
+            return jsonify({'success': False, 'error': 'Session expired'}), 400
+        
+        session_id = session['admin_session_id']
         
         # Check if code exists and is not expired
         if session_id not in admin_verification_codes:
@@ -177,16 +247,22 @@ def check_verification_code():
         # Check code
         if code_data['code'] == code:
             # Mark session as verified
+            session['admin_verified'] = True
             admin_verified_sessions.add(session_id)
+            
             # Remove used code
             del admin_verification_codes[session_id]
+            
+            # Set session expiration (1 hour)
+            session.permanent = True
+            app.permanent_session_lifetime = timedelta(hours=1)
+            
             return jsonify({'success': True})
         else:
             return jsonify({'success': False, 'error': 'Invalid code'}), 400
             
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
-
 
 # Load transactions from data store API
 def load_transactions():
