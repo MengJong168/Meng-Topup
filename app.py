@@ -244,7 +244,7 @@ def generate_qr():
         qr_base64 = base64.b64encode(img_io.getvalue()).decode('utf-8')
         
         # Store current transaction
-        expiry = now_pp() + timedelta(minutes=3)
+        expiry = now_pp() + timedelta(minutes=15)
         current_transactions[transaction_id] = {
             'amount': amount,
             'md5_hash': md5_hash,
@@ -782,7 +782,7 @@ def check_pending_payments_background():
             time.sleep(10)  # Check every 10 seconds
             
         except Exception as e:
-            print(f"Background thread error: {str(e)}")
+            # print(f"Background thread error: {str(e)}")
             time.sleep(30)  # Wait longer if major error occurs
 
 # Start background thread when app starts (replace the existing code)
