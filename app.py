@@ -1,6 +1,4 @@
-from flask import Flask, render_template, render_template_string, request, jsonify, send_from_directory, redirect, url_for
-from datetime import datetime, timedelta
-from flask import Flask, render_template, request, redirect, url_for, session, abort
+from flask import *
 from datetime import datetime, timedelta
 import qrcode
 from io import BytesIO
@@ -16,96 +14,28 @@ import threading
 import secrets
 import hashlib
 from datetime import datetime
-import hashlib
-from functools import wraps
+from zoneinfo import ZoneInfo  # Python 3.9+
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(32)  # Generate a secure secret key
+
 
 # Bakong API setup
 api_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMmEyMDE3MzUxMGU4NDZhMiJ9LCJpYXQiOjE3NTk3MjIzNjAsImV4cCI6MTc2NzQ5ODM2MH0._d3PWPYi-N_mPyt-Ntxj5qbtHghOdtZhka2LbdJlKRw"
 khqr = KHQR(api_token)
 current_transactions = {}
-
-# Data Store API configuration
-DATA_STORE_URL = 'https://mengtopup.shop'  # Change this to your data store server URL
+ADMIN_PASSWORD_HASH = hashlib.sha256("new1516Coolbflash".encode()).hexdigest()
 # Add these global variables near the top
 TELEGRAM_BOT_TOKEN = "8441360171:AAF9SBXX7GJq9Th7cJLjT0YW-bRKq9SIRJs"
 ADMIN_CHAT_ID = "-1003284732983"  # Your admin chat ID
 admin_verification_codes = {}  # Store verification codes
 admin_verified_sessions = set()  # Store verified session IDs
 VERIFICATION_TIMEOUT = 300  # 5 minutes
+PHNOM_PENH_TZ = ZoneInfo("Asia/Phnom_Penh")
 
-# Hash the password (do this once and store the hash)
-ADMIN_PASSWORD_HASH = hashlib.sha256("new1516Coolbflash".encode()).hexdigest()
+# Data Store API configuration
+DATA_STORE_URL = 'https://mengtopup.shop'  # Change this to your data store server URL
 
-def verify_password(password):
-    """Verify password against stored hash"""
-    return hashlib.sha256(password.encode()).hexdigest() == ADMIN_PASSWORD_HASH
-
-def admin_login_required(f):
-    """Decorator for admin pages requiring login"""
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        # Check if user has verified session
-        if not session.get('admin_verified'):
-            # Redirect to login page
-            return redirect('/admin/login')
-        return f(*args, **kwargs)
-    return decorated_function
-
-# Add this function to send verification codes
-def send_telegram_verification_code(session_id, ip_address):
-    """Send a 6-digit verification code to Telegram"""
-    # Generate 6-digit code
-    code = ''.join([str(secrets.randbelow(10)) for _ in range(6)])
-    
-    # Store code with timestamp
-    admin_verification_codes[session_id] = {
-        'code': code,
-        'timestamp': time.time(),
-        'ip_address': ip_address
-    }
-    
-    # Clean up old codes
-    cleanup_expired_codes()
-    
-    # Send to Telegram
-    message = (
-        f"🔐 Admin Login Verification\n"
-        f"Session ID: {session_id[:8]}...\n"
-        f"IP Address: {ip_address}\n"
-        f"🕐 Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
-        f"🔢 Verification Code: {code}\n"
-        f"⏳ Code expires in 5 minutes"
-    )
-    
-    try:
-        response = requests.post(
-            f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage',
-            json={
-                'chat_id': ADMIN_CHAT_ID,
-                'text': message
-            },
-            timeout=5
-        )
-        return response.status_code == 200
-    except:
-        return False
-
-def cleanup_expired_codes():
-    """Remove expired verification codes"""
-    current_time = time.time()
-    expired_sessions = []
-    
-    for session_id, data in admin_verification_codes.items():
-        if current_time - data['timestamp'] > VERIFICATION_TIMEOUT:
-            expired_sessions.append(session_id)
-    
-    for session_id in expired_sessions:
-        del admin_verification_codes[session_id]
-
-# Update admin_required decorator
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -123,146 +53,6 @@ def admin_required(f):
         
         return f(*args, **kwargs)
     return decorated_function
-    
-# Add login route
-@app.route('/admin/login', methods=['GET', 'POST'])
-def admin_login():
-    if request.method == 'GET':
-        return render_template('admin_login.html')
-    
-    # POST request - verify password
-    data = request.get_json()
-    password = data.get('password')
-    
-    if verify_password(password):
-        # Password correct, store in session
-        session['admin_authenticated'] = True
-        return jsonify({'success': True})
-    else:
-        return jsonify({'success': False, 'error': 'Invalid password'}), 401
-
-# Add logout route
-@app.route('/admin/logout')
-def admin_logout():
-    """Clear admin session"""
-    session_id = session.get('admin_session_id')
-    if session_id:
-        if session_id in admin_verified_sessions:
-            admin_verified_sessions.remove(session_id)
-        if session_id in admin_verification_codes:
-            del admin_verification_codes[session_id]
-    
-    # Clear all session data
-    session.clear()
-    
-    return redirect('/admin/login')
-# Generate CSRF token for forms
-def generate_csrf_token():
-    if 'csrf_token' not in session:
-        session['csrf_token'] = secrets.token_hex(32)
-    return session['csrf_token']
-
-app.jinja_env.globals['csrf_token'] = generate_csrf_token
-
-# Verify CSRF token in POST requests
-def csrf_protect():
-    if request.method == "POST":
-        token = session.get('csrf_token')
-        if not token or token != request.form.get('csrf_token'):
-            abort(403)
-
-@app.after_request
-def add_security_headers(response):
-    response.headers['X-Content-Type-Options'] = 'nosniff'
-    response.headers['X-Frame-Options'] = 'DENY'
-    response.headers['X-XSS-Protection'] = '1; mode=block'
-    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
-    return response
-
-# Update verification route to check session
-@app.route('/admin/verify')
-def admin_verify():
-    """Show verification page - requires password first"""
-    if not session.get('admin_authenticated'):
-        return redirect('/admin/login')
-    
-    # Get redirect URL
-    redirect_url = request.args.get('redirect', '/admin')
-    return render_template('admin_verify.html', redirect_url=redirect_url)
-
-# Update verification code sending
-@app.route('/admin/send_code', methods=['POST'])
-def send_verification_code():
-    """Send verification code to Telegram - requires password first"""
-    if not session.get('admin_authenticated'):
-        return jsonify({'success': False, 'error': 'Not authenticated'}), 401
-    
-    try:
-        # Generate session ID if not exists
-        if 'admin_session_id' not in session:
-            session['admin_session_id'] = secrets.token_hex(16)
-        
-        session_id = session['admin_session_id']
-        
-        # Send verification code
-        ip_address = request.remote_addr
-        success = send_telegram_verification_code(session_id, ip_address)
-        
-        if success:
-            return jsonify({'success': True})
-        else:
-            return jsonify({'success': False, 'error': 'Failed to send code'}), 500
-            
-    except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
-
-# Update verification code checking
-@app.route('/admin/check_code', methods=['POST'])
-def check_verification_code():
-    """Verify the 6-digit code"""
-    if not session.get('admin_authenticated'):
-        return jsonify({'success': False, 'error': 'Not authenticated'}), 401
-    
-    try:
-        data = request.get_json()
-        code = data.get('code')
-        
-        if 'admin_session_id' not in session:
-            return jsonify({'success': False, 'error': 'Session expired'}), 400
-        
-        session_id = session['admin_session_id']
-        
-        # Check if code exists and is not expired
-        if session_id not in admin_verification_codes:
-            return jsonify({'success': False, 'error': 'Code expired or not found'}), 400
-        
-        code_data = admin_verification_codes[session_id]
-        
-        # Check timeout
-        if time.time() - code_data['timestamp'] > VERIFICATION_TIMEOUT:
-            del admin_verification_codes[session_id]
-            return jsonify({'success': False, 'error': 'Code expired'}), 400
-        
-        # Check code
-        if code_data['code'] == code:
-            # Mark session as verified
-            session['admin_verified'] = True
-            admin_verified_sessions.add(session_id)
-            
-            # Remove used code
-            del admin_verification_codes[session_id]
-            
-            # Set session expiration (1 hour)
-            session.permanent = True
-            app.permanent_session_lifetime = timedelta(hours=1)
-            
-            return jsonify({'success': True})
-        else:
-            return jsonify({'success': False, 'error': 'Invalid code'}), 400
-            
-    except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
 
 # Load transactions from data store API
 def load_transactions():
@@ -454,7 +244,7 @@ def generate_qr():
         qr_base64 = base64.b64encode(img_io.getvalue()).decode('utf-8')
         
         # Store current transaction
-        expiry = datetime.now() + timedelta(minutes=3)
+        expiry = now_pp() + timedelta(minutes=3)
         current_transactions[transaction_id] = {
             'amount': amount,
             'md5_hash': md5_hash,
@@ -502,14 +292,14 @@ def check_payment():
         transaction = current_transactions[transaction_id]
         
         # Check if expired
-        if datetime.now() > datetime.fromisoformat(transaction['expiry']):
+        if now_pp() > datetime.fromisoformat(transaction['expiry']):
             # Move to expired if not already there
             if not any(t['transaction_id'] == transaction_id for t in transactions['expired']):
                 transactions['expired'].append({
                     **transaction,
                     'transaction_id': transaction_id,
                     'status': 'expired',
-                    'timestamp': datetime.now().isoformat()
+                    'timestamp': now_pp().isoformat()
                 })
                 save_transactions(transactions)
                 
@@ -536,7 +326,7 @@ def check_payment():
                     **transaction,
                     'transaction_id': transaction_id,
                     'status': 'completed',
-                    'timestamp': datetime.now().isoformat(),
+                    'timestamp': now_pp().isoformat(),
                     'telegram_sent': False
                 }
                 transactions['completed'].append(completed_transaction)
@@ -572,7 +362,7 @@ def check_payment():
                         **transaction,
                         'transaction_id': transaction_id,
                         'status': 'pending',
-                        'timestamp': datetime.now().isoformat()
+                        'timestamp': now_pp().isoformat()
                     })
                     save_transactions(transactions)
                     
@@ -831,7 +621,7 @@ def send_to_telegram(transaction):
     cleanup_recent_transactions()
     
     # Generate invoice number
-    invoice_number = f"INVNO-S{datetime.now().strftime('%Y%m%d%H%M')}"
+    invoice_number = f"INVNO-S{now_pp().strftime('%Y%m%d%H%M')}"
     
     # Load packages data
     try:
@@ -887,7 +677,7 @@ def send_to_telegram(transaction):
         f"🌐 Zone ID: {transaction['zone_id']}\n"
         f"🎮 Package: {package_name} (ID: {package_id})\n"
         f"💵 Amount: ${float(transaction['amount']):.2f}\n"
-        f"📅 Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+        f"📅 Date: {now_pp().strftime('%Y-%m-%d %H:%M')}"
     )
     
     try:
@@ -1028,7 +818,212 @@ def check_status(transaction_id):
     
     return jsonify({'status': 'not_found'})
 
+# Add this function to send verification codes
+def send_telegram_verification_code(session_id, ip_address):
+    """Send a 6-digit verification code to Telegram"""
+    # Generate 6-digit code
+    code = ''.join([str(secrets.randbelow(10)) for _ in range(6)])
+    
+    # Store code with timestamp
+    admin_verification_codes[session_id] = {
+        'code': code,
+        'timestamp': time.time(),
+        'ip_address': ip_address
+    }
+    
+    # Clean up old codes
+    cleanup_expired_codes()
+    
+    # Send to Telegram
+    message = (
+        f"🔐 Admin Login Verification\n"
+        f"Session ID: {session_id[:8]}...\n"
+        f"IP Address: {ip_address}\n"
+        f"🕐 Time: {now_pp().strftime('%Y-%m-%d %H:%M:%S')}\n"
+        f"🔢 Verification Code: {code}\n"
+        f"⏳ Code expires in 5 minutes"
+    )
+    
+    try:
+        response = requests.post(
+            f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage',
+            json={
+                'chat_id': ADMIN_CHAT_ID,
+                'text': message
+            },
+            timeout=5
+        )
+        return response.status_code == 200
+    except:
+        return False
 
+def cleanup_expired_codes():
+    """Remove expired verification codes"""
+    current_time = time.time()
+    expired_sessions = []
+    
+    for session_id, data in admin_verification_codes.items():
+        if current_time - data['timestamp'] > VERIFICATION_TIMEOUT:
+            expired_sessions.append(session_id)
+    
+    for session_id in expired_sessions:
+        del admin_verification_codes[session_id]
+
+# Update verification route to check session
+@app.route('/admin/verify')
+def admin_verify():
+    """Show verification page - requires password first"""
+    if not session.get('admin_authenticated'):
+        return redirect('/admin/login')
+    
+    # Get redirect URL
+    redirect_url = request.args.get('redirect', '/admin')
+    return render_template('admin_verify.html', redirect_url=redirect_url)
+
+# Update verification code sending
+@app.route('/admin/send_code', methods=['POST'])
+def send_verification_code():
+    """Send verification code to Telegram - requires password first"""
+    if not session.get('admin_authenticated'):
+        return jsonify({'success': False, 'error': 'Not authenticated'}), 401
+    
+    try:
+        # Generate session ID if not exists
+        if 'admin_session_id' not in session:
+            session['admin_session_id'] = secrets.token_hex(16)
+        
+        session_id = session['admin_session_id']
+        
+        # Send verification code
+        ip_address = request.remote_addr
+        success = send_telegram_verification_code(session_id, ip_address)
+        
+        if success:
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'error': 'Failed to send code'}), 500
+            
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+# Update verification code checking
+@app.route('/admin/check_code', methods=['POST'])
+def check_verification_code():
+    """Verify the 6-digit code"""
+    if not session.get('admin_authenticated'):
+        return jsonify({'success': False, 'error': 'Not authenticated'}), 401
+    
+    try:
+        data = request.get_json()
+        code = data.get('code')
+        
+        if 'admin_session_id' not in session:
+            return jsonify({'success': False, 'error': 'Session expired'}), 400
+        
+        session_id = session['admin_session_id']
+        
+        # Check if code exists and is not expired
+        if session_id not in admin_verification_codes:
+            return jsonify({'success': False, 'error': 'Code expired or not found'}), 400
+        
+        code_data = admin_verification_codes[session_id]
+        
+        # Check timeout
+        if time.time() - code_data['timestamp'] > VERIFICATION_TIMEOUT:
+            del admin_verification_codes[session_id]
+            return jsonify({'success': False, 'error': 'Code expired'}), 400
+        
+        # Check code
+        if code_data['code'] == code:
+            # Mark session as verified
+            session['admin_verified'] = True
+            admin_verified_sessions.add(session_id)
+            
+            # Remove used code
+            del admin_verification_codes[session_id]
+            
+            # Set session expiration (1 hour)
+            session.permanent = True
+            app.permanent_session_lifetime = timedelta(hours=1)
+            
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'error': 'Invalid code'}), 400
+            
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+# Add logout route
+@app.route('/admin/logout')
+def admin_logout():
+    """Clear admin session"""
+    session_id = session.get('admin_session_id')
+    if session_id:
+        if session_id in admin_verified_sessions:
+            admin_verified_sessions.remove(session_id)
+        if session_id in admin_verification_codes:
+            del admin_verification_codes[session_id]
+    
+    # Clear all session data
+    session.clear()
+    
+    return redirect('/admin/login')
+
+def cleanup_expired_sessions():
+    """Clean up expired verification sessions (run periodically)"""
+    # Sessions expire after 1 hour (3600 seconds)
+    # You can run this in a background thread or before checking sessions
+    pass  # For now, we'll rely on the browser cookie expiration
+
+def verify_password(password):
+    """Verify password against stored hash"""
+    return hashlib.sha256(password.encode()).hexdigest() == ADMIN_PASSWORD_HASH
+
+def admin_login_required(f):
+    """Decorator for admin pages requiring login"""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # Check if user has verified session
+        if not session.get('admin_verified'):
+            # Redirect to login page
+            return redirect('/admin/login')
+        return f(*args, **kwargs)
+    return decorated_function
+
+# Add login route
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'GET':
+        return render_template('admin_login.html')
+    
+    # POST request - verify password
+    data = request.get_json()
+    password = data.get('password')
+    
+    if verify_password(password):
+        # Password correct, store in session
+        session['admin_authenticated'] = True
+        return jsonify({'success': True})
+    else:
+        return jsonify({'success': False, 'error': 'Invalid password'}), 401
+
+# Generate CSRF token for forms
+def generate_csrf_token():
+    if 'csrf_token' not in session:
+        session['csrf_token'] = secrets.token_hex(32)
+    return session['csrf_token']
+
+app.jinja_env.globals['csrf_token'] = generate_csrf_token
+
+# Verify CSRF token in POST requests
+def csrf_protect():
+    if request.method == "POST":
+        token = session.get('csrf_token')
+        if not token or token != request.form.get('csrf_token'):
+            abort(403)
+def now_pp():
+    return datetime.now(PHNOM_PENH_TZ)
 
 if __name__ == '__main__':
     app.run()
