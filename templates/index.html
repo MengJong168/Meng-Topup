@@ -33,10 +33,7 @@
   <div class="banner-slider">
     <div class="banner-slides">
       <div class="banner-slide active">
-        <img src="/static/images/banner-01.jpg" alt="LUCCI STORE Banner" class="banner-image">
-      </div>
-      <div class="banner-slide active">
-        <img src="/static/images/banner-02.jpg" alt="LUCCI STORE Banner" class="banner-image">
+        <img src="/static/images/banner-01.jpg" alt="MENG TOPUP Banner" class="banner-image">
       </div>
     </div>
     <div class="slider-nav" style="display: none;">
@@ -196,7 +193,7 @@
         </div>
         <div class="username-row">
         <button onclick="checkUsername()" class="check-name-button">ពិនិត្យឈ្មោះ</button>
-        <div id="usernameDisplay" class="username"></div>
+        <div id="usernameDisplay" class="username">Username:</div>
         </div>
       </section>   
       </section>
@@ -298,7 +295,7 @@
     </div>
     <div class="username-row">
     <button onclick="mlphUsernameDisplay()" class="check-name-button">ពិនិត្យឈ្មោះ</button>
-    <div id="usernameDisplay" class="username"></div>
+    <div id="usernameDisplay" class="username">Username:</div>
     </div>
   </section>
   </section>
@@ -385,7 +382,7 @@
     <input type="number" id="ffIdInput" placeholder="Player ID" class="ff-input" />
     <button onclick="checkFFUsername()" class="ff-check-button">ពិនិត្យឈ្មោះ</button>
   </div>
-  <div id="ffUsernameDisplay" class="ff-username-result"></div>
+  <div id="ffUsernameDisplay" class="ff-username-result">Username:</div>
 </section>
 </section>
 <!-- Free Fire Special Offers Section -->
@@ -481,7 +478,7 @@
       <input type="number" id="pubgIdInput" placeholder="Player ID" class="ff-input" />
       <button onclick="checkPUBGUsername()" class="ff-check-button">ពិនិត្យឈ្មោះ</button>
     </div>
-    <div id="pubgUsernameDisplay" class="ff-username-result"></div>
+    <div id="pubgUsernameDisplay" class="ff-username-result">Username:</div>
   </section>
   </section>
   <!-- PUBG Mobile Special Offers Section -->
@@ -576,7 +573,7 @@
       <input type="number" id="hokIdInput" placeholder="Player ID" class="ff-input" />
       <button onclick="checkHOKUsername()" class="ff-check-button">ពិនិត្យឈ្មោះ</button>
     </div>
-    <div id="hokUsernameDisplay" class="ff-username-result"></div>
+    <div id="hokUsernameDisplay" class="ff-username-result">Username:</div>
   </section>
   </section>
   <!-- HOK Special Offers Section -->
@@ -670,7 +667,7 @@
       <input type="number" id="bloodstrikeIdInput" placeholder="Player ID" class="ff-input" />
       <button onclick="checkBloodStrikeUsername()" class="ff-check-button">ពិនិត្យឈ្មោះ</button>
     </div>
-    <div id="bloodstrikeUsernameDisplay" class="ff-username-result"></div>
+    <div id="bloodstrikeUsernameDisplay" class="ff-username-result">Username:</div>
   </section>
   </section>
   <!-- HOK Special Offers Section -->
@@ -769,7 +766,7 @@
     </div>
     <div class="username-row">
     <button onclick="checkMCGGUsername()" class="check-name-button">ពិនិត្យឈ្មោះ</button>
-    <div id="mcggUsernameDisplay" class="username"></div>
+    <div id="mcggUsernameDisplay" class="username">Username:</div>
     </div>
   </section>
   </section>
@@ -896,27 +893,44 @@
 </button>
 
 
-  <!-- Bakong Payment Modal -->
-  <div id="bakongModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2 class="english-heading">Bakong Payment</h2>
-      <div id="bakongStatus" class="english-heading">Ready to generate payment QR</div>
+<!-- Bakong Payment Modal -->
+<div id="bakongModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 class="bakong-heading">BAKONG KHQR</h2>
+    
+    <!-- Loading Container -->
+    <div id="loadingContainer" style="display: none; text-align: center; padding: 20px;">
+      <div class="loading-spinner" style="width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #3498db; border-radius: 50%; margin: 0 auto 15px; animation: spin 1s linear infinite;"></div>
+      <p class="bakong-heading" style="color: #007cb5; font-weight: bold;">Verifying Payment...</p>
+      <p class="khmer-heading" style="font-size: 0.9rem; margin-top: 5px; color: #666;">Please wait while we prepare your payment</p>
+    </div>
+    
+    <!-- QR Code Container (initially hidden) -->
+    <div id="qrContainer" style="display: none;">
+      <div id="bakongStatus" class="bakong-heading">Ready to generate payment QR</div>
       
-<div class="qr-container">
-  <div class="qr-header">KHQR</div>
-<div class="qr-details">
-  <div>Meng Topup</div>
-  <h2 id="qrAmount"></h2>
-  <hr class="qr-line">
-</div>
-  <div class="qr-image">
-    <img id="bakongQR" src="" alt="QR Code">
-  </div>
-</div>
-
+      <div class="qr-container">
+        <div class="qrcode-container4 qrhrader">
+          <img alt="image" src="static\images\khqr logo-200h.png" class="qrcode-image logo">
+          <div class="qrcode-container2"></div>
+        </div>
+        
+        <div class="qr-details">
+          <div>Meng Topup</div>
+          <h2 id="qrAmount"></h2>
+        </div>
+        <div>
+          <hr class="qr-line">
+        </div>
+        <div class="qr-image">
+          <img id="bakongQR" src="" alt="QR Code">
+          <img id="logo" alt="logo" src="static\images\usd-khqr-logo.svg" class="qrcode-logo">
+        </div>
+      </div>
       
-      <div id="bakongCountdown" class="khmer-heading"></div>
+      <div class="qrcode-footer">Scan with Bakong, or other Mobile Banking App supporting KHQR</div>
+      <div id="bakongCountdown" class="bakong-heading"></div>
       
       <div class="modal-buttons">
         <button id="checkPaymentBtn" class="bakong-btn english-heading" onclick="checkBakongPayment()" disabled>Check Payment</button>
@@ -924,43 +938,44 @@
       </div>
     </div>
   </div>
+</div>
 
   <!-- Invoice Modal -->
   <div id="invoiceModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeInvoiceModal()">&times;</span>
-      <h2 class="english-heading">Topup Successful</h2>
+      <h2 class="bakong-heading">Payment Successful</h2>
       
       <div class="invoice-details">
         <div class="invoice-row">
           <span class="invoice-icon">👤</span>
-          <span class="invoice-label english-heading">name:</span>
-          <span class="invoice-value english-heading" id="invoice-username"></span>
+          <span class="invoice-label bakong-heading">name:</span>
+          <span class="invoice-value bakong-heading" id="invoice-username"></span>
         </div>
         <div class="invoice-row">
           <span class="invoice-icon">🆔</span>
-          <span class="invoice-label english-heading">ID:</span>
-          <span class="invoice-value english-heading" id="invoice-playerid"></span>
+          <span class="invoice-label bakong-heading">ID:</span>
+          <span class="invoice-value bakong-heading" id="invoice-playerid"></span>
         </div>
         <div class="invoice-row">
           <span class="invoice-icon">🌐</span>
-          <span class="invoice-label english-heading">Zone:</span>
-          <span class="invoice-value english-heading" id="invoice-zoneid"></span>
+          <span class="invoice-label bakong-heading">Zone:</span>
+          <span class="invoice-value bakong-heading" id="invoice-zoneid"></span>
         </div>
         <div class="invoice-row">
           <span class="invoice-icon">🎮</span>
-          <span class="invoice-label english-heading">item:</span>
-          <span class="invoice-value english-heading" id="invoice-package"></span>
+          <span class="invoice-label bakong-heading">item:</span>
+          <span class="invoice-value bakong-heading" id="invoice-package"></span>
         </div>
         <div class="invoice-row">
           <span class="invoice-icon">💵</span>
-          <span class="invoice-label english-heading">Amount:</span>
-          <span class="invoice-value english-heading" id="invoice-amount"></span>
+          <span class="invoice-label bakong-heading">Amount:</span>
+          <span class="invoice-value bakong-heading" id="invoice-amount"></span>
         </div>
         <div class="invoice-row">
           <span class="invoice-icon">📅</span>
-          <span class="invoice-label english-heading">Date:</span>
-          <span class="invoice-value english-heading" id="invoice-date"></span>
+          <span class="invoice-label bakong-heading">Date:</span>
+          <span class="invoice-value bakong-heading" id="invoice-date"></span>
         </div>
       </div>
       
@@ -1629,9 +1644,9 @@ function initiatePayment() {
         zone = "0000";
     }    
     else if (document.getElementById('mcggTopupSection').style.display === 'block') {
-    gameType = 'mcgg';
-    id = document.getElementById('mcggIdInput').value.trim();
-    zone = document.getElementById('mcggZoneInput').value.trim();
+        gameType = 'mcgg';
+        id = document.getElementById('mcggIdInput').value.trim();
+        zone = document.getElementById('mcggZoneInput').value.trim();
     }
     else if (document.getElementById('mlphTopupSection').style.display === 'block') {
         gameType = 'mlph';
@@ -1642,12 +1657,6 @@ function initiatePayment() {
         alert('No game section selected');
         return;
     }
-      // After generating QR, save transaction ID
-    if (currentTransaction && currentTransaction.id) {
-        saveTransactionId(currentTransaction.id);
-    }
-
-
 
     // Get the appropriate checkbox based on game type
     let khqrChecked;
@@ -1721,8 +1730,44 @@ function initiatePayment() {
         return;
     }
 
-    openModal();
-    generateBakongQR(id, zone);
+    // Show modal with loading state
+    openModalWithLoading();
+    
+    // Generate QR after a short delay to show loading animation
+    setTimeout(() => {
+        generateBakongQR(id, zone);
+    }, 500);
+}
+
+function openModalWithLoading() {
+    // Show the modal
+    document.getElementById('bakongModal').style.display = 'flex';
+    
+    // Show loading container
+    document.getElementById('loadingContainer').style.display = 'block';
+    
+    // Hide QR container initially
+    document.getElementById('qrContainer').style.display = 'none';
+    
+    // Reset any previous state
+    document.getElementById('bakongQR').src = '';
+    document.getElementById('qrAmount').textContent = '';
+    document.getElementById('bakongCountdown').textContent = '';
+    document.getElementById('bakongStatus').textContent = 'Ready to generate payment QR';
+    
+    // Disable check button
+    document.getElementById('checkPaymentBtn').disabled = true;
+}
+
+function closeModal() {
+    document.getElementById('bakongModal').style.display = 'none';
+    if (countdownInterval) clearInterval(countdownInterval);
+    if (paymentCheckInterval) clearInterval(paymentCheckInterval);
+    currentTransaction = null;
+    
+    // Reset to loading state for next time
+    document.getElementById('loadingContainer').style.display = 'none';
+    document.getElementById('qrContainer').style.display = 'block';
 }
   
 async function generateBakongQR(playerId, zoneId) {
@@ -1786,10 +1831,9 @@ async function generateBakongQR(playerId, zoneId) {
       throw new Error('Package price mismatch detected. Please refresh the page and try again.');
     }
 
-    // Show loading state
-    document.getElementById('bakongStatus').textContent = 'Verifying package and generating QR...';
-    document.getElementById('bakongStatus').style.color = 'white';
-
+    // Update loading text
+    document.querySelector('#loadingContainer p.bakong-heading').textContent = 'Verifying Package...';
+    
     const response = await fetch('/generate_qr', {
       method: 'POST',
       headers: {
@@ -1823,9 +1867,20 @@ async function generateBakongQR(playerId, zoneId) {
       gameType: gameType
     };
     
+    // Hide loading and show QR container with fade effect
+    document.getElementById('loadingContainer').style.display = 'none';
+    document.getElementById('qrContainer').style.display = 'block';
+    document.getElementById('qrContainer').style.opacity = '0';
+    
+    // Fade in animation
+    setTimeout(() => {
+      document.getElementById('qrContainer').style.transition = 'opacity 0.5s ease';
+      document.getElementById('qrContainer').style.opacity = '1';
+    }, 50);
+    
     // Display QR code
     document.getElementById('bakongQR').src = `data:image/png;base64,${result.qr_image}`;
-    document.getElementById("qrAmount").textContent = `$${selectedPrice.toFixed(2)}`;
+    document.getElementById("qrAmount").textContent = `${selectedPrice.toFixed(2)} usd`;
     
     // Enable check button and update text
     const checkBtn = document.getElementById('checkPaymentBtn');
@@ -1845,25 +1900,40 @@ async function generateBakongQR(playerId, zoneId) {
       default: gameName = 'Game';
     }
     document.getElementById('bakongStatus').textContent = `ស្កេនដើម្បីបង់ប្រាក់ $${selectedPrice.toFixed(2)} ហ្គេម ${gameName}`;
-    document.getElementById('bakongStatus').style.color = 'white';
+    document.getElementById('bakongStatus').style.color = 'black';
     
     // Start countdown and auto-checking
     startCountdown();
     startAutoPaymentCheck();
     
   } catch (error) {
-    document.getElementById('bakongStatus').textContent = `Error: ${error.message}`;
-    document.getElementById('bakongStatus').style.color = '#f44336';
+    // Show error in the modal
+    document.querySelector('#loadingContainer p.bakong-heading').textContent = 'Error';
+    document.querySelector('#loadingContainer p.khmer-heading').textContent = error.message;
+    document.querySelector('#loadingContainer p.khmer-heading').style.color = '#f44336';
+    
+    // Show retry button
+    const loadingContainer = document.getElementById('loadingContainer');
+    const retryButton = document.createElement('button');
+    retryButton.className = 'bakong-btn khmer-heading';
+    retryButton.textContent = 'Try Again';
+    retryButton.style.marginTop = '15px';
+    retryButton.onclick = function() {
+      loadingContainer.innerHTML = `
+        <div class="loading-spinner" style="width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #3498db; border-radius: 50%; margin: 0 auto 15px; animation: spin 1s linear infinite;"></div>
+        <p class="bakong-heading" style="color: #007cb5; font-weight: bold;">Retrying...</p>
+        <p class="khmer-heading" style="font-size: 0.9rem; margin-top: 5px; color: #666;">Please wait while we prepare your payment</p>
+      `;
+      setTimeout(() => generateBakongQR(playerId, zoneId), 1000);
+    };
+    loadingContainer.appendChild(retryButton);
+    
     console.error('QR Generation Error:', error);
     
     // Ensure auto-check is stopped if there was an error
     stopAutoPaymentCheck();
-    
-    // Show error alert to user
-    showAlert(error.message, 'error');
   }
 }
-
 // Add this helper function for showing alerts
 function showAlert(message, type = 'error') {
   // You can implement a custom alert system or use the browser's alert
@@ -1930,7 +2000,7 @@ async function checkBakongPayment() {
     else if (result.status === 'EXPIRED') {
       stopAutoPaymentCheck();
       document.getElementById('bakongCountdown').textContent = 'ផុតកំណត់ក្នុងរយៈពេល 3 នាទី។'; 
-      document.getElementById('bakongCountdown').style.color = '#ffffff';
+      document.getElementById('bakongCountdown').style.color = '#000000';
       document.getElementById('bakongStatus').textContent = result.message;
     }
     else {
@@ -1959,7 +2029,7 @@ async function checkBakongPayment() {
       if (remaining <= 0) {
         clearInterval(countdownInterval);
         document.getElementById('bakongCountdown').textContent = 'ផុតកំណត់ក្នុងរយៈពេល 3 នាទី។';
-        document.getElementById('bakongCountdown').style.color = '#ffffff';
+        document.getElementById('bakongCountdown').style.color = '#000000';
         document.getElementById('checkPaymentBtn').disabled = true;
         // document.getElementById('bakongStatus').textContent = 'QR expired. Please try again.';
         return;
@@ -1970,7 +2040,7 @@ async function checkBakongPayment() {
       const countdownText = `Expires in: ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
       
       document.getElementById('bakongCountdown').textContent = countdownText;
-      document.getElementById('bakongCountdown').style.color = (mins === 0 && secs < 30) ? '#f44336' : 'white';
+      document.getElementById('bakongCountdown').style.color = (mins === 0 && secs < 30) ? '#f44336' : 'black';
     }
 
     async function checkBakongPayment() {
@@ -2015,7 +2085,7 @@ async function checkBakongPayment() {
         } else if (result.status === 'EXPIRED') {
           clearInterval(countdownInterval);
           document.getElementById('bakongCountdown').textContent = 'ផុតកំណត់ក្នុងរយៈពេល 3 នាទី។';
-          document.getElementById('bakongCountdown').style.color = '#ffffff';
+          document.getElementById('bakongCountdown').style.color = '#000000';
           document.getElementById('bakongStatus').textContent = result.message;
         } else {
           document.getElementById('bakongStatus').textContent = result.message;
