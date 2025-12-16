@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="/static/style.css">-->
+    <link rel="stylesheet" href="/static/style.css">
+        <div class="admin-nav">
+        <a href="/admin" class="admin-link">Transactions</a>
+        <a href="/admin/packages" class="admin-link"> Packages</a>
+        <a href="/admin/special_offers" class="admin-link"> Packages</a>
+    </div>
 </div>
     <style>
         .admin-nav {
@@ -115,6 +120,7 @@
             <h1>MENG TOPUP Admin Panel</h1>
             <input type="text" class="search-box" id="searchInput" placeholder="Search transactions..." 
                    value="{{ search_query }}" oninput="updateSearch()">
+            <a href="/admin/logout" class="admin-link" style="background-color: #dc3545;">Logout</a>
         </div>
         
         <div class="status-tabs">
