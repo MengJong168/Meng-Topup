@@ -237,11 +237,11 @@ def generate_qr():
         md5_hash = khqr.generate_md5(qr_data)
         
         # Generate QR image
-        qr_img = qrcode.make(qr_data)
-        img_io = BytesIO()
-        qr_img.save(img_io, 'PNG')
-        img_io.seek(0)
-        qr_base64 = base64.b64encode(img_io.getvalue()).decode('utf-8')
+        khqr_image = khqr.qr_image(
+            qr=qr_data,
+            format="base64"
+        )
+        print("QR:", khqr_image)
         
         # Store current transaction
         expiry = now_pp() + timedelta(minutes=15)
@@ -257,7 +257,7 @@ def generate_qr():
         
         return jsonify({
             'success': True,
-            'qr_image': qr_base64,
+            'qr_image': khqr_image,
             'transaction_id': transaction_id,
             'amount': amount,
             'expiry': expiry.isoformat()
@@ -287,7 +287,7 @@ def check_payment():
         
         # Check if transaction exists in current session
         if transaction_id not in current_transactions:
-            return jsonify({'error': 'Invalid transaction ID'}), 400
+            return jsonify({'error': ''}), 400
             
         transaction = current_transactions[transaction_id]
         
@@ -380,7 +380,7 @@ def check_payment():
         else:
             return jsonify({
                 'status': 'ERROR',
-                'message': 'Failed to check payment status',
+                'message': '',
                 'final': False
             })
             
