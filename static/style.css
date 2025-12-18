@@ -489,7 +489,7 @@ input[type="number"] {
 
 .qr-container {
   background-color: #ffffff;   /* white card like KHQR */
-  padding: 5px;
+  padding: 0px;
   border-radius: 16px;
   margin: 20px auto;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -555,7 +555,7 @@ input[type="number"] {
 /* QR code */
 #bakongQR {
   width: 100%;
-  max-width: 220px;
+  max-width: 286px;
   height: auto;
   display: block;
 }
@@ -2212,4 +2212,3 @@ p {
 #confirmPopup .bakong-btn:active {
   transform: translateY(0);
 }
-
