@@ -911,21 +911,11 @@
       <div id="bakongStatus" class="bakong-heading">Ready to generate payment QR</div>
       
       <div class="qr-container">
-        <div class="qrcode-container4 qrhrader">
-          <img alt="image" src="static\images\khqr logo-200h.png" class="qrcode-image logo">
-          <div class="qrcode-container2"></div>
-        </div>
         
         <div class="qr-details">
-          <div>Meng Topup</div>
-          <h2 id="qrAmount"></h2>
-        </div>
-        <div>
-          <hr class="qr-line">
         </div>
         <div class="qr-image">
           <img id="bakongQR" src="" alt="QR Code">
-          <img id="logo" alt="logo" src="static\images\usd-khqr-logo.svg" class="qrcode-logo">
         </div>
       </div>
       
@@ -1751,7 +1741,6 @@ function openModalWithLoading() {
     
     // Reset any previous state
     document.getElementById('bakongQR').src = '';
-    document.getElementById('qrAmount').textContent = '';
     document.getElementById('bakongCountdown').textContent = '';
     document.getElementById('bakongStatus').textContent = 'Ready to generate payment QR';
     
@@ -1880,7 +1869,6 @@ async function generateBakongQR(playerId, zoneId) {
     
     // Display QR code
     document.getElementById('bakongQR').src = `data:image/png;base64,${result.qr_image}`;
-    document.getElementById("qrAmount").textContent = `${selectedPrice.toFixed(2)} usd`;
     
     // Enable check button and update text
     const checkBtn = document.getElementById('checkPaymentBtn');
