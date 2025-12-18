@@ -593,18 +593,16 @@ def api_transactions():
             'error': str(e)
         }), 500
 
-from datetime import datetime, timedelta
-import time
 
 # Add this global variable near the top with other configurations
-DUPLICATE_CHECK_WINDOW = 10  # seconds
+DUPLICATE_CHECK_WINDOW = 15  # seconds
 recent_transactions = {}
 
 def send_to_telegram(transaction):
     """Send transaction details to Telegram with duplicate checking"""
     
-    # Check for duplicate transaction
-    transaction_key = f"{transaction.get('player_id')}_{transaction.get('package')}_{transaction.get('amount')}"
+    # Include all relevant fields
+    transaction_key = f"{transaction.get('game_type', 'ml')}_{transaction.get('player_id')}_{transaction.get('zone_id', '0')}_{transaction.get('package')}_{transaction.get('amount')}_{transaction.get('transaction_id', '')}"
     current_time = time.time()
     
     # Check if this transaction was recently sent
