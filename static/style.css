@@ -699,8 +699,21 @@ button:hover {
 }
 
 /* Footer Styles */
-.site-footer {
+/* .site-footer {
   background-color: #007cb5;
+  color: white;
+  padding: 30px 15px 20px;
+  border-top: 2px solid var(--border-color);
+  margin-top: auto;
+} */
+/* Footer Styles */
+.site-footer {
+  background-color: #007cb5; /* fallback color */
+  background-image: url("/static/images/o0KOt7O.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* or contain */
+  
   color: white;
   padding: 30px 15px 20px;
   border-top: 2px solid var(--border-color);
