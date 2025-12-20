@@ -1203,18 +1203,20 @@ button:hover {
 
 .special-offers-wrapper {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;     /* ✅ enable horizontal scroll */
+  overflow-y: hidden;
   position: relative;
 }
 
+
 .slider-track {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   transition: transform 0.4s ease;
 }
 
 .offer-image-container {
-  width: 45%;
+  width: 48%;
   border-radius: 6px;
   overflow: hidden;
   flex-shrink: 0;
@@ -1225,6 +1227,18 @@ button:hover {
   height: auto;
   display: block;
   border-radius: 6px;
+}
+.special-offers-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.special-offers-wrapper::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 0px;
+}
+
+.special-offers-wrapper::-webkit-scrollbar-track {
+  background: #007cb5;
 }
 
 .section-title {
